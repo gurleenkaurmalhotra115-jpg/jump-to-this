@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    container_name: jumptothis-web
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./media:/app/media
+      - ./data:/app/data
+
+  tunnel:
+    image: cloudflare/cloudflared:latest
+    container_name: jumptothis-tunnel
+    restart: always
+    command: tunnel --url http://web:8000
+    depends_on:
+      - web

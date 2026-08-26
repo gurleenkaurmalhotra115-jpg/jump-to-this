@@ -1,0 +1,1622 @@
+[
+  {
+    "segment_idx": 0,
+    "start": 7.5,
+    "end": 11.5,
+    "text": "First things first, I'ma say all the words inside my head",
+    "lang": "en",
+    "words": [
+      {
+        "word": "First",
+        "start": 7.5,
+        "end": 7.8,
+        "prob": 0.99
+      },
+      {
+        "word": "things",
+        "start": 7.8,
+        "end": 8.1,
+        "prob": 0.99
+      },
+      {
+        "word": "first,",
+        "start": 8.1,
+        "end": 8.4,
+        "prob": 0.99
+      },
+      {
+        "word": "I'ma",
+        "start": 8.4,
+        "end": 8.7,
+        "prob": 0.99
+      },
+      {
+        "word": "say",
+        "start": 8.7,
+        "end": 9.0,
+        "prob": 0.99
+      },
+      {
+        "word": "all",
+        "start": 9.0,
+        "end": 9.3,
+        "prob": 0.99
+      },
+      {
+        "word": "the",
+        "start": 9.3,
+        "end": 9.5,
+        "prob": 0.99
+      },
+      {
+        "word": "words",
+        "start": 9.5,
+        "end": 10.0,
+        "prob": 0.99
+      },
+      {
+        "word": "inside",
+        "start": 10.0,
+        "end": 10.8,
+        "prob": 0.99
+      },
+      {
+        "word": "my",
+        "start": 10.8,
+        "end": 11.0,
+        "prob": 0.99
+      },
+      {
+        "word": "head",
+        "start": 11.0,
+        "end": 11.5,
+        "prob": 0.99
+      }
+    ]
+  },
+  {
+    "segment_idx": 1,
+    "start": 11.8,
+    "end": 15.5,
+    "text": "I'm fired up and tired of the way that things have been, oh-ooh",
+    "lang": "en",
+    "words": [
+      {
+        "word": "I'm",
+        "start": 11.8,
+        "end": 12.1,
+        "prob": 0.99
+      },
+      {
+        "word": "fired",
+        "start": 12.1,
+        "end": 12.6,
+        "prob": 0.99
+      },
+      {
+        "word": "up",
+        "start": 12.6,
+        "end": 12.9,
+        "prob": 0.99
+      },
+      {
+        "word": "and",
+        "start": 12.9,
+        "end": 13.1,
+        "prob": 0.99
+      },
+      {
+        "word": "tired",
+        "start": 13.1,
+        "end": 13.6,
+        "prob": 0.99
+      },
+      {
+        "word": "of",
+        "start": 13.6,
+        "end": 13.8,
+        "prob": 0.99
+      },
+      {
+        "word": "the",
+        "start": 13.8,
+        "end": 14.0,
+        "prob": 0.99
+      },
+      {
+        "word": "way",
+        "start": 14.0,
+        "end": 14.3,
+        "prob": 0.99
+      },
+      {
+        "word": "that",
+        "start": 14.3,
+        "end": 14.5,
+        "prob": 0.99
+      },
+      {
+        "word": "things",
+        "start": 14.5,
+        "end": 14.8,
+        "prob": 0.99
+      },
+      {
+        "word": "have",
+        "start": 14.8,
+        "end": 15.0,
+        "prob": 0.99
+      },
+      {
+        "word": "been,",
+        "start": 15.0,
+        "end": 15.2,
+        "prob": 0.99
+      },
+      {
+        "word": "oh-ooh",
+        "start": 15.2,
+        "end": 15.5,
+        "prob": 0.99
+      }
+    ]
+  },
+  {
+    "segment_idx": 2,
+    "start": 15.8,
+    "end": 18.5,
+    "text": "The way that things have been, oh-ooh",
+    "lang": "en",
+    "words": [
+      {
+        "word": "The",
+        "start": 15.8,
+        "end": 16.0,
+        "prob": 0.99
+      },
+      {
+        "word": "way",
+        "start": 16.0,
+        "end": 16.3,
+        "prob": 0.99
+      },
+      {
+        "word": "that",
+        "start": 16.3,
+        "end": 16.5,
+        "prob": 0.99
+      },
+      {
+        "word": "things",
+        "start": 16.5,
+        "end": 16.8,
+        "prob": 0.99
+      },
+      {
+        "word": "have",
+        "start": 16.8,
+        "end": 17.0,
+        "prob": 0.99
+      },
+      {
+        "word": "been,",
+        "start": 17.0,
+        "end": 17.3,
+        "prob": 0.99
+      },
+      {
+        "word": "oh-ooh",
+        "start": 17.3,
+        "end": 18.5,
+        "prob": 0.99
+      }
+    ]
+  },
+  {
+    "segment_idx": 3,
+    "start": 19.0,
+    "end": 22.5,
+    "text": "Second things second, don't you tell me what you think that I could be",
+    "lang": "en",
+    "words": [
+      {
+        "word": "Second",
+        "start": 19.0,
+        "end": 19.5,
+        "prob": 0.99
+      },
+      {
+        "word": "things",
+        "start": 19.5,
+        "end": 19.8,
+        "prob": 0.99
+      },
+      {
+        "word": "second,",
+        "start": 19.8,
+        "end": 20.2,
+        "prob": 0.99
+      },
+      {
+        "word": "don't",
+        "start": 20.2,
+        "end": 20.5,
+        "prob": 0.99
+      },
+      {
+        "word": "you",
+        "start": 20.5,
+        "end": 20.8,
+        "prob": 0.99
+      },
+      {
+        "word": "tell",
+        "start": 20.8,
+        "end": 21.0,
+        "prob": 0.99
+      },
+      {
+        "word": "me",
+        "start": 21.0,
+        "end": 21.2,
+        "prob": 0.99
+      },
+      {
+        "word": "what",
+        "start": 21.2,
+        "end": 21.4,
+        "prob": 0.99
+      },
+      {
+        "word": "you",
+        "start": 21.4,
+        "end": 21.6,
+        "prob": 0.99
+      },
+      {
+        "word": "think",
+        "start": 21.6,
+        "end": 21.8,
+        "prob": 0.99
+      },
+      {
+        "word": "that",
+        "start": 21.8,
+        "end": 22.0,
+        "prob": 0.99
+      },
+      {
+        "word": "I",
+        "start": 22.0,
+        "end": 22.2,
+        "prob": 0.99
+      },
+      {
+        "word": "could",
+        "start": 22.2,
+        "end": 22.3,
+        "prob": 0.99
+      },
+      {
+        "word": "be",
+        "start": 22.3,
+        "end": 22.5,
+        "prob": 0.99
+      }
+    ]
+  },
+  {
+    "segment_idx": 4,
+    "start": 22.8,
+    "end": 26.5,
+    "text": "I'm the one at the sail, I'm the master of my sea, oh-ooh",
+    "lang": "en",
+    "words": [
+      {
+        "word": "I'm",
+        "start": 22.8,
+        "end": 23.0,
+        "prob": 0.99
+      },
+      {
+        "word": "the",
+        "start": 23.0,
+        "end": 23.2,
+        "prob": 0.99
+      },
+      {
+        "word": "one",
+        "start": 23.2,
+        "end": 23.5,
+        "prob": 0.99
+      },
+      {
+        "word": "at",
+        "start": 23.5,
+        "end": 23.7,
+        "prob": 0.99
+      },
+      {
+        "word": "the",
+        "start": 23.7,
+        "end": 23.9,
+        "prob": 0.99
+      },
+      {
+        "word": "sail,",
+        "start": 23.9,
+        "end": 24.3,
+        "prob": 0.99
+      },
+      {
+        "word": "I'm",
+        "start": 24.3,
+        "end": 24.6,
+        "prob": 0.99
+      },
+      {
+        "word": "the",
+        "start": 24.6,
+        "end": 24.8,
+        "prob": 0.99
+      },
+      {
+        "word": "master",
+        "start": 24.8,
+        "end": 25.3,
+        "prob": 0.99
+      },
+      {
+        "word": "of",
+        "start": 25.3,
+        "end": 25.5,
+        "prob": 0.99
+      },
+      {
+        "word": "my",
+        "start": 25.5,
+        "end": 25.7,
+        "prob": 0.99
+      },
+      {
+        "word": "sea,",
+        "start": 25.7,
+        "end": 26.0,
+        "prob": 0.99
+      },
+      {
+        "word": "oh-ooh",
+        "start": 26.0,
+        "end": 26.5,
+        "prob": 0.99
+      }
+    ]
+  },
+  {
+    "segment_idx": 5,
+    "start": 26.8,
+    "end": 29.5,
+    "text": "The master of my sea, oh-ooh",
+    "lang": "en",
+    "words": [
+      {
+        "word": "The",
+        "start": 26.8,
+        "end": 27.1,
+        "prob": 0.99
+      },
+      {
+        "word": "master",
+        "start": 27.1,
+        "end": 27.6,
+        "prob": 0.99
+      },
+      {
+        "word": "of",
+        "start": 27.6,
+        "end": 27.8,
+        "prob": 0.99
+      },
+      {
+        "word": "my",
+        "start": 27.8,
+        "end": 28.0,
+        "prob": 0.99
+      },
+      {
+        "word": "sea,",
+        "start": 28.0,
+        "end": 28.3,
+        "prob": 0.99
+      },
+      {
+        "word": "oh-ooh",
+        "start": 28.3,
+        "end": 29.5,
+        "prob": 0.99
+      }
+    ]
+  },
+  {
+    "segment_idx": 6,
+    "start": 30.0,
+    "end": 34.0,
+    "text": "I was broken from a young age, taking my sulking to the masses",
+    "lang": "en",
+    "words": [
+      {
+        "word": "I",
+        "start": 30.0,
+        "end": 30.3,
+        "prob": 0.99
+      },
+      {
+        "word": "was",
+        "start": 30.3,
+        "end": 30.6,
+        "prob": 0.99
+      },
+      {
+        "word": "broken",
+        "start": 30.6,
+        "end": 31.2,
+        "prob": 0.99
+      },
+      {
+        "word": "from",
+        "start": 31.2,
+        "end": 31.5,
+        "prob": 0.99
+      },
+      {
+        "word": "a",
+        "start": 31.5,
+        "end": 31.7,
+        "prob": 0.99
+      },
+      {
+        "word": "young",
+        "start": 31.7,
+        "end": 32.0,
+        "prob": 0.99
+      },
+      {
+        "word": "age,",
+        "start": 32.0,
+        "end": 32.4,
+        "prob": 0.99
+      },
+      {
+        "word": "taking",
+        "start": 32.4,
+        "end": 32.9,
+        "prob": 0.99
+      },
+      {
+        "word": "my",
+        "start": 32.9,
+        "end": 33.1,
+        "prob": 0.99
+      },
+      {
+        "word": "sulking",
+        "start": 33.1,
+        "end": 33.6,
+        "prob": 0.99
+      },
+      {
+        "word": "to",
+        "start": 33.6,
+        "end": 33.8,
+        "prob": 0.99
+      },
+      {
+        "word": "the",
+        "start": 33.8,
+        "end": 33.9,
+        "prob": 0.99
+      },
+      {
+        "word": "masses",
+        "start": 33.9,
+        "end": 34.0,
+        "prob": 0.99
+      }
+    ]
+  },
+  {
+    "segment_idx": 7,
+    "start": 34.2,
+    "end": 37.8,
+    "text": "Write down my poems for the few that looked at me, took to me",
+    "lang": "en",
+    "words": [
+      {
+        "word": "Write",
+        "start": 34.2,
+        "end": 34.5,
+        "prob": 0.99
+      },
+      {
+        "word": "down",
+        "start": 34.5,
+        "end": 34.8,
+        "prob": 0.99
+      },
+      {
+        "word": "my",
+        "start": 34.8,
+        "end": 35.0,
+        "prob": 0.99
+      },
+      {
+        "word": "poems",
+        "start": 35.0,
+        "end": 35.5,
+        "prob": 0.99
+      },
+      {
+        "word": "for",
+        "start": 35.5,
+        "end": 35.8,
+        "prob": 0.99
+      },
+      {
+        "word": "the",
+        "start": 35.8,
+        "end": 36.0,
+        "prob": 0.99
+      },
+      {
+        "word": "few",
+        "start": 36.0,
+        "end": 36.4,
+        "prob": 0.99
+      },
+      {
+        "word": "that",
+        "start": 36.4,
+        "end": 36.6,
+        "prob": 0.99
+      },
+      {
+        "word": "looked",
+        "start": 36.6,
+        "end": 37.0,
+        "prob": 0.99
+      },
+      {
+        "word": "at",
+        "start": 37.0,
+        "end": 37.2,
+        "prob": 0.99
+      },
+      {
+        "word": "me,",
+        "start": 37.2,
+        "end": 37.4,
+        "prob": 0.99
+      },
+      {
+        "word": "took",
+        "start": 37.4,
+        "end": 37.6,
+        "prob": 0.99
+      },
+      {
+        "word": "to",
+        "start": 37.6,
+        "end": 37.7,
+        "prob": 0.99
+      },
+      {
+        "word": "me",
+        "start": 37.7,
+        "end": 37.8,
+        "prob": 0.99
+      }
+    ]
+  },
+  {
+    "segment_idx": 8,
+    "start": 38.0,
+    "end": 41.5,
+    "text": "Shook to me, feeling me, singing from heartache from the pain",
+    "lang": "en",
+    "words": [
+      {
+        "word": "Shook",
+        "start": 38.0,
+        "end": 38.3,
+        "prob": 0.99
+      },
+      {
+        "word": "to",
+        "start": 38.3,
+        "end": 38.5,
+        "prob": 0.99
+      },
+      {
+        "word": "me,",
+        "start": 38.5,
+        "end": 38.7,
+        "prob": 0.99
+      },
+      {
+        "word": "feeling",
+        "start": 38.7,
+        "end": 39.2,
+        "prob": 0.99
+      },
+      {
+        "word": "me,",
+        "start": 39.2,
+        "end": 39.4,
+        "prob": 0.99
+      },
+      {
+        "word": "singing",
+        "start": 39.4,
+        "end": 39.9,
+        "prob": 0.99
+      },
+      {
+        "word": "from",
+        "start": 39.9,
+        "end": 40.2,
+        "prob": 0.99
+      },
+      {
+        "word": "heartache",
+        "start": 40.2,
+        "end": 40.8,
+        "prob": 0.99
+      },
+      {
+        "word": "from",
+        "start": 40.8,
+        "end": 41.0,
+        "prob": 0.99
+      },
+      {
+        "word": "the",
+        "start": 41.0,
+        "end": 41.2,
+        "prob": 0.99
+      },
+      {
+        "word": "pain",
+        "start": 41.2,
+        "end": 41.5,
+        "prob": 0.99
+      }
+    ]
+  },
+  {
+    "segment_idx": 9,
+    "start": 41.8,
+    "end": 45.0,
+    "text": "Taking my message from the veins, speaking my lesson from the brain",
+    "lang": "en",
+    "words": [
+      {
+        "word": "Taking",
+        "start": 41.8,
+        "end": 42.2,
+        "prob": 0.99
+      },
+      {
+        "word": "my",
+        "start": 42.2,
+        "end": 42.4,
+        "prob": 0.99
+      },
+      {
+        "word": "message",
+        "start": 42.4,
+        "end": 42.9,
+        "prob": 0.99
+      },
+      {
+        "word": "from",
+        "start": 42.9,
+        "end": 43.1,
+        "prob": 0.99
+      },
+      {
+        "word": "the",
+        "start": 43.1,
+        "end": 43.3,
+        "prob": 0.99
+      },
+      {
+        "word": "veins,",
+        "start": 43.3,
+        "end": 43.7,
+        "prob": 0.99
+      },
+      {
+        "word": "speaking",
+        "start": 43.7,
+        "end": 44.2,
+        "prob": 0.99
+      },
+      {
+        "word": "my",
+        "start": 44.2,
+        "end": 44.4,
+        "prob": 0.99
+      },
+      {
+        "word": "lesson",
+        "start": 44.4,
+        "end": 44.7,
+        "prob": 0.99
+      },
+      {
+        "word": "from",
+        "start": 44.7,
+        "end": 44.8,
+        "prob": 0.99
+      },
+      {
+        "word": "the",
+        "start": 44.8,
+        "end": 44.9,
+        "prob": 0.99
+      },
+      {
+        "word": "brain",
+        "start": 44.9,
+        "end": 45.0,
+        "prob": 0.99
+      }
+    ]
+  },
+  {
+    "segment_idx": 10,
+    "start": 45.2,
+    "end": 48.0,
+    "text": "Seeing the beauty through the...",
+    "lang": "en",
+    "words": [
+      {
+        "word": "Seeing",
+        "start": 45.2,
+        "end": 45.7,
+        "prob": 0.99
+      },
+      {
+        "word": "the",
+        "start": 45.7,
+        "end": 45.9,
+        "prob": 0.99
+      },
+      {
+        "word": "beauty",
+        "start": 45.9,
+        "end": 46.5,
+        "prob": 0.99
+      },
+      {
+        "word": "through",
+        "start": 46.5,
+        "end": 47.0,
+        "prob": 0.99
+      },
+      {
+        "word": "the...",
+        "start": 47.0,
+        "end": 48.0,
+        "prob": 0.99
+      }
+    ]
+  },
+  {
+    "segment_idx": 11,
+    "start": 48.5,
+    "end": 51.5,
+    "text": "Pain! You made me a, you made me a believer, believer",
+    "lang": "en",
+    "words": [
+      {
+        "word": "Pain!",
+        "start": 48.5,
+        "end": 49.3,
+        "prob": 0.99
+      },
+      {
+        "word": "You",
+        "start": 49.3,
+        "end": 49.5,
+        "prob": 0.99
+      },
+      {
+        "word": "made",
+        "start": 49.5,
+        "end": 49.8,
+        "prob": 0.99
+      },
+      {
+        "word": "me",
+        "start": 49.8,
+        "end": 50.0,
+        "prob": 0.99
+      },
+      {
+        "word": "a,",
+        "start": 50.0,
+        "end": 50.2,
+        "prob": 0.99
+      },
+      {
+        "word": "you",
+        "start": 50.2,
+        "end": 50.4,
+        "prob": 0.99
+      },
+      {
+        "word": "made",
+        "start": 50.4,
+        "end": 50.6,
+        "prob": 0.99
+      },
+      {
+        "word": "me",
+        "start": 50.6,
+        "end": 50.8,
+        "prob": 0.99
+      },
+      {
+        "word": "a",
+        "start": 50.8,
+        "end": 51.0,
+        "prob": 0.99
+      },
+      {
+        "word": "believer,",
+        "start": 51.0,
+        "end": 51.3,
+        "prob": 0.99
+      },
+      {
+        "word": "believer",
+        "start": 51.3,
+        "end": 51.5,
+        "prob": 0.99
+      }
+    ]
+  },
+  {
+    "segment_idx": 12,
+    "start": 52.0,
+    "end": 55.5,
+    "text": "Pain! You break me down, you build me up, believer, believer",
+    "lang": "en",
+    "words": [
+      {
+        "word": "Pain!",
+        "start": 52.0,
+        "end": 52.8,
+        "prob": 0.99
+      },
+      {
+        "word": "You",
+        "start": 52.8,
+        "end": 53.0,
+        "prob": 0.99
+      },
+      {
+        "word": "break",
+        "start": 53.0,
+        "end": 53.3,
+        "prob": 0.99
+      },
+      {
+        "word": "me",
+        "start": 53.3,
+        "end": 53.5,
+        "prob": 0.99
+      },
+      {
+        "word": "down,",
+        "start": 53.5,
+        "end": 53.8,
+        "prob": 0.99
+      },
+      {
+        "word": "you",
+        "start": 53.8,
+        "end": 54.0,
+        "prob": 0.99
+      },
+      {
+        "word": "build",
+        "start": 54.0,
+        "end": 54.3,
+        "prob": 0.99
+      },
+      {
+        "word": "me",
+        "start": 54.3,
+        "end": 54.5,
+        "prob": 0.99
+      },
+      {
+        "word": "up,",
+        "start": 54.5,
+        "end": 54.8,
+        "prob": 0.99
+      },
+      {
+        "word": "believer,",
+        "start": 54.8,
+        "end": 55.2,
+        "prob": 0.99
+      },
+      {
+        "word": "believer",
+        "start": 55.2,
+        "end": 55.5,
+        "prob": 0.99
+      }
+    ]
+  },
+  {
+    "segment_idx": 13,
+    "start": 56.0,
+    "end": 59.0,
+    "text": "Pain! Oh let the bullets fly, oh let them rain",
+    "lang": "en",
+    "words": [
+      {
+        "word": "Pain!",
+        "start": 56.0,
+        "end": 56.8,
+        "prob": 0.99
+      },
+      {
+        "word": "Oh",
+        "start": 56.8,
+        "end": 57.0,
+        "prob": 0.99
+      },
+      {
+        "word": "let",
+        "start": 57.0,
+        "end": 57.3,
+        "prob": 0.99
+      },
+      {
+        "word": "the",
+        "start": 57.3,
+        "end": 57.5,
+        "prob": 0.99
+      },
+      {
+        "word": "bullets",
+        "start": 57.5,
+        "end": 58.0,
+        "prob": 0.99
+      },
+      {
+        "word": "fly,",
+        "start": 58.0,
+        "end": 58.3,
+        "prob": 0.99
+      },
+      {
+        "word": "oh",
+        "start": 58.3,
+        "end": 58.5,
+        "prob": 0.99
+      },
+      {
+        "word": "let",
+        "start": 58.5,
+        "end": 58.7,
+        "prob": 0.99
+      },
+      {
+        "word": "them",
+        "start": 58.7,
+        "end": 58.8,
+        "prob": 0.99
+      },
+      {
+        "word": "rain",
+        "start": 58.8,
+        "end": 59.0,
+        "prob": 0.99
+      }
+    ]
+  },
+  {
+    "segment_idx": 14,
+    "start": 59.2,
+    "end": 63.0,
+    "text": "My life, my love, my God, they came from... Pain!",
+    "lang": "en",
+    "words": [
+      {
+        "word": "My",
+        "start": 59.2,
+        "end": 59.5,
+        "prob": 0.99
+      },
+      {
+        "word": "life,",
+        "start": 59.5,
+        "end": 59.8,
+        "prob": 0.99
+      },
+      {
+        "word": "my",
+        "start": 59.8,
+        "end": 60.1,
+        "prob": 0.99
+      },
+      {
+        "word": "love,",
+        "start": 60.1,
+        "end": 60.5,
+        "prob": 0.99
+      },
+      {
+        "word": "my",
+        "start": 60.5,
+        "end": 60.8,
+        "prob": 0.99
+      },
+      {
+        "word": "God,",
+        "start": 60.8,
+        "end": 61.3,
+        "prob": 0.99
+      },
+      {
+        "word": "they",
+        "start": 61.3,
+        "end": 61.6,
+        "prob": 0.99
+      },
+      {
+        "word": "came",
+        "start": 61.6,
+        "end": 62.0,
+        "prob": 0.99
+      },
+      {
+        "word": "from...",
+        "start": 62.0,
+        "end": 62.4,
+        "prob": 0.99
+      },
+      {
+        "word": "Pain!",
+        "start": 62.4,
+        "end": 63.0,
+        "prob": 0.99
+      }
+    ]
+  },
+  {
+    "segment_idx": 15,
+    "start": 63.5,
+    "end": 67.0,
+    "text": "You made me a, you made me a believer, believer",
+    "lang": "en",
+    "words": [
+      {
+        "word": "You",
+        "start": 63.5,
+        "end": 63.8,
+        "prob": 0.99
+      },
+      {
+        "word": "made",
+        "start": 63.8,
+        "end": 64.1,
+        "prob": 0.99
+      },
+      {
+        "word": "me",
+        "start": 64.1,
+        "end": 64.3,
+        "prob": 0.99
+      },
+      {
+        "word": "a,",
+        "start": 64.3,
+        "end": 64.5,
+        "prob": 0.99
+      },
+      {
+        "word": "you",
+        "start": 64.5,
+        "end": 64.7,
+        "prob": 0.99
+      },
+      {
+        "word": "made",
+        "start": 64.7,
+        "end": 64.9,
+        "prob": 0.99
+      },
+      {
+        "word": "me",
+        "start": 64.9,
+        "end": 65.1,
+        "prob": 0.99
+      },
+      {
+        "word": "a",
+        "start": 65.1,
+        "end": 65.3,
+        "prob": 0.99
+      },
+      {
+        "word": "believer,",
+        "start": 65.3,
+        "end": 66.5,
+        "prob": 0.99
+      },
+      {
+        "word": "believer",
+        "start": 66.5,
+        "end": 67.0,
+        "prob": 0.99
+      }
+    ]
+  },
+  {
+    "segment_idx": 16,
+    "start": 67.5,
+    "end": 71.0,
+    "text": "Third things third, send a prayer to the ones up above",
+    "lang": "en",
+    "words": [
+      {
+        "word": "Third",
+        "start": 67.5,
+        "end": 67.8,
+        "prob": 0.99
+      },
+      {
+        "word": "things",
+        "start": 67.8,
+        "end": 68.1,
+        "prob": 0.99
+      },
+      {
+        "word": "third,",
+        "start": 68.1,
+        "end": 68.5,
+        "prob": 0.99
+      },
+      {
+        "word": "send",
+        "start": 68.5,
+        "end": 68.8,
+        "prob": 0.99
+      },
+      {
+        "word": "a",
+        "start": 68.8,
+        "end": 69.0,
+        "prob": 0.99
+      },
+      {
+        "word": "prayer",
+        "start": 69.0,
+        "end": 69.5,
+        "prob": 0.99
+      },
+      {
+        "word": "to",
+        "start": 69.5,
+        "end": 69.7,
+        "prob": 0.99
+      },
+      {
+        "word": "the",
+        "start": 69.7,
+        "end": 69.9,
+        "prob": 0.99
+      },
+      {
+        "word": "ones",
+        "start": 69.9,
+        "end": 70.3,
+        "prob": 0.99
+      },
+      {
+        "word": "up",
+        "start": 70.3,
+        "end": 70.6,
+        "prob": 0.99
+      },
+      {
+        "word": "above",
+        "start": 70.6,
+        "end": 71.0,
+        "prob": 0.99
+      }
+    ]
+  },
+  {
+    "segment_idx": 17,
+    "start": 71.5,
+    "end": 74.8,
+    "text": "All the hate that you've heard has turned your spirit to a dove, oh-ooh",
+    "lang": "en",
+    "words": [
+      {
+        "word": "All",
+        "start": 71.5,
+        "end": 71.8,
+        "prob": 0.99
+      },
+      {
+        "word": "the",
+        "start": 71.8,
+        "end": 72.0,
+        "prob": 0.99
+      },
+      {
+        "word": "hate",
+        "start": 72.0,
+        "end": 72.3,
+        "prob": 0.99
+      },
+      {
+        "word": "that",
+        "start": 72.3,
+        "end": 72.5,
+        "prob": 0.99
+      },
+      {
+        "word": "you've",
+        "start": 72.5,
+        "end": 72.7,
+        "prob": 0.99
+      },
+      {
+        "word": "heard",
+        "start": 72.7,
+        "end": 73.0,
+        "prob": 0.99
+      },
+      {
+        "word": "has",
+        "start": 73.0,
+        "end": 73.2,
+        "prob": 0.99
+      },
+      {
+        "word": "turned",
+        "start": 73.2,
+        "end": 73.6,
+        "prob": 0.99
+      },
+      {
+        "word": "your",
+        "start": 73.6,
+        "end": 73.8,
+        "prob": 0.99
+      },
+      {
+        "word": "spirit",
+        "start": 73.8,
+        "end": 74.2,
+        "prob": 0.99
+      },
+      {
+        "word": "to",
+        "start": 74.2,
+        "end": 74.4,
+        "prob": 0.99
+      },
+      {
+        "word": "a",
+        "start": 74.4,
+        "end": 74.5,
+        "prob": 0.99
+      },
+      {
+        "word": "dove,",
+        "start": 74.5,
+        "end": 74.6,
+        "prob": 0.99
+      },
+      {
+        "word": "oh-ooh",
+        "start": 74.6,
+        "end": 74.8,
+        "prob": 0.99
+      }
+    ]
+  },
+  {
+    "segment_idx": 18,
+    "start": 75.0,
+    "end": 78.0,
+    "text": "Your spirit to a dove, oh-ooh",
+    "lang": "en",
+    "words": [
+      {
+        "word": "Your",
+        "start": 75.0,
+        "end": 75.3,
+        "prob": 0.99
+      },
+      {
+        "word": "spirit",
+        "start": 75.3,
+        "end": 75.7,
+        "prob": 0.99
+      },
+      {
+        "word": "to",
+        "start": 75.7,
+        "end": 75.9,
+        "prob": 0.99
+      },
+      {
+        "word": "a",
+        "start": 75.9,
+        "end": 76.0,
+        "prob": 0.99
+      },
+      {
+        "word": "dove,",
+        "start": 76.0,
+        "end": 76.3,
+        "prob": 0.99
+      },
+      {
+        "word": "oh-ooh",
+        "start": 76.3,
+        "end": 78.0,
+        "prob": 0.99
+      }
+    ]
+  },
+  {
+    "segment_idx": 19,
+    "start": 78.5,
+    "end": 82.0,
+    "text": "I was choking in the crowd, building my rain up in the cloud",
+    "lang": "en",
+    "words": [
+      {
+        "word": "I",
+        "start": 78.5,
+        "end": 78.8,
+        "prob": 0.99
+      },
+      {
+        "word": "was",
+        "start": 78.8,
+        "end": 79.1,
+        "prob": 0.99
+      },
+      {
+        "word": "choking",
+        "start": 79.1,
+        "end": 79.6,
+        "prob": 0.99
+      },
+      {
+        "word": "in",
+        "start": 79.6,
+        "end": 79.8,
+        "prob": 0.99
+      },
+      {
+        "word": "the",
+        "start": 79.8,
+        "end": 80.0,
+        "prob": 0.99
+      },
+      {
+        "word": "crowd,",
+        "start": 80.0,
+        "end": 80.4,
+        "prob": 0.99
+      },
+      {
+        "word": "building",
+        "start": 80.4,
+        "end": 80.9,
+        "prob": 0.99
+      },
+      {
+        "word": "my",
+        "start": 80.9,
+        "end": 81.1,
+        "prob": 0.99
+      },
+      {
+        "word": "rain",
+        "start": 81.1,
+        "end": 81.4,
+        "prob": 0.99
+      },
+      {
+        "word": "up",
+        "start": 81.4,
+        "end": 81.6,
+        "prob": 0.99
+      },
+      {
+        "word": "in",
+        "start": 81.6,
+        "end": 81.8,
+        "prob": 0.99
+      },
+      {
+        "word": "the",
+        "start": 81.8,
+        "end": 81.9,
+        "prob": 0.99
+      },
+      {
+        "word": "cloud",
+        "start": 81.9,
+        "end": 82.0,
+        "prob": 0.99
+      }
+    ]
+  },
+  {
+    "segment_idx": 20,
+    "start": 82.2,
+    "end": 85.8,
+    "text": "Falling like ashes to the ground, hoping my feelings they would drown",
+    "lang": "en",
+    "words": [
+      {
+        "word": "Falling",
+        "start": 82.2,
+        "end": 82.6,
+        "prob": 0.99
+      },
+      {
+        "word": "like",
+        "start": 82.6,
+        "end": 82.8,
+        "prob": 0.99
+      },
+      {
+        "word": "ashes",
+        "start": 82.8,
+        "end": 83.3,
+        "prob": 0.99
+      },
+      {
+        "word": "to",
+        "start": 83.3,
+        "end": 83.5,
+        "prob": 0.99
+      },
+      {
+        "word": "the",
+        "start": 83.5,
+        "end": 83.7,
+        "prob": 0.99
+      },
+      {
+        "word": "ground,",
+        "start": 83.7,
+        "end": 84.1,
+        "prob": 0.99
+      },
+      {
+        "word": "hoping",
+        "start": 84.1,
+        "end": 84.6,
+        "prob": 0.99
+      },
+      {
+        "word": "my",
+        "start": 84.6,
+        "end": 84.8,
+        "prob": 0.99
+      },
+      {
+        "word": "feelings",
+        "start": 84.8,
+        "end": 85.2,
+        "prob": 0.99
+      },
+      {
+        "word": "they",
+        "start": 85.2,
+        "end": 85.4,
+        "prob": 0.99
+      },
+      {
+        "word": "would",
+        "start": 85.4,
+        "end": 85.6,
+        "prob": 0.99
+      },
+      {
+        "word": "drown",
+        "start": 85.6,
+        "end": 85.8,
+        "prob": 0.99
+      }
+    ]
+  },
+  {
+    "segment_idx": 21,
+    "start": 86.0,
+    "end": 89.5,
+    "text": "But they never did, ever lived, ebbing and flowing, inhibited...",
+    "lang": "en",
+    "words": [
+      {
+        "word": "But",
+        "start": 86.0,
+        "end": 86.3,
+        "prob": 0.99
+      },
+      {
+        "word": "they",
+        "start": 86.3,
+        "end": 86.5,
+        "prob": 0.99
+      },
+      {
+        "word": "never",
+        "start": 86.5,
+        "end": 86.9,
+        "prob": 0.99
+      },
+      {
+        "word": "did,",
+        "start": 86.9,
+        "end": 87.2,
+        "prob": 0.99
+      },
+      {
+        "word": "ever",
+        "start": 87.2,
+        "end": 87.6,
+        "prob": 0.99
+      },
+      {
+        "word": "lived,",
+        "start": 87.6,
+        "end": 88.0,
+        "prob": 0.99
+      },
+      {
+        "word": "ebbing",
+        "start": 88.0,
+        "end": 88.5,
+        "prob": 0.99
+      },
+      {
+        "word": "and",
+        "start": 88.5,
+        "end": 88.7,
+        "prob": 0.99
+      },
+      {
+        "word": "flowing,",
+        "start": 88.7,
+        "end": 89.1,
+        "prob": 0.99
+      },
+      {
+        "word": "inhibited...",
+        "start": 89.1,
+        "end": 89.5,
+        "prob": 0.99
+      }
+    ]
+  }
+]

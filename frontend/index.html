@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JumpToThis — Search Inside Videos</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="logo-area">
+        <i data-lucide="sparkles" class="teal-icon animate-pulse"></i>
+        <h1>JumpToThis</h1>
+      </div>
+      <p class="tagline">Search any moment by what is shown OR what is said.</p>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-layout">
+      <!-- Left Column: Video Player, Timeline Ticks & Search Bar -->
+      <section class="player-column">
+        <!-- Video Card -->
+        <div class="video-card">
+          <div class="video-selector-row" style="margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; background: #131A26; padding: 8px 12px; border-radius: 6px; border: 1px solid #1F2E45;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <i data-lucide="video" style="color: #17B6C4; width: 18px; height: 18px;"></i>
+              <span style="font-weight: 500; font-size: 14px; color: #E2E8F0;">Active Video Stream:</span>
+            </div>
+            <select id="video-select" style="background: #0B0E14; color: #E2E8F0; border: 1px solid #1F2E45; padding: 6px 12px; border-radius: 4px; font-size: 13px; font-family: inherit; cursor: pointer; outline: none;">
+              <option value="lecture">EdTech CS Coding Lecture</option>
+              <option value="keynote">Apple WWDC Keynote Recap</option>
+              <option value="friends">🛋️ Friends - Ross's Couch "Pivot" Scene</option>
+              <option value="sports">🎬 De Dana Dan - Hindi Comedy (Dialogue Seeking)</option>
+              <option value="song">🎵 Imagine Dragons - Believer (Lyrics Seeking)</option>
+            </select>
+          </div>
+          <video id="video-player" controls preload="auto">
+            <source src="/media/sample.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+
+        <!-- Custom Timeline Ticks Bar -->
+        <div class="timeline-ticks-container">
+          <span class="timeline-label">Match Ticks</span>
+          <div class="ticks-track" id="timeline-ticks-track">
+            <!-- Ticks will be dynamically injected here -->
+            <div class="ticks-empty-text">No active search markers</div>
+          </div>
+        </div>
+
+        <!-- Search Controls -->
+        <div class="search-card">
+          <form id="search-form" class="search-form">
+            <div class="input-wrapper">
+              <i data-lucide="search" class="search-icon"></i>
+              <input type="text" id="query-input" placeholder='Search by action or speech... (e.g., "AI coding tools" or "explaining dataset")' required autocomplete="off">
+              <button type="button" id="voice-btn" class="voice-btn" title="Speak Query">
+                <i data-lucide="mic" id="mic-icon"></i>
+              </button>
+            </div>
+            <button type="submit" id="search-submit" class="submit-btn">
+              <span>Find Moment</span>
+            </button>
+          </form>
+
+          <!-- Suggestion Chips -->
+          <div class="suggestions-row">
+            <span class="suggestion-label">Try queries:</span>
+            <button class="suggest-chip">"AI coding tools"</button>
+            <button class="suggest-chip">"cognitive debt"</button>
+            <button class="suggest-chip">"developer survey"</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right Column: Results & Dev Inspector -->
+      <aside class="sidebar-column">
+        <!-- Index Status Inspector -->
+        <div class="inspector-card">
+          <div class="card-header">
+            <i data-lucide="cpu" class="icon-label"></i>
+            <h3>Dev Index Inspector</h3>
+            <span class="offline-badge">
+              <i data-lucide="shield-check"></i> Local-Only
+            </span>
+          </div>
+                   <div class="inspector-grid">
+            <div class="stat-item">
+              <span class="stat-label">Indexer Status</span>
+              <span class="stat-value text-green" id="inspect-status">Loading...</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Calculations</span>
+              <span class="stat-value font-mono text-teal" id="inspect-calc">Offline CPU</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Visual Model</span>
+              <span class="stat-value font-mono">CLIP 512d</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Speech Model</span>
+              <span class="stat-value font-mono">MiniLM 384d</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Frames / Speech Chunks</span>
+              <span class="stat-value font-mono" id="inspect-sizes">0 / 0</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Video Duration</span>
+              <span class="stat-value font-mono" id="inspect-duration">-</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Weights (V / T)</span>
+              <span class="stat-value font-mono text-teal" id="inspect-weights">0.60 / 0.40</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Total Latency</span>
+              <span class="stat-value text-amber font-mono" id="inspect-latency">0 ms</span>
+            </div>
+          </div>
+
+          <!-- Collapsible Latency breakdown -->
+          <div class="latency-breakdown" id="latency-breakdown" style="display: none;">
+            <div class="breakdown-title">Latency Breakdown:</div>
+            <div class="breakdown-row"><span>Query Encoding:</span> <span id="val-enc">0 ms</span></div>
+            <div class="breakdown-row"><span>Vector Search:</span> <span id="val-search">0 ms</span></div>
+            <div class="breakdown-row"><span>Score Fusion / NMS:</span> <span id="val-rank">0 ms</span></div>
+          </div>
+
+          <!-- Vector space inspection tool -->
+          <button class="inspect-vector-btn" id="inspect-vector-btn">
+            <i data-lucide="binary"></i> View Vector Space
+          </button>
+          <div class="vector-inspect-panel" id="vector-inspect-panel" style="display: none;">
+            <p>Sample Query Vector:</p>
+            <div class="vector-array" id="vector-array">
+              [-0.012, 0.043, -0.098, 0.124, -0.054, 0.021, -0.104, 0.337, ...]
+            </div>
+          </div>
+        </div>
+
+        <!-- Search Results Panel -->
+        <div class="results-card">
+          <div class="card-header">
+            <i data-lucide="layers" class="icon-label"></i>
+            <h3>Jump Points</h3>
+            <span class="count-badge" id="results-count">0 Matches</span>
+          </div>
+
+          <!-- Result Items -->
+          <div id="results-container" class="results-container">
+            <div class="empty-state">
+              <i data-lucide="play-circle" class="empty-icon"></i>
+              <p>No active search moments</p>
+              <p class="empty-sub">Enter a query on the left to locate visual actions or spoken dialogue.</p>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <!-- Page JS scripts -->
+  <script>
+    const videoPlayer = document.getElementById('video-player');
+    const searchForm = document.getElementById('search-form');
+    const queryInput = document.getElementById('query-input');
+    const resultsContainer = document.getElementById('results-container');
+    const resultsCount = document.getElementById('results-count');
+    const voiceBtn = document.getElementById('voice-btn');
+    const micIcon = document.getElementById('mic-icon');
+    const timelineTicksTrack = document.getElementById('timeline-ticks-track');
+    const videoSelect = document.getElementById('video-select');
+    
+    // Inspector elements
+    const inspectStatus = document.getElementById('inspect-status');
+    const inspectCalc = document.getElementById('inspect-calc');
+    const inspectSizes = document.getElementById('inspect-sizes');
+    const inspectLatency = document.getElementById('inspect-latency');
+    const inspectDuration = document.getElementById('inspect-duration');
+    const inspectWeights = document.getElementById('inspect-weights');
+    
+    const latencyBreakdown = document.getElementById('latency-breakdown');
+    const valEnc = document.getElementById('val-enc');
+    const valSearch = document.getElementById('val-search');
+    const valRank = document.getElementById('val-rank');
+
+    const inspectVectorBtn = document.getElementById('inspect-vector-btn');
+    const vectorInspectPanel = document.getElementById('vector-inspect-panel');
+    const vectorArray = document.getElementById('vector-array');
+
+    let videoDuration = 150.0; // Default length corresponding to 2m30s
+    let selectedVideo = "lecture";
+
+    // On Load: Fetch Indexer Status
+    async function updateStatus() {
+      try {
+        const res = await fetch(`/status?video=${selectedVideo}`);
+        const data = await res.json();
+        
+        if (data.indexed) {
+          inspectStatus.innerText = "Index Loaded";
+          inspectStatus.className = "stat-value text-green";
+          inspectCalc.innerText = `${data.device.toUpperCase()} Matrix`;
+        } else {
+          inspectStatus.innerText = "No Index";
+          inspectStatus.className = "stat-value text-orange";
+        }
+        inspectSizes.innerText = `${data.frames_count}f / ${data.transcript_count}s`;
+      } catch (e) {
+        console.error("Error reading status:", e);
+        inspectStatus.innerText = "Offline";
+        inspectStatus.className = "stat-value text-red";
+      }
+    }
+    updateStatus();
+
+    // Get video length when metadata loads
+    videoPlayer.addEventListener('loadedmetadata', () => {
+      videoDuration = videoPlayer.duration || 150.0;
+      inspectDuration.innerText = `${Math.round(videoDuration)}s`;
+    });
+
+    // Handle video selection change
+    videoSelect.addEventListener('change', () => {
+      selectedVideo = videoSelect.value;
+      if (selectedVideo === "lecture") {
+        videoPlayer.src = "/media/sample.mp4";
+      } else if (selectedVideo === "keynote") {
+        videoPlayer.src = "/media/keynote.mp4";
+      } else if (selectedVideo === "friends") {
+        videoPlayer.src = "/media/friends.mp4";
+      } else if (selectedVideo === "sports") {
+        videoPlayer.src = "/media/sports.mp4";
+      } else if (selectedVideo === "song") {
+        videoPlayer.src = "/media/song.mp4";
+      }
+      videoPlayer.load();
+
+      // Clear previous search ticks and moment cards
+      resultsContainer.innerHTML = `
+        <div class="empty-state">
+          <i data-lucide="play-circle" class="empty-icon"></i>
+          <p>No active search moments</p>
+          <p class="empty-sub">Enter a query on the left to locate visual actions or spoken dialogue.</p>
+        </div>
+      `;
+      timelineTicksTrack.innerHTML = `<div class="ticks-empty-text">No active search markers</div>`;
+      resultsCount.innerText = "0 Matches";
+
+      // Reset latency breakdown and status
+      latencyBreakdown.style.display = 'none';
+      inspectLatency.innerText = "0 ms";
+      inspectWeights.innerText = "0.60 / 0.40";
+
+      updateSuggestionChips();
+      updateStatus();
+    });
+
+    function updateSuggestionChips() {
+      const suggestionsRow = document.querySelector('.suggestions-row');
+      if (selectedVideo === "lecture") {
+        suggestionsRow.innerHTML = `
+          <span class="suggestion-label">Try queries:</span>
+          <button class="suggest-chip">"AI coding tools"</button>
+          <button class="suggest-chip">"cognitive debt"</button>
+          <button class="suggest-chip">"developer survey"</button>
+        `;
+      } else if (selectedVideo === "keynote") {
+        suggestionsRow.innerHTML = `
+          <span class="suggestion-label">Try queries:</span>
+          <button class="suggest-chip">"home screen"</button>
+          <button class="suggest-chip">"dark mode icons"</button>
+          <button class="suggest-chip">"control center"</button>
+        `;
+      } else if (selectedVideo === "friends") {
+        suggestionsRow.innerHTML = `
+          <span class="suggestion-label">Try queries:</span>
+          <button class="suggest-chip">"carrying couch on stairs"</button>
+          <button class="suggest-chip">"pivot"</button>
+          <button class="suggest-chip">"Chandler stuck under sofa"</button>
+        `;
+      } else if (selectedVideo === "sports") {
+        suggestionsRow.innerHTML = `
+          <span class="suggestion-label">Try queries:</span>
+          <button class="suggest-chip">"moolchand ji ko bulao"</button>
+          <button class="suggest-chip">"paani daalo"</button>
+          <button class="suggest-chip">"hosh mein aao"</button>
+        `;
+      } else if (selectedVideo === "song") {
+        suggestionsRow.innerHTML = `
+          <span class="suggestion-label">Try queries:</span>
+          <button class="suggest-chip">"made me a believer"</button>
+          <button class="suggest-chip">"words inside my head"</button>
+          <button class="suggest-chip">"let the bullets fly"</button>
+        `;
+      }
+      
+      // Bind click handler for updated suggest chips
+      document.querySelectorAll('.suggest-chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+          queryInput.value = chip.innerText.replace(/"/g, '');
+          searchForm.dispatchEvent(new Event('submit'));
+        });
+      });
+      lucide.createIcons();
+    }
+    updateSuggestionChips();
+
+    // Vector panel toggle
+    inspectVectorBtn.addEventListener('click', () => {
+      if (vectorInspectPanel.style.display === 'none') {
+        vectorInspectPanel.style.display = 'block';
+        const vals = Array.from({length: 8}, () => (Math.random() * 0.4 - 0.2).toFixed(4));
+        vectorArray.innerText = `[${vals.join(', ')}, ...]`;
+      } else {
+        vectorInspectPanel.style.display = 'none';
+      }
+    });
+
+    // Query form submission
+    searchForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const queryText = queryInput.value.trim();
+      if (!queryText) return;
+
+      resultsContainer.innerHTML = `
+        <div class="loading-state">
+          <div class="spinner"></div>
+          <p>Querying joint vector space...</p>
+        </div>
+      `;
+      timelineTicksTrack.innerHTML = `<div class="ticks-empty-text">Searching timeline...</div>`;
+
+      try {
+        const res = await fetch(`/search?q=${encodeURIComponent(queryText)}&video=${selectedVideo}`);
+        if (!res.ok) {
+          const err = await res.json();
+          throw new Error(err.detail || "Search failed");
+        }
+        
+        const data = await res.json();
+        
+        // Display Latency stats
+        inspectLatency.innerText = `${data.latency_ms} ms`;
+        inspectWeights.innerText = `${data.weights.visual.toFixed(2)} / ${data.weights.text.toFixed(2)}`;
+        
+        valEnc.innerText = `${data.latency.encoding_ms} ms`;
+        valSearch.innerText = `${data.latency.search_ms} ms`;
+        valRank.innerText = `${data.latency.ranking_ms} ms`;
+        latencyBreakdown.style.display = 'block';
+        
+        renderResults(data);
+      } catch (err) {
+        resultsContainer.innerHTML = `
+          <div class="error-state">
+            <i data-lucide="alert-triangle" class="error-icon"></i>
+            <p>${err.message}</p>
+          </div>
+        `;
+        lucide.createIcons();
+      }
+    });
+
+    function renderResults(data) {
+      const hits = data.results || [];
+      resultsCount.innerText = `${hits.length} Matches`;
+      timelineTicksTrack.innerHTML = '';
+      
+      if (hits.length === 0) {
+        resultsContainer.innerHTML = `
+          <div class="empty-state">
+            <i data-lucide="frown" class="empty-icon"></i>
+            <p>No moments found</p>
+            <p class="empty-sub">Try searching other keywords or visual actions.</p>
+          </div>
+        `;
+        timelineTicksTrack.innerHTML = `<div class="ticks-empty-text">No timeline markers found</div>`;
+        lucide.createIcons();
+        return;
+      }
+
+      resultsContainer.innerHTML = '';
+      const thumbBase = `/data/${selectedVideo}/thumbnails/`;
+      
+      hits.forEach((item, idx) => {
+        const scorePct = item.score;
+        let scoreClass = 'text-green';
+        if (scorePct < 40) scoreClass = 'text-teal';
+        else if (scorePct < 70) scoreClass = 'text-orange';
+
+        const card = document.createElement('div');
+        card.className = 'result-item';
+        card.innerHTML = `
+          <div class="result-thumbnail-wrapper" onclick="seekTo(${item.timestamp})">
+            <img src="${thumbBase}${item.frame_path}" alt="Frame Thumbnail" class="result-thumbnail">
+            <div class="thumbnail-hover-overlay">
+              <i data-lucide="play" class="play-huge-icon"></i>
+            </div>
+            <span class="thumbnail-timestamp">${item.formatted_time}</span>
+          </div>
+          <div class="result-body">
+            <div class="result-meta-row">
+              <span class="badge score-badge ${scoreClass}">${scorePct}% Semantic Match</span>
+              <span class="badge type-badge">${item.type.toUpperCase()}</span>
+            </div>
+            <p class="result-text">${item.matched_context}</p>
+            <div class="similarity-debug-details">
+              <span>CLIP: ${item.visual_similarity.toFixed(3)}</span> | 
+              <span>MiniLM: ${item.text_similarity.toFixed(3)}</span>
+            </div>
+            <button class="jump-card-btn" onclick="seekTo(${item.timestamp})">
+              <i data-lucide="external-link"></i> Jump to Playhead
+            </button>
+          </div>
+        `;
+        resultsContainer.appendChild(card);
+
+        // Inject Timeline Ticks
+        const pct = (item.timestamp / videoDuration) * 100;
+        const tick = document.createElement('div');
+        tick.className = `timeline-tick ${item.type === 'visual' ? 'tick-visual' : item.type === 'transcript' ? 'tick-text' : 'tick-fused'}`;
+        tick.style.left = `${pct}%`;
+        tick.title = `Jump to ${item.formatted_time} (${scorePct}% match)`;
+        tick.addEventListener('click', () => seekTo(item.timestamp));
+        timelineTicksTrack.appendChild(tick);
+      });
+      
+      lucide.createIcons();
+    }
+
+    function seekTo(ts) {
+      videoPlayer.currentTime = ts;
+      videoPlayer.play();
+    }
+
+    // Voice search using local MediaRecorder mic capture POSTed to server
+    let mediaRecorder;
+    let audioChunks = [];
+    let isRecording = false;
+
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      voiceBtn.addEventListener('click', async () => {
+        if (!isRecording) {
+          navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
+            mediaRecorder = new MediaRecorder(stream);
+            mediaRecorder.ondataavailable = e => {
+              audioChunks.push(e.data);
+            };
+            mediaRecorder.onstop = async () => {
+              const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+              audioChunks = [];
+              
+              const formData = new FormData();
+              formData.append('file', audioBlob, 'voice.wav');
+              
+              queryInput.placeholder = "Transcribing locally...";
+              try {
+                const res = await fetch('/voice-search', {
+                  method: 'POST',
+                  body: formData
+                });
+                if (!res.ok) throw new Error("Local voice search API failed");
+                const data = await res.json();
+                queryInput.value = data.text;
+                searchForm.dispatchEvent(new Event('submit'));
+              } catch (err) {
+                console.error("Local voice transcription failed:", err);
+                queryInput.placeholder = "Transcription failed.";
+              }
+            };
+            
+            mediaRecorder.start();
+            isRecording = true;
+            voiceBtn.classList.add('recording');
+            queryInput.placeholder = "Recording voice locally... Click mic to stop.";
+          }).catch(err => {
+            console.error("Microphone access denied:", err);
+            queryInput.placeholder = "Mic blocked. Type query.";
+          });
+        } else {
+          mediaRecorder.stop();
+          isRecording = false;
+          voiceBtn.classList.remove('recording');
+          queryInput.placeholder = 'Search by action or speech...';
+        }
+      });
+    } else {
+      voiceBtn.style.display = 'none';
+    }
+
+    lucide.createIcons();
+  </script>
+</body>
+</html>

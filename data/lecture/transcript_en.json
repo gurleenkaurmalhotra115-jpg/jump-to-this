@@ -1,0 +1,3683 @@
+[
+  {
+    "segment_idx": 0,
+    "start": 0.62,
+    "end": 2.28,
+    "text": "There is a lot of confusion with the Devs in 2026.",
+    "lang": "en",
+    "words": [
+      {
+        "word": "There",
+        "start": 0.62,
+        "end": 1.06,
+        "prob": 0.18
+      },
+      {
+        "word": "is",
+        "start": 1.06,
+        "end": 1.06,
+        "prob": 0.62
+      },
+      {
+        "word": "a",
+        "start": 1.06,
+        "end": 1.6,
+        "prob": 0.74
+      },
+      {
+        "word": "lot",
+        "start": 1.6,
+        "end": 1.74,
+        "prob": 0.3
+      },
+      {
+        "word": "of",
+        "start": 1.74,
+        "end": 2.2,
+        "prob": 0.99
+      },
+      {
+        "word": "confusion",
+        "start": 2.2,
+        "end": 2.2,
+        "prob": 0.88
+      },
+      {
+        "word": "with",
+        "start": 2.2,
+        "end": 2.28,
+        "prob": 0.6
+      },
+      {
+        "word": "the",
+        "start": 2.28,
+        "end": 2.28,
+        "prob": 0.42
+      },
+      {
+        "word": "Devs",
+        "start": 2.28,
+        "end": 2.28,
+        "prob": 0.52
+      },
+      {
+        "word": "in",
+        "start": 2.28,
+        "end": 2.28,
+        "prob": 0.76
+      },
+      {
+        "word": "2026.",
+        "start": 2.28,
+        "end": 2.28,
+        "prob": 0.69
+      }
+    ]
+  },
+  {
+    "segment_idx": 1,
+    "start": 2.58,
+    "end": 4.52,
+    "text": "There are so many programming languages to choose from.",
+    "lang": "en",
+    "words": [
+      {
+        "word": "There",
+        "start": 2.58,
+        "end": 2.82,
+        "prob": 0.41
+      },
+      {
+        "word": "are",
+        "start": 2.82,
+        "end": 2.82,
+        "prob": 0.83
+      },
+      {
+        "word": "so",
+        "start": 2.82,
+        "end": 2.82,
+        "prob": 0.51
+      },
+      {
+        "word": "many",
+        "start": 2.82,
+        "end": 2.82,
+        "prob": 0.96
+      },
+      {
+        "word": "programming",
+        "start": 2.82,
+        "end": 3.3,
+        "prob": 0.79
+      },
+      {
+        "word": "languages",
+        "start": 3.3,
+        "end": 3.84,
+        "prob": 0.99
+      },
+      {
+        "word": "to",
+        "start": 3.84,
+        "end": 3.96,
+        "prob": 0.14
+      },
+      {
+        "word": "choose",
+        "start": 3.96,
+        "end": 4.1,
+        "prob": 0.82
+      },
+      {
+        "word": "from.",
+        "start": 4.1,
+        "end": 4.52,
+        "prob": 0.41
+      }
+    ]
+  },
+  {
+    "segment_idx": 2,
+    "start": 4.62,
+    "end": 6.12,
+    "text": "So many AI tools are being used.",
+    "lang": "en",
+    "words": [
+      {
+        "word": "So",
+        "start": 4.62,
+        "end": 4.74,
+        "prob": 0.27
+      },
+      {
+        "word": "many",
+        "start": 4.74,
+        "end": 4.86,
+        "prob": 0.49
+      },
+      {
+        "word": "AI",
+        "start": 4.86,
+        "end": 5.52,
+        "prob": 0.62
+      },
+      {
+        "word": "tools",
+        "start": 5.52,
+        "end": 5.78,
+        "prob": 0.96
+      },
+      {
+        "word": "are",
+        "start": 5.78,
+        "end": 5.96,
+        "prob": 0.75
+      },
+      {
+        "word": "being",
+        "start": 5.96,
+        "end": 6.12,
+        "prob": 0.3
+      },
+      {
+        "word": "used.",
+        "start": 6.12,
+        "end": 6.12,
+        "prob": 0.28
+      }
+    ]
+  },
+  {
+    "segment_idx": 3,
+    "start": 6.28,
+    "end": 9.2,
+    "text": "There are endless new frameworks and you get the opposite advice with your career.",
+    "lang": "en",
+    "words": [
+      {
+        "word": "There",
+        "start": 6.28,
+        "end": 6.38,
+        "prob": 0.42
+      },
+      {
+        "word": "are",
+        "start": 6.38,
+        "end": 6.38,
+        "prob": 0.63
+      },
+      {
+        "word": "endless",
+        "start": 6.38,
+        "end": 6.6,
+        "prob": 0.95
+      },
+      {
+        "word": "new",
+        "start": 6.6,
+        "end": 6.9,
+        "prob": 0.82
+      },
+      {
+        "word": "frameworks",
+        "start": 6.9,
+        "end": 7.28,
+        "prob": 0.99
+      },
+      {
+        "word": "and",
+        "start": 7.28,
+        "end": 7.48,
+        "prob": 0.59
+      },
+      {
+        "word": "you",
+        "start": 7.48,
+        "end": 7.66,
+        "prob": 0.17
+      },
+      {
+        "word": "get",
+        "start": 7.66,
+        "end": 7.66,
+        "prob": 0.83
+      },
+      {
+        "word": "the",
+        "start": 7.66,
+        "end": 7.86,
+        "prob": 0.46
+      },
+      {
+        "word": "opposite",
+        "start": 7.86,
+        "end": 8.14,
+        "prob": 0.85
+      },
+      {
+        "word": "advice",
+        "start": 8.14,
+        "end": 8.5,
+        "prob": 0.97
+      },
+      {
+        "word": "with",
+        "start": 8.5,
+        "end": 8.9,
+        "prob": 0.17
+      },
+      {
+        "word": "your",
+        "start": 8.9,
+        "end": 8.92,
+        "prob": 0.35
+      },
+      {
+        "word": "career.",
+        "start": 8.92,
+        "end": 9.2,
+        "prob": 0.96
+      }
+    ]
+  },
+  {
+    "segment_idx": 4,
+    "start": 9.64,
+    "end": 13.56,
+    "text": "I understand it is very difficult to choose what to do, and you know what the crazy part is?",
+    "lang": "en",
+    "words": [
+      {
+        "word": "I",
+        "start": 9.64,
+        "end": 9.8,
+        "prob": 0.7
+      },
+      {
+        "word": "understand",
+        "start": 9.8,
+        "end": 10.06,
+        "prob": 0.97
+      },
+      {
+        "word": "it",
+        "start": 10.06,
+        "end": 10.3,
+        "prob": 0.58
+      },
+      {
+        "word": "is",
+        "start": 10.3,
+        "end": 10.3,
+        "prob": 0.48
+      },
+      {
+        "word": "very",
+        "start": 10.3,
+        "end": 10.4,
+        "prob": 0.8
+      },
+      {
+        "word": "difficult",
+        "start": 10.4,
+        "end": 10.72,
+        "prob": 0.9
+      },
+      {
+        "word": "to",
+        "start": 10.72,
+        "end": 10.88,
+        "prob": 0.93
+      },
+      {
+        "word": "choose",
+        "start": 10.88,
+        "end": 11.08,
+        "prob": 0.9
+      },
+      {
+        "word": "what",
+        "start": 11.08,
+        "end": 11.48,
+        "prob": 0.82
+      },
+      {
+        "word": "to",
+        "start": 11.48,
+        "end": 11.66,
+        "prob": 0.8
+      },
+      {
+        "word": "do,",
+        "start": 11.66,
+        "end": 11.88,
+        "prob": 0.96
+      },
+      {
+        "word": "and",
+        "start": 12.2,
+        "end": 12.3,
+        "prob": 0.82
+      },
+      {
+        "word": "you",
+        "start": 12.3,
+        "end": 12.44,
+        "prob": 0.85
+      },
+      {
+        "word": "know",
+        "start": 12.44,
+        "end": 12.52,
+        "prob": 0.99
+      },
+      {
+        "word": "what",
+        "start": 12.52,
+        "end": 12.66,
+        "prob": 0.96
+      },
+      {
+        "word": "the",
+        "start": 12.66,
+        "end": 12.78,
+        "prob": 0.93
+      },
+      {
+        "word": "crazy",
+        "start": 12.78,
+        "end": 13.04,
+        "prob": 0.99
+      },
+      {
+        "word": "part",
+        "start": 13.04,
+        "end": 13.34,
+        "prob": 0.99
+      },
+      {
+        "word": "is?",
+        "start": 13.34,
+        "end": 13.56,
+        "prob": 0.99
+      }
+    ]
+  },
+  {
+    "segment_idx": 5,
+    "start": 13.68,
+    "end": 17.3,
+    "text": "In today's date, AI can write thousands of lines of code, that is for sure true.",
+    "lang": "en",
+    "words": [
+      {
+        "word": "In",
+        "start": 13.68,
+        "end": 13.74,
+        "prob": 0.37
+      },
+      {
+        "word": "today's",
+        "start": 13.74,
+        "end": 14.06,
+        "prob": 0.98
+      },
+      {
+        "word": "date,",
+        "start": 14.06,
+        "end": 14.26,
+        "prob": 0.92
+      },
+      {
+        "word": "AI",
+        "start": 14.48,
+        "end": 14.72,
+        "prob": 0.76
+      },
+      {
+        "word": "can",
+        "start": 14.72,
+        "end": 14.88,
+        "prob": 0.91
+      },
+      {
+        "word": "write",
+        "start": 14.88,
+        "end": 14.88,
+        "prob": 0.82
+      },
+      {
+        "word": "thousands",
+        "start": 14.88,
+        "end": 15.18,
+        "prob": 0.89
+      },
+      {
+        "word": "of",
+        "start": 15.18,
+        "end": 15.36,
+        "prob": 0.97
+      },
+      {
+        "word": "lines",
+        "start": 15.36,
+        "end": 15.5,
+        "prob": 0.98
+      },
+      {
+        "word": "of",
+        "start": 15.5,
+        "end": 16.1,
+        "prob": 0.55
+      },
+      {
+        "word": "code,",
+        "start": 16.1,
+        "end": 16.28,
+        "prob": 0.78
+      },
+      {
+        "word": "that",
+        "start": 16.5,
+        "end": 16.66,
+        "prob": 0.89
+      },
+      {
+        "word": "is",
+        "start": 16.66,
+        "end": 16.8,
+        "prob": 0.96
+      },
+      {
+        "word": "for",
+        "start": 16.8,
+        "end": 16.94,
+        "prob": 0.98
+      },
+      {
+        "word": "sure",
+        "start": 16.94,
+        "end": 17.1,
+        "prob": 0.99
+      },
+      {
+        "word": "true.",
+        "start": 17.1,
+        "end": 17.3,
+        "prob": 0.98
+      }
+    ]
+  },
+  {
+    "segment_idx": 6,
+    "start": 17.46,
+    "end": 19.88,
+    "text": "But if you look at the quality of code, it is coming down.",
+    "lang": "en",
+    "words": [
+      {
+        "word": "But",
+        "start": 17.46,
+        "end": 17.68,
+        "prob": 0.93
+      },
+      {
+        "word": "if",
+        "start": 17.68,
+        "end": 17.8,
+        "prob": 0.49
+      },
+      {
+        "word": "you",
+        "start": 17.8,
+        "end": 17.8,
+        "prob": 0.98
+      },
+      {
+        "word": "look",
+        "start": 17.8,
+        "end": 17.8,
+        "prob": 0.62
+      },
+      {
+        "word": "at",
+        "start": 17.8,
+        "end": 17.8,
+        "prob": 0.97
+      },
+      {
+        "word": "the",
+        "start": 17.8,
+        "end": 17.84,
+        "prob": 0.89
+      },
+      {
+        "word": "quality",
+        "start": 17.84,
+        "end": 18.16,
+        "prob": 0.99
+      },
+      {
+        "word": "of",
+        "start": 18.16,
+        "end": 18.44,
+        "prob": 1.0
+      },
+      {
+        "word": "code,",
+        "start": 18.44,
+        "end": 18.72,
+        "prob": 0.61
+      },
+      {
+        "word": "it",
+        "start": 19.4,
+        "end": 19.6,
+        "prob": 0.57
+      },
+      {
+        "word": "is",
+        "start": 19.6,
+        "end": 19.6,
+        "prob": 0.82
+      },
+      {
+        "word": "coming",
+        "start": 19.6,
+        "end": 19.62,
+        "prob": 0.5
+      },
+      {
+        "word": "down.",
+        "start": 19.62,
+        "end": 19.88,
+        "prob": 0.93
+      }
+    ]
+  },
+  {
+    "segment_idx": 7,
+    "start": 20.34,
+    "end": 22.58,
+    "text": "Companies are not able to keep their code working.",
+    "lang": "en",
+    "words": [
+      {
+        "word": "Companies",
+        "start": 20.34,
+        "end": 20.78,
+        "prob": 0.85
+      },
+      {
+        "word": "are",
+        "start": 20.78,
+        "end": 21.18,
+        "prob": 0.55
+      },
+      {
+        "word": "not",
+        "start": 21.18,
+        "end": 21.28,
+        "prob": 0.78
+      },
+      {
+        "word": "able",
+        "start": 21.28,
+        "end": 21.28,
+        "prob": 0.94
+      },
+      {
+        "word": "to",
+        "start": 21.28,
+        "end": 21.28,
+        "prob": 1.0
+      },
+      {
+        "word": "keep",
+        "start": 21.28,
+        "end": 21.28,
+        "prob": 0.72
+      },
+      {
+        "word": "their",
+        "start": 21.28,
+        "end": 21.44,
+        "prob": 0.85
+      },
+      {
+        "word": "code",
+        "start": 21.44,
+        "end": 21.88,
+        "prob": 0.95
+      },
+      {
+        "word": "working.",
+        "start": 21.88,
+        "end": 22.58,
+        "prob": 0.97
+      }
+    ]
+  },
+  {
+    "segment_idx": 8,
+    "start": 23.48,
+    "end": 26.84,
+    "text": "So the question is, what are the basic skills that you need in AI era?",
+    "lang": "en",
+    "words": [
+      {
+        "word": "So",
+        "start": 23.48,
+        "end": 23.64,
+        "prob": 0.95
+      },
+      {
+        "word": "the",
+        "start": 23.64,
+        "end": 23.72,
+        "prob": 0.85
+      },
+      {
+        "word": "question",
+        "start": 23.72,
+        "end": 23.94,
+        "prob": 0.99
+      },
+      {
+        "word": "is,",
+        "start": 23.94,
+        "end": 24.16,
+        "prob": 0.99
+      },
+      {
+        "word": "what",
+        "start": 24.44,
+        "end": 24.46,
+        "prob": 0.59
+      },
+      {
+        "word": "are",
+        "start": 24.46,
+        "end": 24.82,
+        "prob": 0.76
+      },
+      {
+        "word": "the",
+        "start": 24.82,
+        "end": 24.82,
+        "prob": 0.98
+      },
+      {
+        "word": "basic",
+        "start": 24.82,
+        "end": 25.08,
+        "prob": 0.96
+      },
+      {
+        "word": "skills",
+        "start": 25.08,
+        "end": 25.44,
+        "prob": 0.99
+      },
+      {
+        "word": "that",
+        "start": 25.44,
+        "end": 25.74,
+        "prob": 0.62
+      },
+      {
+        "word": "you",
+        "start": 25.74,
+        "end": 25.88,
+        "prob": 0.97
+      },
+      {
+        "word": "need",
+        "start": 25.88,
+        "end": 26.16,
+        "prob": 0.5
+      },
+      {
+        "word": "in",
+        "start": 26.16,
+        "end": 26.3,
+        "prob": 0.81
+      },
+      {
+        "word": "AI",
+        "start": 26.3,
+        "end": 26.52,
+        "prob": 0.28
+      },
+      {
+        "word": "era?",
+        "start": 26.52,
+        "end": 26.84,
+        "prob": 0.42
+      }
+    ]
+  },
+  {
+    "segment_idx": 9,
+    "start": 27.14,
+    "end": 29.04,
+    "text": "What are the skills that will actually pay you well?",
+    "lang": "en",
+    "words": [
+      {
+        "word": "What",
+        "start": 27.14,
+        "end": 27.3,
+        "prob": 0.83
+      },
+      {
+        "word": "are",
+        "start": 27.3,
+        "end": 27.48,
+        "prob": 0.77
+      },
+      {
+        "word": "the",
+        "start": 27.48,
+        "end": 27.5,
+        "prob": 0.98
+      },
+      {
+        "word": "skills",
+        "start": 27.5,
+        "end": 27.88,
+        "prob": 0.95
+      },
+      {
+        "word": "that",
+        "start": 27.88,
+        "end": 28.2,
+        "prob": 0.92
+      },
+      {
+        "word": "will",
+        "start": 28.2,
+        "end": 28.3,
+        "prob": 0.63
+      },
+      {
+        "word": "actually",
+        "start": 28.3,
+        "end": 28.56,
+        "prob": 0.39
+      },
+      {
+        "word": "pay",
+        "start": 28.56,
+        "end": 28.78,
+        "prob": 0.59
+      },
+      {
+        "word": "you",
+        "start": 28.78,
+        "end": 28.8,
+        "prob": 0.95
+      },
+      {
+        "word": "well?",
+        "start": 28.8,
+        "end": 29.04,
+        "prob": 0.8
+      }
+    ]
+  },
+  {
+    "segment_idx": 10,
+    "start": 29.52,
+    "end": 33.7,
+    "text": "And what are the new AI tools that you can skip and you won't have to care?",
+    "lang": "en",
+    "words": [
+      {
+        "word": "And",
+        "start": 29.52,
+        "end": 29.8,
+        "prob": 0.12
+      },
+      {
+        "word": "what",
+        "start": 29.8,
+        "end": 30.04,
+        "prob": 0.16
+      },
+      {
+        "word": "are",
+        "start": 30.04,
+        "end": 30.28,
+        "prob": 0.58
+      },
+      {
+        "word": "the",
+        "start": 30.28,
+        "end": 30.28,
+        "prob": 0.87
+      },
+      {
+        "word": "new",
+        "start": 30.28,
+        "end": 30.72,
+        "prob": 0.79
+      },
+      {
+        "word": "AI",
+        "start": 30.72,
+        "end": 30.96,
+        "prob": 0.68
+      },
+      {
+        "word": "tools",
+        "start": 30.96,
+        "end": 31.32,
+        "prob": 0.97
+      },
+      {
+        "word": "that",
+        "start": 31.32,
+        "end": 31.62,
+        "prob": 0.54
+      },
+      {
+        "word": "you",
+        "start": 31.62,
+        "end": 31.84,
+        "prob": 0.66
+      },
+      {
+        "word": "can",
+        "start": 31.84,
+        "end": 31.88,
+        "prob": 0.93
+      },
+      {
+        "word": "skip",
+        "start": 31.88,
+        "end": 32.24,
+        "prob": 0.87
+      },
+      {
+        "word": "and",
+        "start": 32.24,
+        "end": 32.86,
+        "prob": 0.54
+      },
+      {
+        "word": "you",
+        "start": 32.86,
+        "end": 33.08,
+        "prob": 0.58
+      },
+      {
+        "word": "won't",
+        "start": 33.08,
+        "end": 33.08,
+        "prob": 0.81
+      },
+      {
+        "word": "have",
+        "start": 33.08,
+        "end": 33.08,
+        "prob": 0.22
+      },
+      {
+        "word": "to",
+        "start": 33.08,
+        "end": 33.22,
+        "prob": 0.47
+      },
+      {
+        "word": "care?",
+        "start": 33.22,
+        "end": 33.7,
+        "prob": 0.33
+      }
+    ]
+  },
+  {
+    "segment_idx": 11,
+    "start": 33.96,
+    "end": 35.84,
+    "text": "And the answer to these things that you won't get in social media hype.",
+    "lang": "en",
+    "words": [
+      {
+        "word": "And",
+        "start": 33.96,
+        "end": 34.16,
+        "prob": 0.5
+      },
+      {
+        "word": "the",
+        "start": 34.16,
+        "end": 34.36,
+        "prob": 0.54
+      },
+      {
+        "word": "answer",
+        "start": 34.36,
+        "end": 34.38,
+        "prob": 0.81
+      },
+      {
+        "word": "to",
+        "start": 34.38,
+        "end": 34.38,
+        "prob": 0.92
+      },
+      {
+        "word": "these",
+        "start": 34.38,
+        "end": 34.38,
+        "prob": 0.54
+      },
+      {
+        "word": "things",
+        "start": 34.38,
+        "end": 34.56,
+        "prob": 0.33
+      },
+      {
+        "word": "that",
+        "start": 34.56,
+        "end": 35.04,
+        "prob": 0.28
+      },
+      {
+        "word": "you",
+        "start": 35.04,
+        "end": 35.08,
+        "prob": 0.85
+      },
+      {
+        "word": "won't",
+        "start": 35.08,
+        "end": 35.08,
+        "prob": 0.9
+      },
+      {
+        "word": "get",
+        "start": 35.08,
+        "end": 35.08,
+        "prob": 0.73
+      },
+      {
+        "word": "in",
+        "start": 35.08,
+        "end": 35.08,
+        "prob": 0.62
+      },
+      {
+        "word": "social",
+        "start": 35.08,
+        "end": 35.3,
+        "prob": 0.72
+      },
+      {
+        "word": "media",
+        "start": 35.3,
+        "end": 35.6,
+        "prob": 0.99
+      },
+      {
+        "word": "hype.",
+        "start": 35.6,
+        "end": 35.84,
+        "prob": 0.95
+      }
+    ]
+  },
+  {
+    "segment_idx": 12,
+    "start": 36.54,
+    "end": 41.86,
+    "text": "The real answer to these things is in real-world job market data or in hiring trends.",
+    "lang": "en",
+    "words": [
+      {
+        "word": "The",
+        "start": 36.54,
+        "end": 37.1,
+        "prob": 0.65
+      },
+      {
+        "word": "real",
+        "start": 37.1,
+        "end": 37.66,
+        "prob": 0.78
+      },
+      {
+        "word": "answer",
+        "start": 37.66,
+        "end": 37.98,
+        "prob": 0.97
+      },
+      {
+        "word": "to",
+        "start": 37.98,
+        "end": 38.16,
+        "prob": 0.55
+      },
+      {
+        "word": "these",
+        "start": 38.16,
+        "end": 38.16,
+        "prob": 0.75
+      },
+      {
+        "word": "things",
+        "start": 38.16,
+        "end": 38.16,
+        "prob": 0.62
+      },
+      {
+        "word": "is",
+        "start": 38.16,
+        "end": 38.44,
+        "prob": 0.74
+      },
+      {
+        "word": "in",
+        "start": 38.44,
+        "end": 38.48,
+        "prob": 0.2
+      },
+      {
+        "word": "real",
+        "start": 38.48,
+        "end": 38.78,
+        "prob": 0.45
+      },
+      {
+        "word": "-world",
+        "start": 38.78,
+        "end": 39.14,
+        "prob": 0.58
+      },
+      {
+        "word": "job",
+        "start": 39.14,
+        "end": 39.5,
+        "prob": 0.85
+      },
+      {
+        "word": "market",
+        "start": 39.5,
+        "end": 39.84,
+        "prob": 0.97
+      },
+      {
+        "word": "data",
+        "start": 39.84,
+        "end": 40.16,
+        "prob": 0.96
+      },
+      {
+        "word": "or",
+        "start": 40.16,
+        "end": 40.74,
+        "prob": 0.61
+      },
+      {
+        "word": "in",
+        "start": 40.74,
+        "end": 41.02,
+        "prob": 0.71
+      },
+      {
+        "word": "hiring",
+        "start": 41.02,
+        "end": 41.36,
+        "prob": 0.94
+      },
+      {
+        "word": "trends.",
+        "start": 41.36,
+        "end": 41.86,
+        "prob": 0.98
+      }
+    ]
+  },
+  {
+    "segment_idx": 13,
+    "start": 42.36,
+    "end": 45.08,
+    "text": "If you want to make your long-lasting career in software development,",
+    "lang": "en",
+    "words": [
+      {
+        "word": "If",
+        "start": 42.36,
+        "end": 42.5,
+        "prob": 0.84
+      },
+      {
+        "word": "you",
+        "start": 42.5,
+        "end": 43.62,
+        "prob": 0.73
+      },
+      {
+        "word": "want",
+        "start": 43.62,
+        "end": 43.62,
+        "prob": 0.88
+      },
+      {
+        "word": "to",
+        "start": 43.62,
+        "end": 43.64,
+        "prob": 0.96
+      },
+      {
+        "word": "make",
+        "start": 43.64,
+        "end": 43.64,
+        "prob": 0.48
+      },
+      {
+        "word": "your",
+        "start": 43.64,
+        "end": 43.8,
+        "prob": 0.87
+      },
+      {
+        "word": "long",
+        "start": 43.8,
+        "end": 44.06,
+        "prob": 0.96
+      },
+      {
+        "word": "-lasting",
+        "start": 44.06,
+        "end": 44.36,
+        "prob": 0.88
+      },
+      {
+        "word": "career",
+        "start": 44.36,
+        "end": 44.92,
+        "prob": 1.0
+      },
+      {
+        "word": "in",
+        "start": 44.92,
+        "end": 45.08,
+        "prob": 0.87
+      },
+      {
+        "word": "software",
+        "start": 45.08,
+        "end": 45.08,
+        "prob": 0.89
+      },
+      {
+        "word": "development,",
+        "start": 45.08,
+        "end": 45.08,
+        "prob": 0.99
+      }
+    ]
+  },
+  {
+    "segment_idx": 14,
+    "start": 45.48,
+    "end": 50.34,
+    "text": "then you have to ignore marketing hype and focus on what is going on in the real world.",
+    "lang": "en",
+    "words": [
+      {
+        "word": "then",
+        "start": 45.48,
+        "end": 45.64,
+        "prob": 0.57
+      },
+      {
+        "word": "you",
+        "start": 45.64,
+        "end": 46.18,
+        "prob": 0.7
+      },
+      {
+        "word": "have",
+        "start": 46.18,
+        "end": 46.18,
+        "prob": 0.36
+      },
+      {
+        "word": "to",
+        "start": 46.18,
+        "end": 46.18,
+        "prob": 1.0
+      },
+      {
+        "word": "ignore",
+        "start": 46.18,
+        "end": 46.18,
+        "prob": 0.98
+      },
+      {
+        "word": "marketing",
+        "start": 46.18,
+        "end": 46.54,
+        "prob": 0.87
+      },
+      {
+        "word": "hype",
+        "start": 46.54,
+        "end": 47.08,
+        "prob": 0.97
+      },
+      {
+        "word": "and",
+        "start": 47.08,
+        "end": 48.46,
+        "prob": 0.48
+      },
+      {
+        "word": "focus",
+        "start": 48.46,
+        "end": 49.1,
+        "prob": 0.69
+      },
+      {
+        "word": "on",
+        "start": 49.1,
+        "end": 49.66,
+        "prob": 0.86
+      },
+      {
+        "word": "what",
+        "start": 49.66,
+        "end": 49.8,
+        "prob": 0.35
+      },
+      {
+        "word": "is",
+        "start": 49.8,
+        "end": 49.8,
+        "prob": 0.6
+      },
+      {
+        "word": "going",
+        "start": 49.8,
+        "end": 49.8,
+        "prob": 0.69
+      },
+      {
+        "word": "on",
+        "start": 49.8,
+        "end": 49.8,
+        "prob": 0.98
+      },
+      {
+        "word": "in",
+        "start": 49.8,
+        "end": 49.8,
+        "prob": 0.97
+      },
+      {
+        "word": "the",
+        "start": 49.8,
+        "end": 49.82,
+        "prob": 0.63
+      },
+      {
+        "word": "real",
+        "start": 49.82,
+        "end": 50.0,
+        "prob": 0.98
+      },
+      {
+        "word": "world.",
+        "start": 50.0,
+        "end": 50.34,
+        "prob": 0.92
+      }
+    ]
+  },
+  {
+    "segment_idx": 15,
+    "start": 50.98,
+    "end": 55.2,
+    "text": "AI has brought a lot of changes, the way Devs used to work and the way they work now.",
+    "lang": "en",
+    "words": [
+      {
+        "word": "AI",
+        "start": 50.98,
+        "end": 51.2,
+        "prob": 0.93
+      },
+      {
+        "word": "has",
+        "start": 51.2,
+        "end": 51.4,
+        "prob": 0.9
+      },
+      {
+        "word": "brought",
+        "start": 51.4,
+        "end": 51.44,
+        "prob": 0.52
+      },
+      {
+        "word": "a",
+        "start": 51.44,
+        "end": 51.56,
+        "prob": 0.31
+      },
+      {
+        "word": "lot",
+        "start": 51.56,
+        "end": 51.9,
+        "prob": 0.96
+      },
+      {
+        "word": "of",
+        "start": 51.9,
+        "end": 52.02,
+        "prob": 0.99
+      },
+      {
+        "word": "changes,",
+        "start": 52.02,
+        "end": 52.16,
+        "prob": 0.98
+      },
+      {
+        "word": "the",
+        "start": 52.68,
+        "end": 52.82,
+        "prob": 0.81
+      },
+      {
+        "word": "way",
+        "start": 52.82,
+        "end": 53.02,
+        "prob": 0.98
+      },
+      {
+        "word": "Devs",
+        "start": 53.02,
+        "end": 53.48,
+        "prob": 0.58
+      },
+      {
+        "word": "used",
+        "start": 53.48,
+        "end": 53.66,
+        "prob": 0.68
+      },
+      {
+        "word": "to",
+        "start": 53.66,
+        "end": 53.86,
+        "prob": 0.99
+      },
+      {
+        "word": "work",
+        "start": 53.86,
+        "end": 54.14,
+        "prob": 0.98
+      },
+      {
+        "word": "and",
+        "start": 54.14,
+        "end": 54.3,
+        "prob": 0.88
+      },
+      {
+        "word": "the",
+        "start": 54.3,
+        "end": 54.44,
+        "prob": 0.89
+      },
+      {
+        "word": "way",
+        "start": 54.44,
+        "end": 54.58,
+        "prob": 0.99
+      },
+      {
+        "word": "they",
+        "start": 54.58,
+        "end": 54.7,
+        "prob": 0.98
+      },
+      {
+        "word": "work",
+        "start": 54.7,
+        "end": 54.92,
+        "prob": 0.92
+      },
+      {
+        "word": "now.",
+        "start": 54.92,
+        "end": 55.2,
+        "prob": 0.98
+      }
+    ]
+  },
+  {
+    "segment_idx": 16,
+    "start": 55.48,
+    "end": 58.02,
+    "text": "But the need for basic coding skills has not been replaced.",
+    "lang": "en",
+    "words": [
+      {
+        "word": "But",
+        "start": 55.48,
+        "end": 55.58,
+        "prob": 0.89
+      },
+      {
+        "word": "the",
+        "start": 55.58,
+        "end": 55.7,
+        "prob": 0.79
+      },
+      {
+        "word": "need",
+        "start": 55.7,
+        "end": 55.84,
+        "prob": 0.27
+      },
+      {
+        "word": "for",
+        "start": 55.84,
+        "end": 55.84,
+        "prob": 0.68
+      },
+      {
+        "word": "basic",
+        "start": 55.84,
+        "end": 56.1,
+        "prob": 0.96
+      },
+      {
+        "word": "coding",
+        "start": 56.1,
+        "end": 56.44,
+        "prob": 1.0
+      },
+      {
+        "word": "skills",
+        "start": 56.44,
+        "end": 56.94,
+        "prob": 0.98
+      },
+      {
+        "word": "has",
+        "start": 56.94,
+        "end": 57.72,
+        "prob": 0.19
+      },
+      {
+        "word": "not",
+        "start": 57.72,
+        "end": 57.72,
+        "prob": 0.94
+      },
+      {
+        "word": "been",
+        "start": 57.72,
+        "end": 57.72,
+        "prob": 0.67
+      },
+      {
+        "word": "replaced.",
+        "start": 57.72,
+        "end": 58.02,
+        "prob": 0.96
+      }
+    ]
+  },
+  {
+    "segment_idx": 17,
+    "start": 58.58,
+    "end": 61.04,
+    "text": "In fact, talking about real-world data is a big gap.",
+    "lang": "en",
+    "words": [
+      {
+        "word": "In",
+        "start": 58.58,
+        "end": 58.82,
+        "prob": 0.22
+      },
+      {
+        "word": "fact,",
+        "start": 58.82,
+        "end": 58.98,
+        "prob": 0.93
+      },
+      {
+        "word": "talking",
+        "start": 59.08,
+        "end": 59.08,
+        "prob": 0.05
+      },
+      {
+        "word": "about",
+        "start": 59.08,
+        "end": 59.08,
+        "prob": 0.95
+      },
+      {
+        "word": "real",
+        "start": 59.08,
+        "end": 59.22,
+        "prob": 0.76
+      },
+      {
+        "word": "-world",
+        "start": 59.22,
+        "end": 59.4,
+        "prob": 0.68
+      },
+      {
+        "word": "data",
+        "start": 59.4,
+        "end": 59.66,
+        "prob": 0.99
+      },
+      {
+        "word": "is",
+        "start": 59.66,
+        "end": 60.18,
+        "prob": 0.62
+      },
+      {
+        "word": "a",
+        "start": 60.18,
+        "end": 60.26,
+        "prob": 0.85
+      },
+      {
+        "word": "big",
+        "start": 60.26,
+        "end": 60.68,
+        "prob": 0.36
+      },
+      {
+        "word": "gap.",
+        "start": 60.68,
+        "end": 61.04,
+        "prob": 0.9
+      }
+    ]
+  },
+  {
+    "segment_idx": 18,
+    "start": 61.28,
+    "end": 65.44,
+    "text": "How do we use AI tools and how much trust do we have on AI in those two?",
+    "lang": "en",
+    "words": [
+      {
+        "word": "How",
+        "start": 61.28,
+        "end": 61.5,
+        "prob": 0.58
+      },
+      {
+        "word": "do",
+        "start": 61.5,
+        "end": 61.52,
+        "prob": 0.77
+      },
+      {
+        "word": "we",
+        "start": 61.52,
+        "end": 61.52,
+        "prob": 0.98
+      },
+      {
+        "word": "use",
+        "start": 61.52,
+        "end": 61.52,
+        "prob": 0.93
+      },
+      {
+        "word": "AI",
+        "start": 61.52,
+        "end": 61.72,
+        "prob": 0.66
+      },
+      {
+        "word": "tools",
+        "start": 61.72,
+        "end": 61.94,
+        "prob": 0.22
+      },
+      {
+        "word": "and",
+        "start": 61.94,
+        "end": 63.36,
+        "prob": 0.38
+      },
+      {
+        "word": "how",
+        "start": 63.36,
+        "end": 64.0,
+        "prob": 0.71
+      },
+      {
+        "word": "much",
+        "start": 64.0,
+        "end": 64.18,
+        "prob": 0.5
+      },
+      {
+        "word": "trust",
+        "start": 64.18,
+        "end": 64.34,
+        "prob": 0.82
+      },
+      {
+        "word": "do",
+        "start": 64.34,
+        "end": 64.78,
+        "prob": 0.15
+      },
+      {
+        "word": "we",
+        "start": 64.78,
+        "end": 64.86,
+        "prob": 0.97
+      },
+      {
+        "word": "have",
+        "start": 64.86,
+        "end": 64.9,
+        "prob": 0.9
+      },
+      {
+        "word": "on",
+        "start": 64.9,
+        "end": 65.02,
+        "prob": 0.54
+      },
+      {
+        "word": "AI",
+        "start": 65.02,
+        "end": 65.02,
+        "prob": 0.94
+      },
+      {
+        "word": "in",
+        "start": 65.02,
+        "end": 65.06,
+        "prob": 0.24
+      },
+      {
+        "word": "those",
+        "start": 65.06,
+        "end": 65.28,
+        "prob": 0.21
+      },
+      {
+        "word": "two?",
+        "start": 65.28,
+        "end": 65.44,
+        "prob": 0.74
+      }
+    ]
+  },
+  {
+    "segment_idx": 19,
+    "start": 65.82,
+    "end": 72.76,
+    "text": "According to the DEV survey of the 2020 Stack Overflow, 84% of people use AI every day in their day-to-day tasks.",
+    "lang": "en",
+    "words": [
+      {
+        "word": "According",
+        "start": 65.82,
+        "end": 66.06,
+        "prob": 0.84
+      },
+      {
+        "word": "to",
+        "start": 66.06,
+        "end": 66.06,
+        "prob": 1.0
+      },
+      {
+        "word": "the",
+        "start": 66.06,
+        "end": 66.06,
+        "prob": 0.63
+      },
+      {
+        "word": "DEV",
+        "start": 66.06,
+        "end": 66.06,
+        "prob": 0.3
+      },
+      {
+        "word": "survey",
+        "start": 66.06,
+        "end": 66.06,
+        "prob": 0.85
+      },
+      {
+        "word": "of",
+        "start": 66.06,
+        "end": 66.06,
+        "prob": 0.6
+      },
+      {
+        "word": "the",
+        "start": 66.06,
+        "end": 66.14,
+        "prob": 0.27
+      },
+      {
+        "word": "2020",
+        "start": 66.14,
+        "end": 66.56,
+        "prob": 0.48
+      },
+      {
+        "word": "Stack",
+        "start": 66.56,
+        "end": 67.0,
+        "prob": 0.32
+      },
+      {
+        "word": "Overflow,",
+        "start": 67.0,
+        "end": 67.42,
+        "prob": 0.7
+      },
+      {
+        "word": "84",
+        "start": 67.8,
+        "end": 69.18,
+        "prob": 0.97
+      },
+      {
+        "word": "%",
+        "start": 69.18,
+        "end": 69.84,
+        "prob": 0.89
+      },
+      {
+        "word": "of",
+        "start": 69.84,
+        "end": 70.14,
+        "prob": 0.76
+      },
+      {
+        "word": "people",
+        "start": 70.14,
+        "end": 70.14,
+        "prob": 0.64
+      },
+      {
+        "word": "use",
+        "start": 70.14,
+        "end": 70.38,
+        "prob": 0.9
+      },
+      {
+        "word": "AI",
+        "start": 70.38,
+        "end": 70.5,
+        "prob": 0.95
+      },
+      {
+        "word": "every",
+        "start": 70.5,
+        "end": 70.64,
+        "prob": 0.6
+      },
+      {
+        "word": "day",
+        "start": 70.64,
+        "end": 71.04,
+        "prob": 1.0
+      },
+      {
+        "word": "in",
+        "start": 71.04,
+        "end": 71.98,
+        "prob": 0.39
+      },
+      {
+        "word": "their",
+        "start": 71.98,
+        "end": 72.04,
+        "prob": 0.85
+      },
+      {
+        "word": "day",
+        "start": 72.04,
+        "end": 72.26,
+        "prob": 0.88
+      },
+      {
+        "word": "-to",
+        "start": 72.26,
+        "end": 72.34,
+        "prob": 0.86
+      },
+      {
+        "word": "-day",
+        "start": 72.34,
+        "end": 72.46,
+        "prob": 1.0
+      },
+      {
+        "word": "tasks.",
+        "start": 72.46,
+        "end": 72.76,
+        "prob": 0.94
+      }
+    ]
+  },
+  {
+    "segment_idx": 20,
+    "start": 72.94,
+    "end": 77.16,
+    "text": "But only 29% actually trust the code written by AI.",
+    "lang": "en",
+    "words": [
+      {
+        "word": "But",
+        "start": 72.94,
+        "end": 73.22,
+        "prob": 0.7
+      },
+      {
+        "word": "only",
+        "start": 73.22,
+        "end": 73.54,
+        "prob": 0.61
+      },
+      {
+        "word": "29",
+        "start": 73.54,
+        "end": 74.26,
+        "prob": 0.98
+      },
+      {
+        "word": "%",
+        "start": 74.26,
+        "end": 74.78,
+        "prob": 0.98
+      },
+      {
+        "word": "actually",
+        "start": 74.78,
+        "end": 75.2,
+        "prob": 0.32
+      },
+      {
+        "word": "trust",
+        "start": 75.2,
+        "end": 75.72,
+        "prob": 0.98
+      },
+      {
+        "word": "the",
+        "start": 75.72,
+        "end": 76.12,
+        "prob": 0.85
+      },
+      {
+        "word": "code",
+        "start": 76.12,
+        "end": 76.96,
+        "prob": 0.6
+      },
+      {
+        "word": "written",
+        "start": 76.96,
+        "end": 77.16,
+        "prob": 0.58
+      },
+      {
+        "word": "by",
+        "start": 77.16,
+        "end": 77.16,
+        "prob": 0.75
+      },
+      {
+        "word": "AI.",
+        "start": 77.16,
+        "end": 77.16,
+        "prob": 0.92
+      }
+    ]
+  },
+  {
+    "segment_idx": 21,
+    "start": 77.2,
+    "end": 81.94,
+    "text": "Apart from that, 66% of the devs are frustrated that AI has written a lot of code,",
+    "lang": "en",
+    "words": [
+      {
+        "word": "Apart",
+        "start": 77.2,
+        "end": 77.6,
+        "prob": 0.28
+      },
+      {
+        "word": "from",
+        "start": 77.6,
+        "end": 77.6,
+        "prob": 0.99
+      },
+      {
+        "word": "that,",
+        "start": 77.6,
+        "end": 77.6,
+        "prob": 0.93
+      },
+      {
+        "word": "66",
+        "start": 77.78,
+        "end": 77.98,
+        "prob": 0.97
+      },
+      {
+        "word": "%",
+        "start": 77.98,
+        "end": 78.42,
+        "prob": 0.98
+      },
+      {
+        "word": "of",
+        "start": 78.42,
+        "end": 78.5,
+        "prob": 0.85
+      },
+      {
+        "word": "the",
+        "start": 78.5,
+        "end": 78.52,
+        "prob": 0.55
+      },
+      {
+        "word": "devs",
+        "start": 78.52,
+        "end": 78.9,
+        "prob": 0.56
+      },
+      {
+        "word": "are",
+        "start": 78.9,
+        "end": 78.98,
+        "prob": 0.84
+      },
+      {
+        "word": "frustrated",
+        "start": 78.98,
+        "end": 79.46,
+        "prob": 0.99
+      },
+      {
+        "word": "that",
+        "start": 79.46,
+        "end": 80.06,
+        "prob": 0.42
+      },
+      {
+        "word": "AI",
+        "start": 80.06,
+        "end": 80.2,
+        "prob": 0.64
+      },
+      {
+        "word": "has",
+        "start": 80.2,
+        "end": 80.6,
+        "prob": 0.69
+      },
+      {
+        "word": "written",
+        "start": 80.6,
+        "end": 80.78,
+        "prob": 0.61
+      },
+      {
+        "word": "a",
+        "start": 80.78,
+        "end": 81.48,
+        "prob": 0.33
+      },
+      {
+        "word": "lot",
+        "start": 81.48,
+        "end": 81.48,
+        "prob": 0.78
+      },
+      {
+        "word": "of",
+        "start": 81.48,
+        "end": 81.86,
+        "prob": 0.82
+      },
+      {
+        "word": "code,",
+        "start": 81.86,
+        "end": 81.94,
+        "prob": 0.55
+      }
+    ]
+  },
+  {
+    "segment_idx": 22,
+    "start": 82.48,
+    "end": 84.72,
+    "text": "but it takes hours to fix the one part that is wrong.",
+    "lang": "en",
+    "words": [
+      {
+        "word": "but",
+        "start": 82.48,
+        "end": 82.96,
+        "prob": 0.89
+      },
+      {
+        "word": "it",
+        "start": 82.96,
+        "end": 83.16,
+        "prob": 0.36
+      },
+      {
+        "word": "takes",
+        "start": 83.16,
+        "end": 83.16,
+        "prob": 0.46
+      },
+      {
+        "word": "hours",
+        "start": 83.16,
+        "end": 83.16,
+        "prob": 0.84
+      },
+      {
+        "word": "to",
+        "start": 83.16,
+        "end": 83.16,
+        "prob": 0.91
+      },
+      {
+        "word": "fix",
+        "start": 83.16,
+        "end": 83.16,
+        "prob": 0.98
+      },
+      {
+        "word": "the",
+        "start": 83.16,
+        "end": 83.16,
+        "prob": 0.24
+      },
+      {
+        "word": "one",
+        "start": 83.16,
+        "end": 83.38,
+        "prob": 0.35
+      },
+      {
+        "word": "part",
+        "start": 83.38,
+        "end": 83.6,
+        "prob": 0.76
+      },
+      {
+        "word": "that",
+        "start": 83.6,
+        "end": 83.78,
+        "prob": 0.39
+      },
+      {
+        "word": "is",
+        "start": 83.78,
+        "end": 84.62,
+        "prob": 0.62
+      },
+      {
+        "word": "wrong.",
+        "start": 84.62,
+        "end": 84.72,
+        "prob": 0.88
+      }
+    ]
+  },
+  {
+    "segment_idx": 23,
+    "start": 84.72,
+    "end": 90.7,
+    "text": "It is not as valuable to memorize the syntax in today's day-to-day tasks as it is valuable to understand the system.",
+    "lang": "en",
+    "words": [
+      {
+        "word": "It",
+        "start": 84.72,
+        "end": 85.16,
+        "prob": 0.04
+      },
+      {
+        "word": "is",
+        "start": 85.16,
+        "end": 85.16,
+        "prob": 0.26
+      },
+      {
+        "word": "not",
+        "start": 85.16,
+        "end": 85.94,
+        "prob": 0.37
+      },
+      {
+        "word": "as",
+        "start": 85.94,
+        "end": 85.94,
+        "prob": 0.3
+      },
+      {
+        "word": "valuable",
+        "start": 85.94,
+        "end": 85.94,
+        "prob": 0.87
+      },
+      {
+        "word": "to",
+        "start": 85.94,
+        "end": 86.0,
+        "prob": 0.33
+      },
+      {
+        "word": "memorize",
+        "start": 86.0,
+        "end": 86.52,
+        "prob": 0.81
+      },
+      {
+        "word": "the",
+        "start": 86.52,
+        "end": 86.6,
+        "prob": 0.4
+      },
+      {
+        "word": "syntax",
+        "start": 86.6,
+        "end": 86.94,
+        "prob": 0.84
+      },
+      {
+        "word": "in",
+        "start": 86.94,
+        "end": 87.96,
+        "prob": 0.35
+      },
+      {
+        "word": "today's",
+        "start": 87.96,
+        "end": 88.36,
+        "prob": 0.87
+      },
+      {
+        "word": "day",
+        "start": 88.36,
+        "end": 88.36,
+        "prob": 0.05
+      },
+      {
+        "word": "-to",
+        "start": 88.36,
+        "end": 88.94,
+        "prob": 0.2
+      },
+      {
+        "word": "-day",
+        "start": 88.94,
+        "end": 88.94,
+        "prob": 0.98
+      },
+      {
+        "word": "tasks",
+        "start": 88.94,
+        "end": 88.94,
+        "prob": 0.0
+      },
+      {
+        "word": "as",
+        "start": 88.94,
+        "end": 89.02,
+        "prob": 0.42
+      },
+      {
+        "word": "it",
+        "start": 89.02,
+        "end": 90.7,
+        "prob": 0.53
+      },
+      {
+        "word": "is",
+        "start": 90.7,
+        "end": 90.7,
+        "prob": 0.86
+      },
+      {
+        "word": "valuable",
+        "start": 90.7,
+        "end": 90.7,
+        "prob": 0.41
+      },
+      {
+        "word": "to",
+        "start": 90.7,
+        "end": 90.7,
+        "prob": 0.76
+      },
+      {
+        "word": "understand",
+        "start": 90.7,
+        "end": 90.7,
+        "prob": 0.75
+      },
+      {
+        "word": "the",
+        "start": 90.7,
+        "end": 90.7,
+        "prob": 0.9
+      },
+      {
+        "word": "system.",
+        "start": 90.7,
+        "end": 90.7,
+        "prob": 0.94
+      }
+    ]
+  },
+  {
+    "segment_idx": 24,
+    "start": 90.92,
+    "end": 96.9,
+    "text": "AI will set you up in a basic server, but it can't recognize the rules, security needs, user limits.",
+    "lang": "en",
+    "words": [
+      {
+        "word": "AI",
+        "start": 90.92,
+        "end": 91.12,
+        "prob": 0.01
+      },
+      {
+        "word": "will",
+        "start": 91.12,
+        "end": 91.26,
+        "prob": 0.8
+      },
+      {
+        "word": "set",
+        "start": 91.26,
+        "end": 91.3,
+        "prob": 0.56
+      },
+      {
+        "word": "you",
+        "start": 91.3,
+        "end": 91.3,
+        "prob": 0.52
+      },
+      {
+        "word": "up",
+        "start": 91.3,
+        "end": 91.32,
+        "prob": 0.78
+      },
+      {
+        "word": "in",
+        "start": 91.32,
+        "end": 91.32,
+        "prob": 0.43
+      },
+      {
+        "word": "a",
+        "start": 91.32,
+        "end": 91.36,
+        "prob": 0.25
+      },
+      {
+        "word": "basic",
+        "start": 91.36,
+        "end": 91.56,
+        "prob": 0.87
+      },
+      {
+        "word": "server,",
+        "start": 91.56,
+        "end": 91.9,
+        "prob": 0.31
+      },
+      {
+        "word": "but",
+        "start": 92.44,
+        "end": 93.1,
+        "prob": 0.88
+      },
+      {
+        "word": "it",
+        "start": 93.1,
+        "end": 93.44,
+        "prob": 0.25
+      },
+      {
+        "word": "can't",
+        "start": 93.44,
+        "end": 93.5,
+        "prob": 0.51
+      },
+      {
+        "word": "recognize",
+        "start": 93.5,
+        "end": 93.5,
+        "prob": 0.46
+      },
+      {
+        "word": "the",
+        "start": 93.5,
+        "end": 93.5,
+        "prob": 0.77
+      },
+      {
+        "word": "rules,",
+        "start": 93.5,
+        "end": 94.54,
+        "prob": 0.43
+      },
+      {
+        "word": "security",
+        "start": 94.8,
+        "end": 95.16,
+        "prob": 0.97
+      },
+      {
+        "word": "needs,",
+        "start": 95.16,
+        "end": 95.64,
+        "prob": 0.82
+      },
+      {
+        "word": "user",
+        "start": 95.88,
+        "end": 96.44,
+        "prob": 0.87
+      },
+      {
+        "word": "limits.",
+        "start": 96.44,
+        "end": 96.9,
+        "prob": 0.93
+      }
+    ]
+  },
+  {
+    "segment_idx": 25,
+    "start": 98.32,
+    "end": 103.4,
+    "text": "The biggest risk for companies today is that you just copy and paste the code without looking at it.",
+    "lang": "en",
+    "words": [
+      {
+        "word": "The",
+        "start": 98.32,
+        "end": 98.84,
+        "prob": 0.39
+      },
+      {
+        "word": "biggest",
+        "start": 98.84,
+        "end": 99.26,
+        "prob": 0.94
+      },
+      {
+        "word": "risk",
+        "start": 99.26,
+        "end": 99.52,
+        "prob": 0.98
+      },
+      {
+        "word": "for",
+        "start": 99.52,
+        "end": 99.54,
+        "prob": 0.58
+      },
+      {
+        "word": "companies",
+        "start": 99.54,
+        "end": 99.54,
+        "prob": 0.8
+      },
+      {
+        "word": "today",
+        "start": 99.54,
+        "end": 99.72,
+        "prob": 0.39
+      },
+      {
+        "word": "is",
+        "start": 99.72,
+        "end": 100.3,
+        "prob": 0.95
+      },
+      {
+        "word": "that",
+        "start": 100.3,
+        "end": 100.44,
+        "prob": 0.8
+      },
+      {
+        "word": "you",
+        "start": 100.44,
+        "end": 101.54,
+        "prob": 0.49
+      },
+      {
+        "word": "just",
+        "start": 101.54,
+        "end": 101.54,
+        "prob": 0.43
+      },
+      {
+        "word": "copy",
+        "start": 101.54,
+        "end": 101.78,
+        "prob": 0.8
+      },
+      {
+        "word": "and",
+        "start": 101.78,
+        "end": 102.86,
+        "prob": 0.64
+      },
+      {
+        "word": "paste",
+        "start": 102.86,
+        "end": 103.0,
+        "prob": 0.97
+      },
+      {
+        "word": "the",
+        "start": 103.0,
+        "end": 103.4,
+        "prob": 0.37
+      },
+      {
+        "word": "code",
+        "start": 103.4,
+        "end": 103.4,
+        "prob": 0.11
+      },
+      {
+        "word": "without",
+        "start": 103.4,
+        "end": 103.4,
+        "prob": 0.54
+      },
+      {
+        "word": "looking",
+        "start": 103.4,
+        "end": 103.4,
+        "prob": 0.36
+      },
+      {
+        "word": "at",
+        "start": 103.4,
+        "end": 103.4,
+        "prob": 0.48
+      },
+      {
+        "word": "it.",
+        "start": 103.4,
+        "end": 103.4,
+        "prob": 0.79
+      }
+    ]
+  },
+  {
+    "segment_idx": 26,
+    "start": 103.6,
+    "end": 105.14,
+    "text": "And you can't understand what's going on in it.",
+    "lang": "en",
+    "words": [
+      {
+        "word": "And",
+        "start": 103.6,
+        "end": 103.7,
+        "prob": 0.13
+      },
+      {
+        "word": "you",
+        "start": 103.7,
+        "end": 104.1,
+        "prob": 0.47
+      },
+      {
+        "word": "can't",
+        "start": 104.1,
+        "end": 104.18,
+        "prob": 0.61
+      },
+      {
+        "word": "understand",
+        "start": 104.18,
+        "end": 104.18,
+        "prob": 0.77
+      },
+      {
+        "word": "what's",
+        "start": 104.18,
+        "end": 104.74,
+        "prob": 0.71
+      },
+      {
+        "word": "going",
+        "start": 104.74,
+        "end": 104.76,
+        "prob": 0.36
+      },
+      {
+        "word": "on",
+        "start": 104.76,
+        "end": 104.76,
+        "prob": 0.98
+      },
+      {
+        "word": "in",
+        "start": 104.76,
+        "end": 105.14,
+        "prob": 0.25
+      },
+      {
+        "word": "it.",
+        "start": 105.14,
+        "end": 105.14,
+        "prob": 0.69
+      }
+    ]
+  },
+  {
+    "segment_idx": 27,
+    "start": 105.24,
+    "end": 107.12,
+    "text": "This is called cognitive debt.",
+    "lang": "en",
+    "words": [
+      {
+        "word": "This",
+        "start": 105.24,
+        "end": 105.4,
+        "prob": 0.38
+      },
+      {
+        "word": "is",
+        "start": 105.4,
+        "end": 105.46,
+        "prob": 0.52
+      },
+      {
+        "word": "called",
+        "start": 105.46,
+        "end": 105.56,
+        "prob": 0.75
+      },
+      {
+        "word": "cognitive",
+        "start": 105.56,
+        "end": 106.58,
+        "prob": 0.5
+      },
+      {
+        "word": "debt.",
+        "start": 106.58,
+        "end": 107.12,
+        "prob": 0.95
+      }
+    ]
+  },
+  {
+    "segment_idx": 28,
+    "start": 107.28,
+    "end": 111.74,
+    "text": "The entire team is saying that the code is working, but I don't know how it's working.",
+    "lang": "en",
+    "words": [
+      {
+        "word": "The",
+        "start": 107.28,
+        "end": 107.42,
+        "prob": 0.41
+      },
+      {
+        "word": "entire",
+        "start": 107.42,
+        "end": 107.82,
+        "prob": 0.53
+      },
+      {
+        "word": "team",
+        "start": 107.82,
+        "end": 108.12,
+        "prob": 1.0
+      },
+      {
+        "word": "is",
+        "start": 108.12,
+        "end": 108.24,
+        "prob": 0.66
+      },
+      {
+        "word": "saying",
+        "start": 108.24,
+        "end": 108.38,
+        "prob": 0.59
+      },
+      {
+        "word": "that",
+        "start": 108.38,
+        "end": 108.64,
+        "prob": 0.67
+      },
+      {
+        "word": "the",
+        "start": 108.64,
+        "end": 108.84,
+        "prob": 0.63
+      },
+      {
+        "word": "code",
+        "start": 108.84,
+        "end": 108.98,
+        "prob": 0.98
+      },
+      {
+        "word": "is",
+        "start": 108.98,
+        "end": 109.08,
+        "prob": 0.76
+      },
+      {
+        "word": "working,",
+        "start": 109.08,
+        "end": 109.26,
+        "prob": 0.38
+      },
+      {
+        "word": "but",
+        "start": 109.58,
+        "end": 109.82,
+        "prob": 0.55
+      },
+      {
+        "word": "I",
+        "start": 109.82,
+        "end": 110.82,
+        "prob": 0.24
+      },
+      {
+        "word": "don't",
+        "start": 110.82,
+        "end": 110.82,
+        "prob": 0.81
+      },
+      {
+        "word": "know",
+        "start": 110.82,
+        "end": 110.92,
+        "prob": 0.96
+      },
+      {
+        "word": "how",
+        "start": 110.92,
+        "end": 111.2,
+        "prob": 0.26
+      },
+      {
+        "word": "it's",
+        "start": 111.2,
+        "end": 111.74,
+        "prob": 0.45
+      },
+      {
+        "word": "working.",
+        "start": 111.74,
+        "end": 111.74,
+        "prob": 0.83
+      }
+    ]
+  },
+  {
+    "segment_idx": 29,
+    "start": 111.84,
+    "end": 113.18,
+    "text": "Don't touch it, it will get spoiled.",
+    "lang": "en",
+    "words": [
+      {
+        "word": "Don't",
+        "start": 111.84,
+        "end": 112.14,
+        "prob": 0.66
+      },
+      {
+        "word": "touch",
+        "start": 112.14,
+        "end": 112.18,
+        "prob": 0.79
+      },
+      {
+        "word": "it,",
+        "start": 112.18,
+        "end": 112.68,
+        "prob": 0.86
+      },
+      {
+        "word": "it",
+        "start": 112.72,
+        "end": 112.96,
+        "prob": 0.86
+      },
+      {
+        "word": "will",
+        "start": 112.96,
+        "end": 112.96,
+        "prob": 0.56
+      },
+      {
+        "word": "get",
+        "start": 112.96,
+        "end": 112.96,
+        "prob": 0.48
+      },
+      {
+        "word": "spoiled.",
+        "start": 112.96,
+        "end": 113.18,
+        "prob": 0.24
+      }
+    ]
+  },
+  {
+    "segment_idx": 30,
+    "start": 113.18,
+    "end": 115.42,
+    "text": "But the real problem is that it has to be updated.",
+    "lang": "en",
+    "words": [
+      {
+        "word": "But",
+        "start": 113.18,
+        "end": 113.78,
+        "prob": 0.3
+      },
+      {
+        "word": "the",
+        "start": 113.78,
+        "end": 113.9,
+        "prob": 0.49
+      },
+      {
+        "word": "real",
+        "start": 113.9,
+        "end": 113.98,
+        "prob": 0.59
+      },
+      {
+        "word": "problem",
+        "start": 113.98,
+        "end": 114.26,
+        "prob": 0.88
+      },
+      {
+        "word": "is",
+        "start": 114.26,
+        "end": 114.4,
+        "prob": 0.53
+      },
+      {
+        "word": "that",
+        "start": 114.4,
+        "end": 114.46,
+        "prob": 0.3
+      },
+      {
+        "word": "it",
+        "start": 114.46,
+        "end": 114.92,
+        "prob": 0.29
+      },
+      {
+        "word": "has",
+        "start": 114.92,
+        "end": 114.92,
+        "prob": 0.34
+      },
+      {
+        "word": "to",
+        "start": 114.92,
+        "end": 114.94,
+        "prob": 0.85
+      },
+      {
+        "word": "be",
+        "start": 114.94,
+        "end": 115.42,
+        "prob": 0.89
+      },
+      {
+        "word": "updated.",
+        "start": 115.42,
+        "end": 115.42,
+        "prob": 0.94
+      }
+    ]
+  },
+  {
+    "segment_idx": 31,
+    "start": 116.24,
+    "end": 116.82,
+    "text": "I don't understand.",
+    "lang": "en",
+    "words": [
+      {
+        "word": "I",
+        "start": 116.24,
+        "end": 116.68,
+        "prob": 0.05
+      },
+      {
+        "word": "don't",
+        "start": 116.68,
+        "end": 116.82,
+        "prob": 0.63
+      },
+      {
+        "word": "understand.",
+        "start": 116.82,
+        "end": 116.82,
+        "prob": 0.78
+      }
+    ]
+  },
+  {
+    "segment_idx": 32,
+    "start": 117.38,
+    "end": 120.4,
+    "text": "According to recent data, the code bases are getting worse.",
+    "lang": "en",
+    "words": [
+      {
+        "word": "According",
+        "start": 117.38,
+        "end": 117.46,
+        "prob": 0.71
+      },
+      {
+        "word": "to",
+        "start": 117.46,
+        "end": 117.46,
+        "prob": 1.0
+      },
+      {
+        "word": "recent",
+        "start": 117.46,
+        "end": 117.62,
+        "prob": 0.68
+      },
+      {
+        "word": "data,",
+        "start": 117.62,
+        "end": 117.9,
+        "prob": 0.97
+      },
+      {
+        "word": "the",
+        "start": 118.4,
+        "end": 118.44,
+        "prob": 0.54
+      },
+      {
+        "word": "code",
+        "start": 118.44,
+        "end": 118.56,
+        "prob": 0.61
+      },
+      {
+        "word": "bases",
+        "start": 118.56,
+        "end": 118.8,
+        "prob": 0.88
+      },
+      {
+        "word": "are",
+        "start": 118.8,
+        "end": 119.24,
+        "prob": 0.73
+      },
+      {
+        "word": "getting",
+        "start": 119.24,
+        "end": 119.86,
+        "prob": 0.54
+      },
+      {
+        "word": "worse.",
+        "start": 119.86,
+        "end": 120.4,
+        "prob": 0.5
+      }
+    ]
+  },
+  {
+    "segment_idx": 33,
+    "start": 120.74,
+    "end": 122.52,
+    "text": "They used to be, but they are getting worse.",
+    "lang": "en",
+    "words": [
+      {
+        "word": "They",
+        "start": 120.74,
+        "end": 120.9,
+        "prob": 0.07
+      },
+      {
+        "word": "used",
+        "start": 120.9,
+        "end": 120.96,
+        "prob": 0.7
+      },
+      {
+        "word": "to",
+        "start": 120.96,
+        "end": 120.96,
+        "prob": 1.0
+      },
+      {
+        "word": "be,",
+        "start": 120.96,
+        "end": 121.16,
+        "prob": 0.65
+      },
+      {
+        "word": "but",
+        "start": 121.22,
+        "end": 121.68,
+        "prob": 0.83
+      },
+      {
+        "word": "they",
+        "start": 121.68,
+        "end": 122.02,
+        "prob": 0.31
+      },
+      {
+        "word": "are",
+        "start": 122.02,
+        "end": 122.02,
+        "prob": 0.65
+      },
+      {
+        "word": "getting",
+        "start": 122.02,
+        "end": 122.02,
+        "prob": 0.89
+      },
+      {
+        "word": "worse.",
+        "start": 122.02,
+        "end": 122.52,
+        "prob": 0.89
+      }
+    ]
+  },
+  {
+    "segment_idx": 34,
+    "start": 122.86,
+    "end": 127.94,
+    "text": "According to the Git Clear report of 2025, it has read 211 million lines of code.",
+    "lang": "en",
+    "words": [
+      {
+        "word": "According",
+        "start": 122.86,
+        "end": 122.92,
+        "prob": 0.95
+      },
+      {
+        "word": "to",
+        "start": 122.92,
+        "end": 122.92,
+        "prob": 1.0
+      },
+      {
+        "word": "the",
+        "start": 122.92,
+        "end": 123.62,
+        "prob": 0.73
+      },
+      {
+        "word": "Git",
+        "start": 123.62,
+        "end": 123.84,
+        "prob": 0.08
+      },
+      {
+        "word": "Clear",
+        "start": 123.84,
+        "end": 124.1,
+        "prob": 0.36
+      },
+      {
+        "word": "report",
+        "start": 124.1,
+        "end": 124.64,
+        "prob": 0.39
+      },
+      {
+        "word": "of",
+        "start": 124.64,
+        "end": 124.64,
+        "prob": 0.58
+      },
+      {
+        "word": "2025,",
+        "start": 124.64,
+        "end": 124.64,
+        "prob": 0.47
+      },
+      {
+        "word": "it",
+        "start": 125.02,
+        "end": 125.12,
+        "prob": 0.78
+      },
+      {
+        "word": "has",
+        "start": 125.12,
+        "end": 125.22,
+        "prob": 0.41
+      },
+      {
+        "word": "read",
+        "start": 125.22,
+        "end": 125.24,
+        "prob": 0.8
+      },
+      {
+        "word": "211",
+        "start": 125.24,
+        "end": 126.48,
+        "prob": 0.75
+      },
+      {
+        "word": "million",
+        "start": 126.48,
+        "end": 126.9,
+        "prob": 0.81
+      },
+      {
+        "word": "lines",
+        "start": 126.9,
+        "end": 127.4,
+        "prob": 0.98
+      },
+      {
+        "word": "of",
+        "start": 127.4,
+        "end": 127.62,
+        "prob": 0.97
+      },
+      {
+        "word": "code.",
+        "start": 127.62,
+        "end": 127.94,
+        "prob": 0.97
+      }
+    ]
+  },
+  {
+    "segment_idx": 35,
+    "start": 128.48,
+    "end": 129.72,
+    "text": "In which my code churn was made.",
+    "lang": "en",
+    "words": [
+      {
+        "word": "In",
+        "start": 128.48,
+        "end": 128.58,
+        "prob": 0.28
+      },
+      {
+        "word": "which",
+        "start": 128.58,
+        "end": 128.68,
+        "prob": 0.89
+      },
+      {
+        "word": "my",
+        "start": 128.68,
+        "end": 128.96,
+        "prob": 0.16
+      },
+      {
+        "word": "code",
+        "start": 128.96,
+        "end": 129.3,
+        "prob": 0.93
+      },
+      {
+        "word": "churn",
+        "start": 129.3,
+        "end": 129.6,
+        "prob": 0.86
+      },
+      {
+        "word": "was",
+        "start": 129.6,
+        "end": 129.64,
+        "prob": 0.11
+      },
+      {
+        "word": "made.",
+        "start": 129.64,
+        "end": 129.72,
+        "prob": 0.54
+      }
+    ]
+  },
+  {
+    "segment_idx": 36,
+    "start": 129.72,
+    "end": 133.52,
+    "text": "It means that only two weeks in between, a lot of code is being written, deleted, and changed.",
+    "lang": "en",
+    "words": [
+      {
+        "word": "It",
+        "start": 129.72,
+        "end": 129.86,
+        "prob": 0.07
+      },
+      {
+        "word": "means",
+        "start": 129.86,
+        "end": 129.92,
+        "prob": 0.75
+      },
+      {
+        "word": "that",
+        "start": 129.92,
+        "end": 130.04,
+        "prob": 0.7
+      },
+      {
+        "word": "only",
+        "start": 130.04,
+        "end": 130.18,
+        "prob": 0.29
+      },
+      {
+        "word": "two",
+        "start": 130.18,
+        "end": 130.4,
+        "prob": 0.22
+      },
+      {
+        "word": "weeks",
+        "start": 130.4,
+        "end": 130.56,
+        "prob": 0.8
+      },
+      {
+        "word": "in",
+        "start": 130.56,
+        "end": 130.76,
+        "prob": 0.22
+      },
+      {
+        "word": "between,",
+        "start": 130.76,
+        "end": 130.94,
+        "prob": 0.89
+      },
+      {
+        "word": "a",
+        "start": 131.22,
+        "end": 131.3,
+        "prob": 0.52
+      },
+      {
+        "word": "lot",
+        "start": 131.3,
+        "end": 131.5,
+        "prob": 0.97
+      },
+      {
+        "word": "of",
+        "start": 131.5,
+        "end": 131.7,
+        "prob": 0.98
+      },
+      {
+        "word": "code",
+        "start": 131.7,
+        "end": 131.92,
+        "prob": 0.82
+      },
+      {
+        "word": "is",
+        "start": 131.92,
+        "end": 132.0,
+        "prob": 0.79
+      },
+      {
+        "word": "being",
+        "start": 132.0,
+        "end": 132.02,
+        "prob": 0.89
+      },
+      {
+        "word": "written,",
+        "start": 132.02,
+        "end": 132.12,
+        "prob": 0.84
+      },
+      {
+        "word": "deleted,",
+        "start": 132.58,
+        "end": 132.82,
+        "prob": 0.88
+      },
+      {
+        "word": "and",
+        "start": 133.22,
+        "end": 133.3,
+        "prob": 0.18
+      },
+      {
+        "word": "changed.",
+        "start": 133.3,
+        "end": 133.52,
+        "prob": 0.93
+      }
+    ]
+  },
+  {
+    "segment_idx": 37,
+    "start": 133.96,
+    "end": 137.82,
+    "text": "Which was before, but now it's doubled, which is now 7.1%.",
+    "lang": "en",
+    "words": [
+      {
+        "word": "Which",
+        "start": 133.96,
+        "end": 134.18,
+        "prob": 0.79
+      },
+      {
+        "word": "was",
+        "start": 134.18,
+        "end": 134.38,
+        "prob": 0.41
+      },
+      {
+        "word": "before,",
+        "start": 134.38,
+        "end": 134.72,
+        "prob": 0.17
+      },
+      {
+        "word": "but",
+        "start": 134.98,
+        "end": 135.24,
+        "prob": 0.79
+      },
+      {
+        "word": "now",
+        "start": 135.24,
+        "end": 135.36,
+        "prob": 0.34
+      },
+      {
+        "word": "it's",
+        "start": 135.36,
+        "end": 135.46,
+        "prob": 0.46
+      },
+      {
+        "word": "doubled,",
+        "start": 135.46,
+        "end": 135.62,
+        "prob": 0.63
+      },
+      {
+        "word": "which",
+        "start": 136.0,
+        "end": 136.32,
+        "prob": 0.96
+      },
+      {
+        "word": "is",
+        "start": 136.32,
+        "end": 136.46,
+        "prob": 0.98
+      },
+      {
+        "word": "now",
+        "start": 136.46,
+        "end": 136.62,
+        "prob": 0.89
+      },
+      {
+        "word": "7",
+        "start": 136.62,
+        "end": 136.92,
+        "prob": 0.96
+      },
+      {
+        "word": ".1%.",
+        "start": 136.92,
+        "end": 137.82,
+        "prob": 0.94
+      }
+    ]
+  },
+  {
+    "segment_idx": 38,
+    "start": 137.82,
+    "end": 142.18,
+    "text": "Because the devs have started using AI and the copy-paste has increased by 48%.",
+    "lang": "en",
+    "words": [
+      {
+        "word": "Because",
+        "start": 137.82,
+        "end": 138.12,
+        "prob": 0.42
+      },
+      {
+        "word": "the",
+        "start": 138.12,
+        "end": 138.48,
+        "prob": 0.09
+      },
+      {
+        "word": "devs",
+        "start": 138.48,
+        "end": 138.72,
+        "prob": 0.91
+      },
+      {
+        "word": "have",
+        "start": 138.72,
+        "end": 138.76,
+        "prob": 0.61
+      },
+      {
+        "word": "started",
+        "start": 138.76,
+        "end": 138.76,
+        "prob": 0.86
+      },
+      {
+        "word": "using",
+        "start": 138.76,
+        "end": 138.78,
+        "prob": 0.88
+      },
+      {
+        "word": "AI",
+        "start": 138.78,
+        "end": 138.98,
+        "prob": 0.92
+      },
+      {
+        "word": "and",
+        "start": 138.98,
+        "end": 140.0,
+        "prob": 0.24
+      },
+      {
+        "word": "the",
+        "start": 140.0,
+        "end": 140.12,
+        "prob": 0.63
+      },
+      {
+        "word": "copy",
+        "start": 140.12,
+        "end": 140.3,
+        "prob": 0.99
+      },
+      {
+        "word": "-paste",
+        "start": 140.3,
+        "end": 140.72,
+        "prob": 0.73
+      },
+      {
+        "word": "has",
+        "start": 140.72,
+        "end": 141.08,
+        "prob": 0.71
+      },
+      {
+        "word": "increased",
+        "start": 141.08,
+        "end": 141.08,
+        "prob": 0.76
+      },
+      {
+        "word": "by",
+        "start": 141.08,
+        "end": 141.08,
+        "prob": 0.71
+      },
+      {
+        "word": "48%.",
+        "start": 141.08,
+        "end": 142.18,
+        "prob": 0.97
+      }
+    ]
+  },
+  {
+    "segment_idx": 39,
+    "start": 142.18,
+    "end": 147.18,
+    "text": "Now, people are going all-time low to clean up the code and maintain it.",
+    "lang": "en",
+    "words": [
+      {
+        "word": "Now,",
+        "start": 142.18,
+        "end": 142.76,
+        "prob": 0.38
+      },
+      {
+        "word": "people",
+        "start": 142.88,
+        "end": 143.06,
+        "prob": 0.61
+      },
+      {
+        "word": "are",
+        "start": 143.06,
+        "end": 143.84,
+        "prob": 0.87
+      },
+      {
+        "word": "going",
+        "start": 143.84,
+        "end": 143.84,
+        "prob": 0.27
+      },
+      {
+        "word": "all",
+        "start": 143.84,
+        "end": 143.84,
+        "prob": 0.23
+      },
+      {
+        "word": "-time",
+        "start": 143.84,
+        "end": 143.84,
+        "prob": 0.66
+      },
+      {
+        "word": "low",
+        "start": 143.84,
+        "end": 143.84,
+        "prob": 0.92
+      },
+      {
+        "word": "to",
+        "start": 143.84,
+        "end": 143.84,
+        "prob": 0.69
+      },
+      {
+        "word": "clean",
+        "start": 143.84,
+        "end": 144.2,
+        "prob": 0.37
+      },
+      {
+        "word": "up",
+        "start": 144.2,
+        "end": 144.7,
+        "prob": 0.81
+      },
+      {
+        "word": "the",
+        "start": 144.7,
+        "end": 144.82,
+        "prob": 0.3
+      },
+      {
+        "word": "code",
+        "start": 144.82,
+        "end": 145.12,
+        "prob": 0.45
+      },
+      {
+        "word": "and",
+        "start": 145.12,
+        "end": 145.12,
+        "prob": 0.09
+      },
+      {
+        "word": "maintain",
+        "start": 145.12,
+        "end": 145.2,
+        "prob": 0.03
+      },
+      {
+        "word": "it.",
+        "start": 145.2,
+        "end": 147.18,
+        "prob": 0.84
+      }
+    ]
+  },
+  {
+    "segment_idx": 40,
+    "start": 147.22,
+    "end": 149.78,
+    "text": "So, the company doesn't want you to just fill in the code.",
+    "lang": "en",
+    "words": [
+      {
+        "word": "So,",
+        "start": 147.22,
+        "end": 147.3,
+        "prob": 0.31
+      },
+      {
+        "word": "the",
+        "start": 147.36,
+        "end": 147.36,
+        "prob": 0.31
+      },
+      {
+        "word": "company",
+        "start": 147.36,
+        "end": 147.54,
+        "prob": 0.68
+      },
+      {
+        "word": "doesn't",
+        "start": 147.54,
+        "end": 148.38,
+        "prob": 0.57
+      },
+      {
+        "word": "want",
+        "start": 148.38,
+        "end": 148.86,
+        "prob": 0.52
+      },
+      {
+        "word": "you",
+        "start": 148.86,
+        "end": 149.14,
+        "prob": 0.61
+      },
+      {
+        "word": "to",
+        "start": 149.14,
+        "end": 149.34,
+        "prob": 0.89
+      },
+      {
+        "word": "just",
+        "start": 149.34,
+        "end": 149.36,
+        "prob": 0.43
+      },
+      {
+        "word": "fill",
+        "start": 149.36,
+        "end": 149.36,
+        "prob": 0.84
+      },
+      {
+        "word": "in",
+        "start": 149.36,
+        "end": 149.58,
+        "prob": 0.14
+      },
+      {
+        "word": "the",
+        "start": 149.58,
+        "end": 149.64,
+        "prob": 0.88
+      },
+      {
+        "word": "code.",
+        "start": 149.64,
+        "end": 149.78,
+        "prob": 0.94
+      }
+    ]
+  }
+]

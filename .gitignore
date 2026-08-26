@@ -1,0 +1,7 @@
+.venv/ 
+__pycache__/ 
+scratch/ 
+media/*_full* 
+media/cloudflared.exe 
+.idea/ 
+.vscode/ 

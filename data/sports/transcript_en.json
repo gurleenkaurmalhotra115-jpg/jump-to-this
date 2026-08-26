@@ -1,0 +1,323 @@
+[
+  {
+    "segment_idx": 0,
+    "start": 5.0,
+    "end": 15.0,
+    "text": "Oh, he has fainted!",
+    "lang": "en",
+    "words": [
+      {
+        "word": "Arre",
+        "start": 5.0,
+        "end": 5.5,
+        "prob": 0.99
+      },
+      {
+        "word": "yeh",
+        "start": 5.5,
+        "end": 6.0,
+        "prob": 0.99
+      },
+      {
+        "word": "toh",
+        "start": 6.0,
+        "end": 6.5,
+        "prob": 0.99
+      },
+      {
+        "word": "behosh",
+        "start": 6.5,
+        "end": 8.0,
+        "prob": 0.99
+      },
+      {
+        "word": "ho",
+        "start": 8.0,
+        "end": 8.5,
+        "prob": 0.99
+      },
+      {
+        "word": "gaya!",
+        "start": 8.5,
+        "end": 10.0,
+        "prob": 0.99
+      }
+    ]
+  },
+  {
+    "segment_idx": 1,
+    "start": 15.5,
+    "end": 25.0,
+    "text": "Throw water on him, throw water!",
+    "lang": "en",
+    "words": [
+      {
+        "word": "Paani",
+        "start": 15.5,
+        "end": 16.5,
+        "prob": 0.99
+      },
+      {
+        "word": "daalo",
+        "start": 16.5,
+        "end": 17.5,
+        "prob": 0.99
+      },
+      {
+        "word": "is",
+        "start": 17.5,
+        "end": 18.0,
+        "prob": 0.99
+      },
+      {
+        "word": "par,",
+        "start": 18.0,
+        "end": 18.5,
+        "prob": 0.99
+      },
+      {
+        "word": "paani",
+        "start": 18.5,
+        "end": 19.5,
+        "prob": 0.99
+      },
+      {
+        "word": "daalo!",
+        "start": 19.5,
+        "end": 21.0,
+        "prob": 0.99
+      }
+    ]
+  },
+  {
+    "segment_idx": 2,
+    "start": 25.5,
+    "end": 38.0,
+    "text": "He won't wake up with water, throw buttermilk!",
+    "lang": "en",
+    "words": [
+      {
+        "word": "Arre",
+        "start": 25.5,
+        "end": 26.0,
+        "prob": 0.99
+      },
+      {
+        "word": "paani",
+        "start": 26.0,
+        "end": 27.0,
+        "prob": 0.99
+      },
+      {
+        "word": "se",
+        "start": 27.0,
+        "end": 27.5,
+        "prob": 0.99
+      },
+      {
+        "word": "nahi",
+        "start": 27.5,
+        "end": 28.0,
+        "prob": 0.99
+      },
+      {
+        "word": "jaagega,",
+        "start": 28.0,
+        "end": 29.5,
+        "prob": 0.99
+      },
+      {
+        "word": "chhaachh",
+        "start": 29.5,
+        "end": 31.0,
+        "prob": 0.99
+      },
+      {
+        "word": "daalo!",
+        "start": 31.0,
+        "end": 32.5,
+        "prob": 0.99
+      }
+    ]
+  },
+  {
+    "segment_idx": 3,
+    "start": 38.5,
+    "end": 50.0,
+    "text": "Call Moolchand Ji quickly!",
+    "lang": "en",
+    "words": [
+      {
+        "word": "Moolchand",
+        "start": 38.5,
+        "end": 40.0,
+        "prob": 0.99
+      },
+      {
+        "word": "ji",
+        "start": 40.0,
+        "end": 40.5,
+        "prob": 0.99
+      },
+      {
+        "word": "ko",
+        "start": 40.5,
+        "end": 41.0,
+        "prob": 0.99
+      },
+      {
+        "word": "bulao",
+        "start": 41.0,
+        "end": 42.5,
+        "prob": 0.99
+      },
+      {
+        "word": "jaldi!",
+        "start": 42.5,
+        "end": 44.0,
+        "prob": 0.99
+      }
+    ]
+  },
+  {
+    "segment_idx": 4,
+    "start": 50.5,
+    "end": 65.0,
+    "text": "Hey, wake up! What are you doing?",
+    "lang": "en",
+    "words": [
+      {
+        "word": "Arre",
+        "start": 50.5,
+        "end": 51.5,
+        "prob": 0.99
+      },
+      {
+        "word": "hosh",
+        "start": 51.5,
+        "end": 52.5,
+        "prob": 0.99
+      },
+      {
+        "word": "mein",
+        "start": 52.5,
+        "end": 53.0,
+        "prob": 0.99
+      },
+      {
+        "word": "aao,",
+        "start": 53.0,
+        "end": 54.0,
+        "prob": 0.99
+      },
+      {
+        "word": "kya",
+        "start": 54.0,
+        "end": 54.5,
+        "prob": 0.99
+      },
+      {
+        "word": "kar",
+        "start": 54.5,
+        "end": 55.0,
+        "prob": 0.99
+      },
+      {
+        "word": "rahe",
+        "start": 55.0,
+        "end": 55.5,
+        "prob": 0.99
+      },
+      {
+        "word": "ho!",
+        "start": 55.5,
+        "end": 57.0,
+        "prob": 0.99
+      }
+    ]
+  },
+  {
+    "segment_idx": 5,
+    "start": 65.5,
+    "end": 80.0,
+    "text": "He is definitely acting",
+    "lang": "en",
+    "words": [
+      {
+        "word": "Yeh",
+        "start": 65.5,
+        "end": 66.0,
+        "prob": 0.99
+      },
+      {
+        "word": "toh",
+        "start": 66.0,
+        "end": 66.5,
+        "prob": 0.99
+      },
+      {
+        "word": "pakka",
+        "start": 66.5,
+        "end": 67.5,
+        "prob": 0.99
+      },
+      {
+        "word": "acting",
+        "start": 67.5,
+        "end": 68.5,
+        "prob": 0.99
+      },
+      {
+        "word": "kar",
+        "start": 68.5,
+        "end": 69.0,
+        "prob": 0.99
+      },
+      {
+        "word": "raha",
+        "start": 69.0,
+        "end": 69.5,
+        "prob": 0.99
+      },
+      {
+        "word": "hai",
+        "start": 69.5,
+        "end": 70.5,
+        "prob": 0.99
+      }
+    ]
+  },
+  {
+    "segment_idx": 6,
+    "start": 81.0,
+    "end": 90.0,
+    "text": "Moolchand Ji! Moolchand Ji!",
+    "lang": "en",
+    "words": [
+      {
+        "word": "Moolchand",
+        "start": 81.0,
+        "end": 82.5,
+        "prob": 0.99
+      },
+      {
+        "word": "Ji!",
+        "start": 82.5,
+        "end": 83.5,
+        "prob": 0.99
+      },
+      {
+        "word": "Moolchand",
+        "start": 83.5,
+        "end": 85.0,
+        "prob": 0.99
+      },
+      {
+        "word": "Ji!",
+        "start": 85.0,
+        "end": 86.5,
+        "prob": 0.99
+      }
+    ]
+  }
+]
