@@ -41,6 +41,16 @@ if not CLOUD_DEPLOY:
     print("[*] Models loaded successfully.")
 else:
     print("[*] Running in CLOUD_DEPLOY (lightweight API mode) under 50MB RAM!")
+    if not os.environ.get("HF_TOKEN"):
+        print("[WARNING] ⚠️ CLOUD_DEPLOY is active, but HF_TOKEN is not set in environment variables!")
+        print("[WARNING] ⚠️ The Hugging Face Inference API requires a token and will return 401 Unauthorized.")
+        print("[WARNING] ⚠️ Please set the HF_TOKEN environment variable in your deployment settings.")
+
+def extract_embedding(data):
+    """Recursively extract the 1D list of floats from a nested list response."""
+    while isinstance(data, list) and len(data) > 0 and isinstance(data[0], list):
+        data = data[0]
+    return data
 
 DATA_DIR = "data"
 os.makedirs(DATA_DIR, exist_ok=True)
@@ -245,45 +255,63 @@ def search_moment(q: str, video: str = "lecture", top_k: int = 3):
         headers = {"Authorization": f"Bearer {hf_token}"} if hf_token else {}
         
         # Encode CLIP (512-dim) via HF API
-        clip_url = "https://api-inference.huggingface.co/models/openai/clip-vit-base-patch32"
+        clip_url = "https://router.huggingface.co/models/openai/clip-vit-base-patch32"
         q_clip_arr = None
+        last_clip_error = None
         for _ in range(5):
             try:
                 res = requests.post(clip_url, headers=headers, json={"inputs": [q]}, timeout=10)
                 if res.status_code == 200:
                     data = res.json()
-                    emb = data[0][0] if isinstance(data[0], list) else data[0]
+                    emb = extract_embedding(data)
                     q_clip_arr = np.array(emb, dtype=np.float32)
                     q_clip_arr /= np.linalg.norm(q_clip_arr)
                     break
                 elif res.status_code == 503:
                     time.sleep(3)
                 else:
+                    last_clip_error = f"HF API Status {res.status_code}: {res.text}"
                     break
-            except Exception:
+            except Exception as e:
+                last_clip_error = str(e)
                 time.sleep(1)
+                
         if q_clip_arr is None:
+            if last_clip_error:
+                error_msg = f"Failed to encode CLIP query via Hugging Face Inference API ({last_clip_error})."
+                if "401" in last_clip_error or "Unauthorized" in last_clip_error:
+                    error_msg += " Please set a valid HF_TOKEN environment variable in your deployment configuration."
+                raise HTTPException(status_code=500, detail=error_msg)
             q_clip_arr = np.zeros(512, dtype=np.float32)
             
         # Encode SentenceTransformer (384-dim) via HF API
-        st_url = "https://api-inference.huggingface.co/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+        st_url = "https://router.huggingface.co/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
         q_text_arr = None
+        last_st_error = None
         for _ in range(5):
             try:
                 res = requests.post(st_url, headers=headers, json={"inputs": [q]}, timeout=10)
                 if res.status_code == 200:
                     data = res.json()
-                    emb = data[0][0] if isinstance(data[0], list) else data[0]
+                    emb = extract_embedding(data)
                     q_text_arr = np.array(emb, dtype=np.float32)
                     q_text_arr /= np.linalg.norm(q_text_arr)
                     break
                 elif res.status_code == 503:
                     time.sleep(3)
                 else:
+                    last_st_error = f"HF API Status {res.status_code}: {res.text}"
                     break
-            except Exception:
+            except Exception as e:
+                last_st_error = str(e)
                 time.sleep(1)
+                
         if q_text_arr is None:
+            if last_st_error:
+                error_msg = f"Failed to encode text query via Hugging Face Inference API ({last_st_error})."
+                if "401" in last_st_error or "Unauthorized" in last_st_error:
+                    error_msg += " Please set a valid HF_TOKEN environment variable in your deployment configuration."
+                raise HTTPException(status_code=500, detail=error_msg)
             q_text_arr = np.zeros(384, dtype=np.float32)
     else:
         # Local Mode: Encode text query using CLIP (512-dim)
@@ -378,11 +406,11 @@ def debug_hf(q: str = "hello"):
     headers = {"Authorization": f"Bearer {hf_token}"} if hf_token else {}
     
     # 1. Test CLIP via HF API
-    clip_url = "https://api-inference.huggingface.co/models/openai/clip-vit-base-patch32"
+    clip_url = "https://router.huggingface.co/models/openai/clip-vit-base-patch32"
     res_clip = requests.post(clip_url, headers=headers, json={"inputs": [q]})
     
     # 2. Test ST via HF API
-    st_url = "https://api-inference.huggingface.co/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+    st_url = "https://router.huggingface.co/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
     res_st = requests.post(st_url, headers=headers, json={"inputs": [q]})
     
     clip_data = res_clip.json() if res_clip.status_code == 200 else str(res_clip.text)
