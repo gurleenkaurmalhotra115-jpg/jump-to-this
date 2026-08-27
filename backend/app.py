@@ -255,7 +255,7 @@ def search_moment(q: str, video: str = "lecture", top_k: int = 3):
         headers = {"Authorization": f"Bearer {hf_token}"} if hf_token else {}
         
         # Encode CLIP (512-dim) via HF API
-        clip_url = "https://router.huggingface.co/models/openai/clip-vit-base-patch32"
+        clip_url = "https://router.huggingface.co/hf-inference/models/sentence-transformers/clip-ViT-B-32-multilingual-v1/pipeline/feature-extraction"
         q_clip_arr = None
         last_clip_error = None
         for _ in range(5):
@@ -285,7 +285,7 @@ def search_moment(q: str, video: str = "lecture", top_k: int = 3):
             q_clip_arr = np.zeros(512, dtype=np.float32)
             
         # Encode SentenceTransformer (384-dim) via HF API
-        st_url = "https://router.huggingface.co/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+        st_url = "https://router.huggingface.co/hf-inference/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/pipeline/feature-extraction"
         q_text_arr = None
         last_st_error = None
         for _ in range(5):
@@ -406,11 +406,11 @@ def debug_hf(q: str = "hello"):
     headers = {"Authorization": f"Bearer {hf_token}"} if hf_token else {}
     
     # 1. Test CLIP via HF API
-    clip_url = "https://router.huggingface.co/models/openai/clip-vit-base-patch32"
+    clip_url = "https://router.huggingface.co/hf-inference/models/sentence-transformers/clip-ViT-B-32-multilingual-v1/pipeline/feature-extraction"
     res_clip = requests.post(clip_url, headers=headers, json={"inputs": [q]})
     
     # 2. Test ST via HF API
-    st_url = "https://router.huggingface.co/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+    st_url = "https://router.huggingface.co/hf-inference/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/pipeline/feature-extraction"
     res_st = requests.post(st_url, headers=headers, json={"inputs": [q]})
     
     clip_data = res_clip.json() if res_clip.status_code == 200 else str(res_clip.text)
