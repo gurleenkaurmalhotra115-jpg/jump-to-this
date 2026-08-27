@@ -2,31 +2,45 @@ import os
 import sys
 import json
 import time
-import torch
-torch.set_num_threads(4)  # Optimize PyTorch CPU thread pools to prevent contention
-import open_clip
 import numpy as np
 from fastapi import FastAPI, HTTPException, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
-from sentence_transformers import SentenceTransformer
+import requests
 
 app = FastAPI(title="JumpToThis Backend", description="Upgraded Dual-Embedding Moment Search")
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
 
-device = "cuda" if torch.cuda.is_available() else "cpu"
+CLOUD_DEPLOY = os.environ.get("CLOUD_DEPLOY") == "1"
 
-# 1. Load CLIP Model
-print("[*] Loading CLIP Model...")
-clip_model, _, _ = open_clip.create_model_and_transforms('ViT-B-32', pretrained='openai')
-tokenizer = open_clip.get_tokenizer('ViT-B-32')
-clip_model.to(device).eval()
+# Global model references
+clip_model = None
+tokenizer = None
+text_encoder = None
+device = "cpu"
 
-# 2. Load Multilingual SentenceTransformer Model
-print("[*] Loading SentenceTransformer 'paraphrase-multilingual-MiniLM-L12-v2'...")
-text_encoder = SentenceTransformer("paraphrase-multilingual-MiniLM-L12-v2")
-print("[*] Models loaded successfully.")
+if not CLOUD_DEPLOY:
+    # Local Mode: Load heavy PyTorch libraries
+    import torch
+    torch.set_num_threads(4)  # Optimize PyTorch CPU thread pools to prevent contention
+    import open_clip
+    from sentence_transformers import SentenceTransformer
+    
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+    
+    # 1. Load CLIP Model
+    print("[*] Loading CLIP Model...")
+    clip_model, _, _ = open_clip.create_model_and_transforms('ViT-B-32', pretrained='openai')
+    tokenizer = open_clip.get_tokenizer('ViT-B-32')
+    clip_model.to(device).eval()
+    
+    # 2. Load Multilingual SentenceTransformer Model
+    print("[*] Loading SentenceTransformer 'paraphrase-multilingual-MiniLM-L12-v2'...")
+    text_encoder = SentenceTransformer("paraphrase-multilingual-MiniLM-L12-v2")
+    print("[*] Models loaded successfully.")
+else:
+    print("[*] Running in CLOUD_DEPLOY (lightweight API mode) under 50MB RAM!")
 
 DATA_DIR = "data"
 os.makedirs(DATA_DIR, exist_ok=True)
@@ -183,6 +197,8 @@ whisper_model = None
 @app.post("/voice-search")
 async def voice_search(file: UploadFile = File(...)):
     """Transcribes client microphone audio block locally using the small Whisper model."""
+    if CLOUD_DEPLOY:
+        raise HTTPException(status_code=501, detail="Voice search is disabled in cloud hosting to save RAM. Please type your query.")
     global whisper_model
     try:
         temp_path = os.path.join(DATA_DIR, "voice.wav")
@@ -223,15 +239,62 @@ def search_moment(q: str, video: str = "lecture", top_k: int = 3):
     
     t_start = time.time()
     
-    # 1. Encode text query using CLIP (512-dim)
-    tokens = tokenizer([q]).to(device)
-    with torch.no_grad():
-        q_clip_vec = clip_model.encode_text(tokens)
-        q_clip_vec /= q_clip_vec.norm(dim=-1, keepdim=True)
-        q_clip_arr = q_clip_vec.cpu().numpy()[0]
+    # 1. Encode text query using CLIP and SentenceTransformer
+    if CLOUD_DEPLOY:
+        hf_token = os.environ.get("HF_TOKEN", "")
+        headers = {"Authorization": f"Bearer {hf_token}"} if hf_token else {}
         
-    # 2. Encode text query using SentenceTransformer (384-dim)
-    q_text_arr = text_encoder.encode([q], normalize_embeddings=True, show_progress_bar=False)[0]
+        # Encode CLIP (512-dim) via HF API
+        clip_url = "https://api-inference.huggingface.co/models/openai/clip-vit-base-patch32"
+        q_clip_arr = None
+        for _ in range(5):
+            try:
+                res = requests.post(clip_url, headers=headers, json={"inputs": [q]}, timeout=10)
+                if res.status_code == 200:
+                    data = res.json()
+                    emb = data[0][0] if isinstance(data[0], list) else data[0]
+                    q_clip_arr = np.array(emb, dtype=np.float32)
+                    q_clip_arr /= np.linalg.norm(q_clip_arr)
+                    break
+                elif res.status_code == 503:
+                    time.sleep(3)
+                else:
+                    break
+            except Exception:
+                time.sleep(1)
+        if q_clip_arr is None:
+            q_clip_arr = np.zeros(512, dtype=np.float32)
+            
+        # Encode SentenceTransformer (384-dim) via HF API
+        st_url = "https://api-inference.huggingface.co/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+        q_text_arr = None
+        for _ in range(5):
+            try:
+                res = requests.post(st_url, headers=headers, json={"inputs": [q]}, timeout=10)
+                if res.status_code == 200:
+                    data = res.json()
+                    emb = data[0][0] if isinstance(data[0], list) else data[0]
+                    q_text_arr = np.array(emb, dtype=np.float32)
+                    q_text_arr /= np.linalg.norm(q_text_arr)
+                    break
+                elif res.status_code == 503:
+                    time.sleep(3)
+                else:
+                    break
+            except Exception:
+                time.sleep(1)
+        if q_text_arr is None:
+            q_text_arr = np.zeros(384, dtype=np.float32)
+    else:
+        # Local Mode: Encode text query using CLIP (512-dim)
+        tokens = tokenizer([q]).to(device)
+        with torch.no_grad():
+            q_clip_vec = clip_model.encode_text(tokens)
+            q_clip_vec /= q_clip_vec.norm(dim=-1, keepdim=True)
+            q_clip_arr = q_clip_vec.cpu().numpy()[0]
+            
+        # Local Mode: Encode text query using SentenceTransformer (384-dim)
+        q_text_arr = text_encoder.encode([q], normalize_embeddings=True, show_progress_bar=False)[0]
     
     t_enc = (time.time() - t_start) * 1000
     
