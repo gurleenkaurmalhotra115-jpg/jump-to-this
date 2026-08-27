@@ -372,6 +372,47 @@ def search_moment(q: str, video: str = "lecture", top_k: int = 3):
     search_cache[cache_key] = res
     return res
 
+@app.get("/debug-hf")
+def debug_hf(q: str = "hello"):
+    hf_token = os.environ.get("HF_TOKEN", "")
+    headers = {"Authorization": f"Bearer {hf_token}"} if hf_token else {}
+    
+    # 1. Test CLIP via HF API
+    clip_url = "https://api-inference.huggingface.co/models/openai/clip-vit-base-patch32"
+    res_clip = requests.post(clip_url, headers=headers, json={"inputs": [q]})
+    
+    # 2. Test ST via HF API
+    st_url = "https://api-inference.huggingface.co/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+    res_st = requests.post(st_url, headers=headers, json={"inputs": [q]})
+    
+    clip_data = res_clip.json() if res_clip.status_code == 200 else str(res_clip.text)
+    st_data = res_st.json() if res_st.status_code == 200 else str(res_st.text)
+    
+    clip_shape = "None"
+    if isinstance(clip_data, list):
+        clip_shape = f"list length={len(clip_data)}"
+        if len(clip_data) > 0 and isinstance(clip_data[0], list):
+            clip_shape += f", sublist={len(clip_data[0])}"
+            if len(clip_data[0]) > 0 and isinstance(clip_data[0][0], list):
+                clip_shape += f", subsublist={len(clip_data[0][0])}"
+                
+    st_shape = "None"
+    if isinstance(st_data, list):
+        st_shape = f"list length={len(st_data)}"
+        if len(st_data) > 0 and isinstance(st_data[0], list):
+            st_shape += f", sublist={len(st_data[0])}"
+            if len(st_data[0]) > 0 and isinstance(st_data[0][0], list):
+                st_shape += f", subsublist={len(st_data[0][0])}"
+                
+    return {
+        "clip_status": res_clip.status_code,
+        "clip_shape": clip_shape,
+        "clip_sample": str(clip_data)[:300],
+        "st_status": res_st.status_code,
+        "st_shape": st_shape,
+        "st_sample": str(st_data)[:300]
+    }
+
 @app.get("/status")
 def get_status(video: str = "lecture"):
     try:
