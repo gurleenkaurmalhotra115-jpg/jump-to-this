@@ -1,16 +1,16 @@
 :root {
-  --bg-color: #0b0f17;
-  --card-bg: #161e2b;
-  --border-color: #243042;
-  --text-color: #f8fafc;
-  --text-muted: #94a3b8;
-  --teal-color: #17b6c4;
-  --teal-hover: #149ba7;
-  --amber-color: #ff8a3d;
-  --amber-hover: #e6762c;
+  --bg-color: #050505;
+  --card-bg: #121212;
+  --border-color: #2b1111;
+  --text-color: #ffffff;
+  --text-muted: #a3a3a3;
+  --teal-color: #e50914;
+  --teal-hover: #b80710;
+  --amber-color: #ff4d4d;
+  --amber-hover: #cc1111;
   --green-color: #10b981;
   --orange-color: #f59e0b;
-  --red-color: #ef4444;
+  --red-color: #e50914;
   --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -53,7 +53,7 @@ body {
   font-size: 24px;
   font-weight: 800;
   margin: 0;
-  background: linear-gradient(135deg, var(--teal-color), #38bdf8);
+  background: linear-gradient(135deg, var(--teal-color), #ff6666);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   letter-spacing: -0.5px;
