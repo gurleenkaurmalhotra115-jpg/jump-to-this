@@ -8,10 +8,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 import requests
-try:
-    import tasks
-except ModuleNotFoundError:
-    from backend import tasks
+# Inject backend directory into python path to guarantee local imports resolve
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import tasks
 
 # Qdrant Cloud Setup
 QDRANT_URL = os.environ.get("QDRANT_URL")
