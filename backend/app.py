@@ -3,16 +3,31 @@ import sys
 import json
 import time
 import numpy as np
-from fastapi import FastAPI, HTTPException, UploadFile, File
+from fastapi import FastAPI, HTTPException, UploadFile, File, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 import requests
+import tasks
+
+# Qdrant Cloud Setup
+QDRANT_URL = os.environ.get("QDRANT_URL")
+QDRANT_API_KEY = os.environ.get("QDRANT_API_KEY")
+qdrant_client = None
+if QDRANT_URL:
+    try:
+        from qdrant_client import QdrantClient
+        from qdrant_client.http import models as qd_models
+        qdrant_client = QdrantClient(url=QDRANT_URL, api_key=QDRANT_API_KEY)
+        print("[*] Successfully initialized Qdrant Cloud client connection.")
+    except Exception as e:
+        print(f"[!] Error: Could not connect to Qdrant Cloud: {e}")
 
 app = FastAPI(title="JumpToThis Backend", description="Upgraded Dual-Embedding Moment Search")
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
 
 CLOUD_DEPLOY = os.environ.get("CLOUD_DEPLOY") == "1"
+
 
 # Global model references
 clip_model = None
@@ -326,6 +341,155 @@ def search_moment(q: str, video: str = "lecture", top_k: int = 3):
     
     t_enc = (time.time() - t_start) * 1000
     
+    # 2. Check if we should use Qdrant Cloud
+    if qdrant_client is not None:
+        try:
+            # Query Qdrant Visual Collection
+            visual_results = qdrant_client.search(
+                collection_name="visual_moments",
+                query_vector=q_clip_arr.tolist(),
+                query_filter=qd_models.Filter(
+                    must=[qd_models.FieldCondition(key="video_id", match=qd_models.MatchValue(value=video))]
+                ),
+                limit=50
+            )
+            
+            # Query Qdrant Transcript Collection
+            text_results = qdrant_client.search(
+                collection_name="transcript_moments",
+                query_vector=q_text_arr.tolist(),
+                query_filter=qd_models.Filter(
+                    must=[qd_models.FieldCondition(key="video_id", match=qd_models.MatchValue(value=video))]
+                ),
+                limit=50
+            )
+            
+            # Fuse scores
+            scores_dict = {}
+            max_text_score = max([hit.score for hit in text_results]) if text_results else 0.0
+            
+            VISUAL_CUES = {"shown", "wearing", "color", "car", "crash", "goal", "board", "diagram", "gesturing", "graphics", "stairs", "sofa", "carrying", "couch", "person"}
+            SPEECH_CUES = {"says", "explains", "mentions", "asks", "discusses", "teacher", "speaker", "career", "guidance"}
+            q_words = set(q.lower().split())
+            
+            if max_text_score > 0.35:
+                w_v, w_t = 0.10, 0.90
+            elif q_words & SPEECH_CUES:
+                w_v, w_t = 0.15, 0.85
+            elif q_words & VISUAL_CUES:
+                w_v, w_t = 0.85, 0.15
+            else:
+                w_v, w_t = 0.50, 0.50
+                
+            # Populate scores
+            for hit in visual_results:
+                ts = hit.payload["timestamp"]
+                scores_dict[ts] = {
+                    "timestamp": ts,
+                    "visual_similarity": hit.score,
+                    "text_similarity": 0.0,
+                    "frame_path": hit.payload.get("frame_path", ""),
+                    "matched_context": "Visual match",
+                    "type": "visual"
+                }
+                
+            for hit in text_results:
+                ts = hit.payload["timestamp"]
+                txt = hit.payload.get("text", "")
+                if ts in scores_dict:
+                    scores_dict[ts]["text_similarity"] = hit.score
+                    scores_dict[ts]["matched_context"] = f"Speech: \"{txt}\""
+                    scores_dict[ts]["type"] = "transcript" if hit.score > scores_dict[ts]["visual_similarity"] else "fused"
+                else:
+                    scores_dict[ts] = {
+                        "timestamp": ts,
+                        "visual_similarity": 0.0,
+                        "text_similarity": hit.score,
+                        "frame_path": "",
+                        "matched_context": f"Speech: \"{txt}\"",
+                        "type": "transcript"
+                    }
+                    
+            # Combine scores
+            fused_list = []
+            for ts, item in scores_dict.items():
+                item["score"] = (w_v * item["visual_similarity"]) + (w_t * item["text_similarity"])
+                fused_list.append(item)
+                
+            fused_list.sort(key=lambda x: x["score"], reverse=True)
+            results = []
+            window_sec = 4.0
+            
+            # Load local transcripts if available for word alignment
+            try:
+                local_trans = indices.get("transcripts", [])
+                local_trans_en = indices.get("transcripts_en", [])
+            except Exception:
+                local_trans, local_trans_en = [], []
+                
+            for item in fused_list:
+                t = item["timestamp"]
+                if any(abs(t - prev["timestamp"]) < window_sec for prev in results):
+                    continue
+                    
+                exact_timestamp = t
+                matched_seg = None
+                
+                # Retrieve local segment for word alignment if available
+                for seg in local_trans:
+                    if seg["start"] <= t <= seg["end"]:
+                        matched_seg = seg
+                        break
+                if not matched_seg:
+                    for seg in local_trans_en:
+                        if seg["start"] <= t <= seg["end"]:
+                            matched_seg = seg
+                            break
+                            
+                word_found = False
+                if matched_seg and "words" in matched_seg:
+                    for w_item in matched_seg["words"]:
+                        clean_w = w_item["word"].strip(".,!?\"'").lower()
+                        if clean_w in q_words:
+                            exact_timestamp = w_item["start"]
+                            word_found = True
+                            break
+                            
+                match_pct = round(item["score"] * 100, 1)
+                results.append({
+                    "timestamp": exact_timestamp,
+                    "score": match_pct,
+                    "formatted_time": f"{int(exact_timestamp // 60):02d}:{int(exact_timestamp % 60):02d}",
+                    "type": item["type"],
+                    "matched_context": item["matched_context"],
+                    "frame_path": item["frame_path"] if item["frame_path"] else "frame_00000.jpg",
+                    "visual_similarity": round(item["visual_similarity"], 3),
+                    "text_similarity": round(item["text_similarity"], 3)
+                })
+                if len(results) >= top_k:
+                    break
+                    
+            t_search = (time.time() - t_start) * 1000 - t_enc
+            t_rank = 0.0
+            total_ms = t_enc + t_search
+            
+            res = {
+                "query": q,
+                "weights": {"visual": w_v, "text": w_t},
+                "latency_ms": round(total_ms, 1),
+                "latency": {
+                    "encoding_ms": round(t_enc, 1),
+                    "search_ms": round(t_search, 1),
+                    "ranking_ms": round(t_rank, 1),
+                    "total_ms": round(total_ms, 1)
+                },
+                "results": results
+            }
+            search_cache[cache_key] = res
+            return res
+        except Exception as qd_err:
+            print(f"[!] Qdrant Cloud Search error: {qd_err}. Falling back to local numpy match...")
+
     # 3. Visual Similarity calculation (Matrix Multiplication)
     visual_sims = np.dot(visual_vectors, q_clip_arr)
     
@@ -441,6 +605,45 @@ def debug_hf(q: str = "hello"):
         "st_sample": str(st_data)[:300]
     }
 
+@app.post("/api/videos/ingest-url")
+def ingest_url(payload: dict, background_tasks: BackgroundTasks):
+    url = payload.get("url")
+    if not url:
+        raise HTTPException(status_code=400, detail="Missing video URL in payload")
+    
+    video_id = f"video_{int(time.time())}"
+    file_ext = ".mp4" # Default to mp4 extension
+    file_path = os.path.join("media", f"{video_id}{file_ext}")
+    
+    # Define downloader callback
+    def download_and_process():
+        try:
+            tasks.set_status(video_id, "downloading")
+            print(f"[*] Downloading remote video: {url} -> {file_path}")
+            res = requests.get(url, stream=True, timeout=30)
+            if res.status_code != 200:
+                raise Exception(f"Failed to fetch video: HTTP {res.status_code}")
+                
+            with open(file_path, "wb") as f:
+                for chunk in res.iter_content(chunk_size=8192):
+                    if chunk:
+                        f.write(chunk)
+                        
+            print(f"[+] Download complete: {file_path}. Starting ingestion...")
+            tasks.ingest_video(video_id, file_path)
+        except Exception as e:
+            print(f"[!] Dynamic indexing failed: {e}")
+            tasks.set_status(video_id, "failed", error_msg=str(e))
+
+    # Trigger background thread execution
+    background_tasks.add_task(download_and_process)
+    return {"video_id": video_id, "status": "processing"}
+
+@app.get("/api/videos/{video_id}/status")
+def get_video_ingest_status(video_id: str):
+    import tasks
+    return tasks.get_status(video_id)
+
 @app.get("/status")
 def get_status(video: str = "lecture"):
     try:
@@ -459,6 +662,27 @@ def get_status(video: str = "lecture"):
             "device": device
         }
     return status
+
+@app.on_event("startup")
+def startup_event():
+    if qdrant_client:
+        try:
+            collections = qdrant_client.get_collections().collections
+            existing = [c.name for c in collections]
+            if "visual_moments" not in existing:
+                qdrant_client.create_collection(
+                    collection_name="visual_moments",
+                    vectors_config=qd_models.VectorParams(size=512, distance=qd_models.Distance.COSINE)
+                )
+                print("[*] Created Qdrant collection: 'visual_moments'")
+            if "transcript_moments" not in existing:
+                qdrant_client.create_collection(
+                    collection_name="transcript_moments",
+                    vectors_config=qd_models.VectorParams(size=384, distance=qd_models.Distance.COSINE)
+                )
+                print("[*] Created Qdrant collection: 'transcript_moments'")
+        except Exception as e:
+            print(f"[!] Warning: Could not initialize Qdrant collections: {e}")
 
 # Serve static folders
 app.mount("/media", StaticFiles(directory="media"), name="media")
