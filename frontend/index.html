@@ -439,58 +439,63 @@
       videoPlayer.play();
     }
 
-    // Voice search using local MediaRecorder mic capture POSTed to server
-    let mediaRecorder;
-    let audioChunks = [];
+    // Native Browser Speech Recognition (Web Speech API)
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    let recognition;
     let isRecording = false;
 
-    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-      voiceBtn.addEventListener('click', async () => {
-        if (!isRecording) {
-          navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
-            mediaRecorder = new MediaRecorder(stream);
-            mediaRecorder.ondataavailable = e => {
-              audioChunks.push(e.data);
-            };
-            mediaRecorder.onstop = async () => {
-              const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
-              audioChunks = [];
-              
-              const formData = new FormData();
-              formData.append('file', audioBlob, 'voice.wav');
-              
-              queryInput.placeholder = "Transcribing locally...";
-              try {
-                const res = await fetch('/voice-search', {
-                  method: 'POST',
-                  body: formData
-                });
-                if (!res.ok) throw new Error("Local voice search API failed");
-                const data = await res.json();
-                queryInput.value = data.text;
-                searchForm.dispatchEvent(new Event('submit'));
-              } catch (err) {
-                console.error("Local voice transcription failed:", err);
-                queryInput.placeholder = "Transcription failed.";
-              }
-            };
-            
-            mediaRecorder.start();
-            isRecording = true;
-            voiceBtn.classList.add('recording');
-            queryInput.placeholder = "Recording voice locally... Click mic to stop.";
-          }).catch(err => {
-            console.error("Microphone access denied:", err);
-            queryInput.placeholder = "Mic blocked. Type query.";
-          });
+    if (SpeechRecognition) {
+      recognition = new SpeechRecognition();
+      recognition.continuous = false;
+      recognition.interimResults = false;
+      
+      // Auto-detect language (defaults to US English but supports code-mixed voice inputs)
+      recognition.lang = 'en-US';
+
+      recognition.onstart = () => {
+        isRecording = true;
+        voiceBtn.classList.add('recording');
+        queryInput.value = "";
+        queryInput.placeholder = "Listening... Speak now!";
+      };
+
+      recognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        queryInput.value = transcript;
+        queryInput.placeholder = "Search by action or speech...";
+        // Trigger auto-search immediately
+        searchForm.dispatchEvent(new Event('submit'));
+      };
+
+      recognition.onerror = (event) => {
+        console.error("Speech recognition error:", event.error);
+        if (event.error === 'not-allowed') {
+          queryInput.placeholder = "Mic blocked by browser. Please enable permissions.";
         } else {
-          mediaRecorder.stop();
-          isRecording = false;
-          voiceBtn.classList.remove('recording');
-          queryInput.placeholder = 'Search by action or speech...';
+          queryInput.placeholder = "Speech error: " + event.error;
+        }
+        isRecording = false;
+        voiceBtn.classList.remove('recording');
+      };
+
+      recognition.onend = () => {
+        isRecording = false;
+        voiceBtn.classList.remove('recording');
+      };
+
+      voiceBtn.addEventListener('click', () => {
+        if (!isRecording) {
+          try {
+            recognition.start();
+          } catch (e) {
+            console.error(e);
+          }
+        } else {
+          recognition.stop();
         }
       });
     } else {
+      // Fallback: hide mic icon if the browser has no SpeechRecognition support
       voiceBtn.style.display = 'none';
     }
 
