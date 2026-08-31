@@ -459,7 +459,7 @@ def _search_moment_impl(q: str, video: str = "lecture", top_k: int = 3, w_v: flo
                     "ranking_ms": round(t_rank, 1),
                     "total_ms": round(total_ms, 1)
                 },
-                "results": results
+                "results": [r for r in results if r["score"] >= 28.0]
             }
             search_cache[cache_key] = res
             return res
@@ -531,7 +531,7 @@ def _search_moment_impl(q: str, video: str = "lecture", top_k: int = 3, w_v: flo
             "ranking_ms": round(t_rank, 1),
             "total_ms": round(total_ms, 1)
         },
-        "results": results
+        "results": [r for r in results if r["score"] >= 28.0]
     }
     search_cache[cache_key] = res
     return res
