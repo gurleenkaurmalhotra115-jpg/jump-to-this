@@ -2,15 +2,20 @@ import os
 import sys
 import json
 import time
+import uuid
+import threading
+import requests
 import numpy as np
 from fastapi import FastAPI, HTTPException, UploadFile, File, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
-import requests
+from pydantic import BaseModel
+
 # Inject backend directory into python path to guarantee local imports resolve
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-import tasks
+backend_dir = os.path.dirname(os.path.abspath(__file__))
+if backend_dir not in sys.path:
+    sys.path.insert(0, backend_dir)
 
 # Qdrant Cloud Setup
 QDRANT_URL = os.environ.get("QDRANT_URL")
@@ -30,57 +35,41 @@ app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], all
 
 CLOUD_DEPLOY = os.environ.get("CLOUD_DEPLOY") == "1"
 
-
-# Global model references
+# Global model references for local execution
 clip_model = None
 tokenizer = None
 text_encoder = None
 device = "cpu"
 
 if not CLOUD_DEPLOY:
-    # Local Mode: Load heavy PyTorch libraries
     import torch
-    torch.set_num_threads(4)  # Optimize PyTorch CPU thread pools to prevent contention
+    torch.set_num_threads(4)
     import open_clip
     from sentence_transformers import SentenceTransformer
     
     device = "cuda" if torch.cuda.is_available() else "cpu"
-    
-    # 1. Load CLIP Model
-    print("[*] Loading CLIP Model...")
+    print("[*] Loading CLIP Model locally...")
     clip_model, _, _ = open_clip.create_model_and_transforms('ViT-B-32', pretrained='openai')
     tokenizer = open_clip.get_tokenizer('ViT-B-32')
     clip_model.to(device).eval()
     
-    # 2. Load Multilingual SentenceTransformer Model
-    print("[*] Loading SentenceTransformer 'paraphrase-multilingual-MiniLM-L12-v2'...")
+    print("[*] Loading SentenceTransformer locally...")
     text_encoder = SentenceTransformer("paraphrase-multilingual-MiniLM-L12-v2")
-    print("[*] Models loaded successfully.")
-else:
-    print("[*] Running in CLOUD_DEPLOY (lightweight API mode) under 50MB RAM!")
-    if not os.environ.get("HF_TOKEN"):
-        print("[WARNING] ⚠️ CLOUD_DEPLOY is active, but HF_TOKEN is not set in environment variables!")
-        print("[WARNING] ⚠️ The Hugging Face Inference API requires a token and will return 401 Unauthorized.")
-        print("[WARNING] ⚠️ Please set the HF_TOKEN environment variable in your deployment settings.")
 
 def extract_embedding(data):
-    """Recursively extract the 1D list of floats from a nested list response."""
     while isinstance(data, list) and len(data) > 0 and isinstance(data[0], list):
         data = data[0]
     return data
 
 DATA_DIR = "data"
 os.makedirs(DATA_DIR, exist_ok=True)
-os.makedirs(os.path.join(DATA_DIR, "thumbnails"), exist_ok=True)
 os.makedirs("media", exist_ok=True)
 os.makedirs("frontend", exist_ok=True)
 
-# Global cache for loaded indexes and query searches
 loaded_indices = {}
 search_cache = {}
 
 def get_video_indices(video: str):
-    """Dynamically gets or loads the index data for a specific video."""
     global loaded_indices
     if video not in loaded_indices:
         print(f"[*] Dynamically loading indexes for video: '{video}'...")
@@ -93,14 +82,15 @@ def get_video_indices(video: str):
         trans_en_path = os.path.join(video_data_dir, "transcript_en.json")
         emb_en_path = os.path.join(video_data_dir, "transcript_en_embeddings.npy")
         
-        if not os.path.exists(vec_path) or not os.path.exists(ts_path):
+        # We only strictly require the timestamp metadata to play/seek the video
+        if not os.path.exists(ts_path):
             raise HTTPException(
                 status_code=404, 
                 detail=f"Index data files for '{video}' not found. Run indexer for this video first."
             )
             
         try:
-            v_vecs = np.load(vec_path)
+            v_vecs = np.load(vec_path) if os.path.exists(vec_path) else None
             with open(ts_path, "r", encoding="utf-8") as f:
                 v_timestamps = json.load(f)
                 
@@ -116,13 +106,6 @@ def get_video_indices(video: str):
                     trans_en = json.load(f)
             t_en_embeddings = np.load(emb_en_path) if os.path.exists(emb_en_path) else None
             
-            # Assertions to ensure data consistency
-            assert v_vecs.shape[0] == len(v_timestamps), f"Visual vector/timestamp mismatch for {video}!"
-            if trans and t_embeddings is not None:
-                assert t_embeddings.shape[0] == len(trans), f"Transcript embedding/segment mismatch for {video}!"
-            if trans_en and t_en_embeddings is not None:
-                assert t_en_embeddings.shape[0] == len(trans_en), f"Transcript EN embedding/segment mismatch for {video}!"
-                
             loaded_indices[video] = {
                 "visual_vectors": v_vecs,
                 "visual_timestamps": v_timestamps,
@@ -140,37 +123,29 @@ def get_video_indices(video: str):
     return loaded_indices[video]
 
 def temporal_nms(scores, timestamps_metadata, visual_sims, text_sims_native, text_sims_en, query, transcripts, transcripts_en, window_sec=4.0, top_k=3):
-    """Temporal Non-Maximum Suppression to group contiguous seconds into 1 scene, seeking to the exact word."""
     sorted_indices = np.argsort(scores)[::-1]
     selected = []
-    
     q_words = set(query.lower().split())
     
     for idx in sorted_indices:
         item = timestamps_metadata[idx]
         t = item["timestamp"]
         
-        # Skip if within NMS window of already selected times
         if any(abs(t - prev["timestamp"]) < window_sec for prev in selected):
             continue
             
         native_seg_idx = item.get("segment_idx")
         en_seg_idx = item.get("en_segment_idx")
         
-        v_sim = float(visual_sims[idx])
-        
+        v_sim = float(visual_sims[idx]) if visual_sims is not None and len(visual_sims) > idx else 0.0
         native_sim = float(text_sims_native[native_seg_idx]) if (native_seg_idx is not None and text_sims_native is not None and len(text_sims_native) > 0 and native_seg_idx < len(text_sims_native)) else 0.0
         en_sim = float(text_sims_en[en_seg_idx]) if (en_seg_idx is not None and text_sims_en is not None and len(text_sims_en) > 0 and en_seg_idx < len(text_sims_en)) else 0.0
-        
         t_sim = max(native_sim, en_sim)
         
         matched_context = "Visual match"
         match_type = "visual"
-        
-        # Start targeted timestamp as the timeline frame second
         exact_timestamp = t
         
-        # Resolve transcript segment context (prefer native, fallback to translation)
         matched_seg = None
         if native_seg_idx is not None and native_seg_idx < len(transcripts):
             matched_seg = transcripts[native_seg_idx]
@@ -181,7 +156,6 @@ def temporal_nms(scores, timestamps_metadata, visual_sims, text_sims_native, tex
             matched_context = f"Translated Speech: \"{matched_seg['text']}\""
             match_type = "transcript" if t_sim > v_sim else "fused"
             
-        # Pinpoint exact timestamp using word-level alignment if exact word matches
         word_found = False
         if matched_seg and "words" in matched_seg:
             for w_item in matched_seg["words"]:
@@ -201,7 +175,6 @@ def temporal_nms(scores, timestamps_metadata, visual_sims, text_sims_native, tex
                         break
                         
         match_pct = round(scores[idx] * 100, 1)
-        
         selected.append({
             "timestamp": exact_timestamp,
             "score": match_pct,
@@ -218,14 +191,39 @@ def temporal_nms(scores, timestamps_metadata, visual_sims, text_sims_native, tex
             
     return selected
 
-# Global variable for voice search transcription model
 whisper_model = None
 
 @app.post("/voice-search")
 async def voice_search(file: UploadFile = File(...)):
-    """Transcribes client microphone audio block locally using the small Whisper model."""
     if CLOUD_DEPLOY:
-        raise HTTPException(status_code=501, detail="Voice search is disabled in cloud hosting to save RAM. Please type your query.")
+        hf_token = os.environ.get("HF_TOKEN", "")
+        headers = {"Authorization": f"Bearer {hf_token}"} if hf_token else {}
+        content = await file.read()
+        
+        whisper_url = "https://router.huggingface.co/hf-inference/models/openai/whisper-large-v3"
+        res_trans = None
+        for i in range(12): # Warmup retry up to 24s
+            try:
+                res_trans = requests.post(whisper_url, headers=headers, data=content, timeout=30)
+                if res_trans.status_code == 200:
+                    break
+                elif res_trans.status_code == 503:
+                    time.sleep(2)
+                else:
+                    time.sleep(1)
+            except Exception:
+                time.sleep(1)
+                
+        if res_trans and res_trans.status_code == 200:
+            trans_res = res_trans.json()
+            text = trans_res.get("text", "").strip()
+            print(f"[Voice Search] Transcribed audio via HF: '{text}'")
+            return {"text": text}
+        else:
+            status_code = res_trans.status_code if res_trans else 500
+            detail = res_trans.text if res_trans else "Failed to contact Hugging Face API"
+            raise HTTPException(status_code=status_code, detail=f"Serverless voice search failed: {detail}")
+            
     global whisper_model
     try:
         temp_path = os.path.join(DATA_DIR, "voice.wav")
@@ -234,11 +232,9 @@ async def voice_search(file: UploadFile = File(...)):
             f.write(content)
             
         if whisper_model is None:
-            print("[*] Lazily loading WhisperModel for local voice search...")
             from faster_whisper import WhisperModel
             whisper_model = WhisperModel("small", device=device, compute_type="int8" if device == "cpu" else "float16")
             
-        # Run local transcription
         segments, _ = whisper_model.transcribe(temp_path, vad_filter=True)
         text = " ".join([s.text.strip() for s in segments]).strip()
         print(f"[Voice Search] Transcribed local audio: '{text}'")
@@ -248,22 +244,26 @@ async def voice_search(file: UploadFile = File(...)):
         raise HTTPException(status_code=500, detail=f"Local voice transcription failed: {e}")
 
 @app.get("/search")
-def search_moment(q: str, video: str = "lecture", top_k: int = 3):
+def search_moment(q: str, video: str = "lecture", top_k: int = 3, w_v: float = None, w_t: float = None):
+    try:
+        return _search_moment_impl(q, video, top_k, w_v, w_t)
+    except Exception as err:
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=f"Search endpoint exception: {str(err)}")
+
+def _search_moment_impl(q: str, video: str = "lecture", top_k: int = 3, w_v: float = None, w_t: float = None):
     global search_cache
-    cache_key = f"{video}:{q.lower().strip()}:{top_k}"
+    cache_key = f"{video}:{q.lower().strip()}:{top_k}:{w_v}:{w_t}"
     if cache_key in search_cache:
         print(f"[*] Cache hit for query: '{q}'")
         return search_cache[cache_key]
 
-    indices = get_video_indices(video)
-    
-    visual_vectors = indices["visual_vectors"]
-    visual_timestamps = indices["visual_timestamps"]
-    transcripts = indices["transcripts"]
-    transcript_embeddings = indices["transcript_embeddings"]
-    transcripts_en = indices["transcripts_en"]
-    transcript_en_embeddings = indices["transcript_en_embeddings"]
-    
+    try:
+        indices = get_video_indices(video)
+    except Exception:
+        indices = None
+
     t_start = time.time()
     
     # 1. Encode text query using CLIP and SentenceTransformer
@@ -271,74 +271,52 @@ def search_moment(q: str, video: str = "lecture", top_k: int = 3):
         hf_token = os.environ.get("HF_TOKEN", "")
         headers = {"Authorization": f"Bearer {hf_token}"} if hf_token else {}
         
-        # Encode CLIP (512-dim) via HF API
         clip_url = "https://router.huggingface.co/hf-inference/models/sentence-transformers/clip-ViT-B-32-multilingual-v1/pipeline/feature-extraction"
         q_clip_arr = None
-        last_clip_error = None
-        for _ in range(5):
+        for i in range(12):
             try:
-                res = requests.post(clip_url, headers=headers, json={"inputs": [q]}, timeout=10)
+                res = requests.post(clip_url, headers=headers, json={"inputs": [q]}, timeout=15)
                 if res.status_code == 200:
-                    data = res.json()
-                    emb = extract_embedding(data)
+                    emb = extract_embedding(res.json())
                     q_clip_arr = np.array(emb, dtype=np.float32)
                     q_clip_arr /= np.linalg.norm(q_clip_arr)
                     break
                 elif res.status_code == 503:
-                    time.sleep(3)
+                    time.sleep(2)
                 else:
-                    last_clip_error = f"HF API Status {res.status_code}: {res.text}"
-                    break
-            except Exception as e:
-                last_clip_error = str(e)
+                    time.sleep(1)
+            except Exception:
                 time.sleep(1)
                 
         if q_clip_arr is None:
-            if last_clip_error:
-                error_msg = f"Failed to encode CLIP query via Hugging Face Inference API ({last_clip_error})."
-                if "401" in last_clip_error or "Unauthorized" in last_clip_error:
-                    error_msg += " Please set a valid HF_TOKEN environment variable in your deployment configuration."
-                raise HTTPException(status_code=500, detail=error_msg)
-            q_clip_arr = np.zeros(512, dtype=np.float32)
+            raise HTTPException(status_code=503, detail="Hugging Face CLIP text encoder is currently cold-starting. Please try again in 5 seconds.")
             
-        # Encode SentenceTransformer (384-dim) via HF API
         st_url = "https://router.huggingface.co/hf-inference/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/pipeline/feature-extraction"
         q_text_arr = None
-        last_st_error = None
-        for _ in range(5):
+        for i in range(12):
             try:
-                res = requests.post(st_url, headers=headers, json={"inputs": [q]}, timeout=10)
+                res = requests.post(st_url, headers=headers, json={"inputs": [q]}, timeout=15)
                 if res.status_code == 200:
-                    data = res.json()
-                    emb = extract_embedding(data)
+                    emb = extract_embedding(res.json())
                     q_text_arr = np.array(emb, dtype=np.float32)
                     q_text_arr /= np.linalg.norm(q_text_arr)
                     break
                 elif res.status_code == 503:
-                    time.sleep(3)
+                    time.sleep(2)
                 else:
-                    last_st_error = f"HF API Status {res.status_code}: {res.text}"
-                    break
-            except Exception as e:
-                last_st_error = str(e)
+                    time.sleep(1)
+            except Exception:
                 time.sleep(1)
                 
         if q_text_arr is None:
-            if last_st_error:
-                error_msg = f"Failed to encode text query via Hugging Face Inference API ({last_st_error})."
-                if "401" in last_st_error or "Unauthorized" in last_st_error:
-                    error_msg += " Please set a valid HF_TOKEN environment variable in your deployment configuration."
-                raise HTTPException(status_code=500, detail=error_msg)
-            q_text_arr = np.zeros(384, dtype=np.float32)
+            raise HTTPException(status_code=503, detail="Hugging Face MiniLM text encoder is currently cold-starting. Please try again in 5 seconds.")
     else:
-        # Local Mode: Encode text query using CLIP (512-dim)
         tokens = tokenizer([q]).to(device)
         with torch.no_grad():
             q_clip_vec = clip_model.encode_text(tokens)
             q_clip_vec /= q_clip_vec.norm(dim=-1, keepdim=True)
             q_clip_arr = q_clip_vec.cpu().numpy()[0]
             
-        # Local Mode: Encode text query using SentenceTransformer (384-dim)
         q_text_arr = text_encoder.encode([q], normalize_embeddings=True, show_progress_bar=False)[0]
     
     t_enc = (time.time() - t_start) * 1000
@@ -346,7 +324,6 @@ def search_moment(q: str, video: str = "lecture", top_k: int = 3):
     # 2. Check if we should use Qdrant Cloud
     if qdrant_client is not None:
         try:
-            # Query Qdrant Visual Collection
             visual_results = qdrant_client.search(
                 collection_name="visual_moments",
                 query_vector=q_clip_arr.tolist(),
@@ -356,7 +333,6 @@ def search_moment(q: str, video: str = "lecture", top_k: int = 3):
                 limit=50
             )
             
-            # Query Qdrant Transcript Collection
             text_results = qdrant_client.search(
                 collection_name="transcript_moments",
                 query_vector=q_text_arr.tolist(),
@@ -366,24 +342,25 @@ def search_moment(q: str, video: str = "lecture", top_k: int = 3):
                 limit=50
             )
             
-            # Fuse scores
-            scores_dict = {}
-            max_text_score = max([hit.score for hit in text_results]) if text_results else 0.0
-            
-            VISUAL_CUES = {"shown", "wearing", "color", "car", "crash", "goal", "board", "diagram", "gesturing", "graphics", "stairs", "sofa", "carrying", "couch", "person"}
-            SPEECH_CUES = {"says", "explains", "mentions", "asks", "discusses", "teacher", "speaker", "career", "guidance"}
-            q_words = set(q.lower().split())
-            
-            if max_text_score > 0.35:
-                w_v, w_t = 0.10, 0.90
-            elif q_words & SPEECH_CUES:
-                w_v, w_t = 0.15, 0.85
-            elif q_words & VISUAL_CUES:
-                w_v, w_t = 0.85, 0.15
+            if w_v is not None and w_t is not None:
+                weight_v = float(w_v)
+                weight_t = float(w_t)
             else:
-                w_v, w_t = 0.50, 0.50
+                max_text_score = max([hit.score for hit in text_results]) if text_results else 0.0
+                VISUAL_CUES = {"shown", "wearing", "color", "car", "crash", "goal", "board", "diagram", "gesturing", "graphics", "stairs", "sofa", "carrying", "couch", "person"}
+                SPEECH_CUES = {"says", "explains", "mentions", "asks", "discusses", "teacher", "speaker", "career", "guidance"}
+                q_words = set(q.lower().split())
                 
-            # Populate scores
+                if max_text_score > 0.35:
+                    weight_v, weight_t = 0.10, 0.90
+                elif q_words & SPEECH_CUES:
+                    weight_v, weight_t = 0.15, 0.85
+                elif q_words & VISUAL_CUES:
+                    weight_v, weight_t = 0.85, 0.15
+                else:
+                    weight_v, weight_t = 0.50, 0.50
+                    
+            scores_dict = {}
             for hit in visual_results:
                 ts = hit.payload["timestamp"]
                 scores_dict[ts] = {
@@ -412,20 +389,18 @@ def search_moment(q: str, video: str = "lecture", top_k: int = 3):
                         "type": "transcript"
                     }
                     
-            # Combine scores
             fused_list = []
             for ts, item in scores_dict.items():
-                item["score"] = (w_v * item["visual_similarity"]) + (w_t * item["text_similarity"])
+                item["score"] = (weight_v * item["visual_similarity"]) + (weight_t * item["text_similarity"])
                 fused_list.append(item)
                 
             fused_list.sort(key=lambda x: x["score"], reverse=True)
             results = []
             window_sec = 4.0
             
-            # Load local transcripts if available for word alignment
             try:
-                local_trans = indices.get("transcripts", [])
-                local_trans_en = indices.get("transcripts_en", [])
+                local_trans = indices.get("transcripts", []) if indices else []
+                local_trans_en = indices.get("transcripts_en", []) if indices else []
             except Exception:
                 local_trans, local_trans_en = [], []
                 
@@ -436,8 +411,6 @@ def search_moment(q: str, video: str = "lecture", top_k: int = 3):
                     
                 exact_timestamp = t
                 matched_seg = None
-                
-                # Retrieve local segment for word alignment if available
                 for seg in local_trans:
                     if seg["start"] <= t <= seg["end"]:
                         matched_seg = seg
@@ -450,6 +423,7 @@ def search_moment(q: str, video: str = "lecture", top_k: int = 3):
                             
                 word_found = False
                 if matched_seg and "words" in matched_seg:
+                    q_words = set(q.lower().split())
                     for w_item in matched_seg["words"]:
                         clean_w = w_item["word"].strip(".,!?\"'").lower()
                         if clean_w in q_words:
@@ -477,7 +451,7 @@ def search_moment(q: str, video: str = "lecture", top_k: int = 3):
             
             res = {
                 "query": q,
-                "weights": {"visual": w_v, "text": w_t},
+                "weights": {"visual": weight_v, "text": weight_t},
                 "latency_ms": round(total_ms, 1),
                 "latency": {
                     "encoding_ms": round(t_enc, 1),
@@ -490,59 +464,58 @@ def search_moment(q: str, video: str = "lecture", top_k: int = 3):
             search_cache[cache_key] = res
             return res
         except Exception as qd_err:
-            print(f"[!] Qdrant Cloud Search error: {qd_err}. Falling back to local numpy match...")
+            print(f"[!] Qdrant Cloud Search failed: {qd_err}. Falling back to numpy...")
 
-    # 3. Visual Similarity calculation (Matrix Multiplication)
-    visual_sims = np.dot(visual_vectors, q_clip_arr)
+    # 3. Visual Similarity calculation (Matrix Multiplication Fallback)
+    if indices is None:
+        raise HTTPException(status_code=404, detail="Index data not found. Run indexer first.")
+        
+    visual_vectors = indices["visual_vectors"]
+    visual_timestamps = indices["visual_timestamps"]
+    transcripts = indices["transcripts"]
+    transcript_embeddings = indices["transcript_embeddings"]
+    transcripts_en = indices["transcripts_en"]
+    transcript_en_embeddings = indices["transcript_en_embeddings"]
     
-    # 4. Transcript Semantic Similarity (Native + Translated English)
-    text_sims_native = np.array([])
-    if transcript_embeddings is not None and len(transcript_embeddings) > 0:
-        text_sims_native = np.dot(transcript_embeddings, q_text_arr)
-        
-    text_sims_en = np.array([])
-    if transcript_en_embeddings is not None and len(transcript_en_embeddings) > 0:
-        text_sims_en = np.dot(transcript_en_embeddings, q_text_arr)
-        
+    visual_sims = np.dot(visual_vectors, q_clip_arr) if visual_vectors is not None else np.zeros(len(visual_timestamps))
+    text_sims_native = np.dot(transcript_embeddings, q_text_arr) if transcript_embeddings is not None and len(transcript_embeddings) > 0 else np.array([])
+    text_sims_en = np.dot(transcript_en_embeddings, q_text_arr) if transcript_en_embeddings is not None and len(transcript_en_embeddings) > 0 else np.array([])
+    
     t_search = (time.time() - t_start) * 1000 - t_enc
     
-    # 5. Dynamic Weight Intent Routing based on actual match strength
-    max_text_score = 0.0
-    if len(text_sims_native) > 0:
-        max_text_score = max(max_text_score, float(text_sims_native.max()))
-    if len(text_sims_en) > 0:
-        max_text_score = max(max_text_score, float(text_sims_en.max()))
-        
-    VISUAL_CUES = {"shown", "wearing", "color", "car", "crash", "goal", "board", "diagram", "gesturing", "graphics", "stairs", "sofa", "carrying", "couch", "person"}
-    SPEECH_CUES = {"says", "explains", "mentions", "asks", "discusses", "teacher", "speaker", "career", "guidance"}
-    q_words = set(q.lower().split())
-    
-    if max_text_score > 0.35:
-        # Strong dialogue semantic similarity -> dynamically pivot to speech-heavy weights!
-        w_v, w_t = 0.10, 0.90
-    elif q_words & SPEECH_CUES:
-        w_v, w_t = 0.15, 0.85
-    elif q_words & VISUAL_CUES:
-        w_v, w_t = 0.85, 0.15
+    # Calculate weights
+    if w_v is not None and w_t is not None:
+        weight_v, weight_t = float(w_v), float(w_t)
     else:
-        # Default balanced weights for general searches
-        w_v, w_t = 0.50, 0.50
+        max_text_score = 0.0
+        if len(text_sims_native) > 0:
+            max_text_score = max(max_text_score, float(text_sims_native.max()))
+        if len(text_sims_en) > 0:
+            max_text_score = max(max_text_score, float(text_sims_en.max()))
+            
+        VISUAL_CUES = {"shown", "wearing", "color", "car", "crash", "goal", "board", "diagram", "gesturing", "graphics", "stairs", "sofa", "carrying", "couch", "person"}
+        SPEECH_CUES = {"says", "explains", "mentions", "asks", "discusses", "teacher", "speaker", "career", "guidance"}
+        q_words = set(q.lower().split())
         
-    # 6. Weight Fusion & Score Calculation
+        if max_text_score > 0.35:
+            weight_v, weight_t = 0.10, 0.90
+        elif q_words & SPEECH_CUES:
+            weight_v, weight_t = 0.15, 0.85
+        elif q_words & VISUAL_CUES:
+            weight_v, weight_t = 0.85, 0.15
+        else:
+            weight_v, weight_t = 0.50, 0.50
+            
     scores = np.zeros(len(visual_timestamps), dtype=np.float32)
     for i, item in enumerate(visual_timestamps):
-        v_score = visual_sims[i]
-        
+        v_score = visual_sims[i] if visual_sims is not None and len(visual_sims) > i else 0.0
         native_seg_idx = item.get("segment_idx")
         native_score = text_sims_native[native_seg_idx] if (native_seg_idx is not None and len(text_sims_native) > 0 and native_seg_idx < len(text_sims_native)) else 0.0
-        
         en_seg_idx = item.get("en_segment_idx")
         en_score = text_sims_en[en_seg_idx] if (en_seg_idx is not None and len(text_sims_en) > 0 and en_seg_idx < len(text_sims_en)) else 0.0
-        
         t_score = max(native_score, en_score)
-        scores[i] = (w_v * v_score) + (w_t * t_score)
+        scores[i] = (weight_v * v_score) + (weight_t * t_score)
         
-    # 7. Run Non-Maximum Suppression (NMS)
     results = temporal_nms(scores, visual_timestamps, visual_sims, text_sims_native, text_sims_en, q, transcripts, transcripts_en, window_sec=4.0, top_k=top_k)
     
     t_rank = (time.time() - t_start) * 1000 - t_enc - t_search
@@ -550,10 +523,7 @@ def search_moment(q: str, video: str = "lecture", top_k: int = 3):
     
     res = {
         "query": q,
-        "weights": {
-            "visual": w_v,
-            "text": w_t
-        },
+        "weights": {"visual": weight_v, "text": weight_t},
         "latency_ms": round(total_ms, 1),
         "latency": {
             "encoding_ms": round(t_enc, 1),
@@ -566,85 +536,16 @@ def search_moment(q: str, video: str = "lecture", top_k: int = 3):
     search_cache[cache_key] = res
     return res
 
-@app.get("/debug-hf")
-def debug_hf(q: str = "hello"):
-    hf_token = os.environ.get("HF_TOKEN", "")
-    headers = {"Authorization": f"Bearer {hf_token}"} if hf_token else {}
-    
-    # 1. Test CLIP via HF API
-    clip_url = "https://router.huggingface.co/hf-inference/models/sentence-transformers/clip-ViT-B-32-multilingual-v1/pipeline/feature-extraction"
-    res_clip = requests.post(clip_url, headers=headers, json={"inputs": [q]})
-    
-    # 2. Test ST via HF API
-    st_url = "https://router.huggingface.co/hf-inference/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/pipeline/feature-extraction"
-    res_st = requests.post(st_url, headers=headers, json={"inputs": [q]})
-    
-    clip_data = res_clip.json() if res_clip.status_code == 200 else str(res_clip.text)
-    st_data = res_st.json() if res_st.status_code == 200 else str(res_st.text)
-    
-    clip_shape = "None"
-    if isinstance(clip_data, list):
-        clip_shape = f"list length={len(clip_data)}"
-        if len(clip_data) > 0 and isinstance(clip_data[0], list):
-            clip_shape += f", sublist={len(clip_data[0])}"
-            if len(clip_data[0]) > 0 and isinstance(clip_data[0][0], list):
-                clip_shape += f", subsublist={len(clip_data[0][0])}"
-                
-    st_shape = "None"
-    if isinstance(st_data, list):
-        st_shape = f"list length={len(st_data)}"
-        if len(st_data) > 0 and isinstance(st_data[0], list):
-            st_shape += f", sublist={len(st_data[0])}"
-            if len(st_data[0]) > 0 and isinstance(st_data[0][0], list):
-                st_shape += f", subsublist={len(st_data[0][0])}"
-                
-    return {
-        "clip_status": res_clip.status_code,
-        "clip_shape": clip_shape,
-        "clip_sample": str(clip_data)[:300],
-        "st_status": res_st.status_code,
-        "st_shape": st_shape,
-        "st_sample": str(st_data)[:300]
-    }
-
-@app.post("/api/videos/ingest-url")
-def ingest_url(payload: dict, background_tasks: BackgroundTasks):
-    url = payload.get("url")
-    if not url:
-        raise HTTPException(status_code=400, detail="Missing video URL in payload")
-    
-    video_id = f"video_{int(time.time())}"
-    file_ext = ".mp4" # Default to mp4 extension
-    file_path = os.path.join("media", f"{video_id}{file_ext}")
-    
-    # Define downloader callback
-    def download_and_process():
-        try:
-            tasks.set_status(video_id, "downloading")
-            print(f"[*] Downloading remote video: {url} -> {file_path}")
-            res = requests.get(url, stream=True, timeout=30)
-            if res.status_code != 200:
-                raise Exception(f"Failed to fetch video: HTTP {res.status_code}")
-                
-            with open(file_path, "wb") as f:
-                for chunk in res.iter_content(chunk_size=8192):
-                    if chunk:
-                        f.write(chunk)
-                        
-            print(f"[+] Download complete: {file_path}. Starting ingestion...")
-            tasks.ingest_video(video_id, file_path)
-        except Exception as e:
-            print(f"[!] Dynamic indexing failed: {e}")
-            tasks.set_status(video_id, "failed", error_msg=str(e))
-
-    # Trigger background thread execution
-    background_tasks.add_task(download_and_process)
-    return {"video_id": video_id, "status": "processing"}
-
-@app.get("/api/videos/{video_id}/status")
-def get_video_ingest_status(video_id: str):
-    import tasks
-    return tasks.get_status(video_id)
+@app.get("/videos")
+def list_videos():
+    presets = [
+        {"id": "lecture", "title": "EdTech CS Coding Lecture", "type": "preset", "src": "/media/sample.mp4"},
+        {"id": "keynote", "title": "Apple WWDC Keynote Recap", "type": "preset", "src": "/media/keynote.mp4"},
+        {"id": "friends", "title": "🛋️ Friends - Ross's Couch 'Pivot' Scene", "type": "preset", "src": "/media/friends.mp4"},
+        {"id": "sports", "title": "🎬 De Dana Dan - Hindi Comedy (Dialogue Seeking)", "type": "preset", "src": "/media/sports.mp4"},
+        {"id": "song", "title": "🎵 Imagine Dragons - Believer (Lyrics Seeking)", "type": "preset", "src": "/media/song.mp4"}
+    ]
+    return {"presets": presets, "ingested": []}
 
 @app.get("/status")
 def get_status(video: str = "lecture"):
@@ -665,8 +566,33 @@ def get_status(video: str = "lecture"):
         }
     return status
 
+def warmup_models_background():
+    print("[*] Starting background warmup for Hugging Face Inference models...")
+    hf_token = os.environ.get("HF_TOKEN", "")
+    headers = {"Authorization": f"Bearer {hf_token}"} if hf_token else {}
+    
+    clip_url = "https://router.huggingface.co/hf-inference/models/sentence-transformers/clip-ViT-B-32-multilingual-v1/pipeline/feature-extraction"
+    st_url = "https://router.huggingface.co/hf-inference/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/pipeline/feature-extraction"
+    whisper_url = "https://router.huggingface.co/hf-inference/models/openai/whisper-large-v3"
+    
+    # Warmup pings
+    try:
+        requests.post(clip_url, headers=headers, json={"inputs": ["warmup"]}, timeout=10)
+        print("[+] Hugging Face CLIP visual model warmed up successfully.")
+    except Exception as e:
+        print(f"[!] CLIP warmup ping failed: {e}")
+        
+    try:
+        requests.post(st_url, headers=headers, json={"inputs": ["warmup"]}, timeout=10)
+        print("[+] Hugging Face MiniLM text model warmed up successfully.")
+    except Exception as e:
+        print(f"[!] MiniLM warmup ping failed: {e}")
+
 @app.on_event("startup")
 def startup_event():
+    # Trigger non-blocking warmup pings in a background daemon thread
+    threading.Thread(target=warmup_models_background, daemon=True).start()
+
     if qdrant_client:
         try:
             collections = qdrant_client.get_collections().collections
@@ -701,7 +627,5 @@ def index():
 
 if __name__ == "__main__":
     import uvicorn
-    backend_dir = os.path.dirname(os.path.abspath(__file__))
-    os.environ["PYTHONPATH"] = backend_dir + os.pathsep + os.environ.get("PYTHONPATH", "")
     port = int(os.environ.get("PORT", 8000))
     uvicorn.run("app:app", host="0.0.0.0", port=port, reload=False)

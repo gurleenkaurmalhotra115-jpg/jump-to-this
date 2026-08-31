@@ -38,24 +38,6 @@
               <option value="sports">🎬 De Dana Dan - Hindi Comedy (Dialogue Seeking)</option>
               <option value="song">🎵 Imagine Dragons - Believer (Lyrics Seeking)</option>
             </select>
-          </div>
-
-          <!-- Index New Video Card -->
-          <div class="ingest-card" style="margin-bottom: 12px; background: #131A26; padding: 12px; border-radius: 6px; border: 1px solid #1F2E45; display: flex; flex-direction: column; gap: 8px;">
-            <div style="display: flex; align-items: center; justify-content: space-between;">
-              <div style="display: flex; align-items: center; gap: 8px;">
-                <i data-lucide="plus-circle" style="color: #FF5A00; width: 18px; height: 18px;"></i>
-                <span style="font-weight: 500; font-size: 14px; color: #E2E8F0;">Index New Video:</span>
-              </div>
-              <span id="ingest-status-text" style="font-size: 12px; font-weight: 600; color: #A0AEC0;">Idle</span>
-            </div>
-            <div style="display: flex; gap: 8px;">
-              <input type="text" id="ingest-url-input" placeholder="Paste MP4 Video URL (e.g. http://...)" style="flex: 1; background: #0B0E14; border: 1px solid #1F2E45; color: #E2E8F0; padding: 6px 12px; border-radius: 4px; font-size: 13px; outline: none; font-family: inherit;">
-              <button id="ingest-submit-btn" style="background: #FF5A00; color: white; border: none; padding: 6px 16px; border-radius: 4px; font-size: 13px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 4px; font-family: inherit;">
-                <i data-lucide="zap" style="width: 14px; height: 14px;"></i> Index
-              </button>
-            </div>
-          </div>
           <video id="video-player" controls preload="auto">
             <source src="/media/sample.mp4" type="video/mp4">
             Your browser does not support the video tag.
@@ -194,12 +176,6 @@
     const micIcon = document.getElementById('mic-icon');
     const timelineTicksTrack = document.getElementById('timeline-ticks-track');
     const videoSelect = document.getElementById('video-select');
-    
-    // Ingest DOM references
-    const ingestUrlInput = document.getElementById('ingest-url-input');
-    const ingestSubmitBtn = document.getElementById('ingest-submit-btn');
-    const ingestStatusText = document.getElementById('ingest-status-text');
-    
     // Inspector elements
     const inspectStatus = document.getElementById('inspect-status');
     const inspectCalc = document.getElementById('inspect-calc');
@@ -515,91 +491,6 @@
       });
     } else {
       voiceBtn.style.display = 'none';
-    }
-
-    // Ingest video submission
-    ingestSubmitBtn.addEventListener('click', async () => {
-      const url = ingestUrlInput.value.trim();
-      if (!url) {
-        alert("Please paste a valid video URL.");
-        return;
-      }
-
-      ingestStatusText.innerText = "Connecting...";
-      ingestStatusText.style.color = "#E2E8F0";
-      ingestSubmitBtn.disabled = true;
-
-      try {
-        const res = await fetch('/api/videos/ingest-url', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ url: url })
-        });
-        if (!res.ok) throw new Error("Index request failed");
-        
-        const data = await res.json();
-        const videoId = data.video_id;
-        
-        // Start polling status
-        pollIngestStatus(videoId, url);
-      } catch (err) {
-        console.error(err);
-        ingestStatusText.innerText = "Failed";
-        ingestStatusText.style.color = "#FF2A54";
-        ingestSubmitBtn.disabled = false;
-      }
-    });
-
-    function pollIngestStatus(videoId, originalUrl) {
-      const interval = setInterval(async () => {
-        try {
-          const res = await fetch(`/api/videos/${videoId}/status`);
-          if (!res.ok) return;
-          const data = await res.json();
-          
-          if (data.status === "downloading") {
-            ingestStatusText.innerText = "Downloading...";
-            ingestStatusText.style.color = "#17B6C4";
-          } else if (data.status === "indexing_visual") {
-            ingestStatusText.innerText = "AI Frame indexing...";
-            ingestStatusText.style.color = "#FF5A00";
-          } else if (data.status === "transcribing") {
-            ingestStatusText.innerText = "AI transcribing...";
-            ingestStatusText.style.color = "#FF2A54";
-          } else if (data.status === "indexing_speech") {
-            ingestStatusText.innerText = "AI speech indexing...";
-            ingestStatusText.style.color = "#E2E8F0";
-          } else if (data.status === "completed") {
-            clearInterval(interval);
-            ingestStatusText.innerText = "Completed!";
-            ingestStatusText.style.color = "#48BB78";
-            ingestSubmitBtn.disabled = false;
-            ingestUrlInput.value = "";
-            
-            // Add to dropdown list dynamically
-            const newOpt = document.createElement('option');
-            newOpt.value = videoId;
-            newOpt.text = `⚡ Custom: ${videoId}`;
-            videoSelect.appendChild(newOpt);
-            videoSelect.value = videoId;
-            
-            // Force player to use the new video
-            selectedVideo = videoId;
-            videoPlayer.src = `/media/${videoId}.mp4`;
-            videoPlayer.load();
-            updateStatus();
-            alert("Video successfully indexed! You can search inside it now.");
-          } else if (data.status === "failed") {
-            clearInterval(interval);
-            ingestStatusText.innerText = "Failed";
-            ingestStatusText.style.color = "#FF2A54";
-            ingestSubmitBtn.disabled = false;
-            alert(`Indexing failed: ${data.error || "Unknown error"}`);
-          }
-        } catch (e) {
-          console.error("Status check failed", e);
-        }
-      }, 2000);
     }
 
     lucide.createIcons();
